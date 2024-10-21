@@ -8,7 +8,7 @@ const week = day * 7
 const month = day * 30
 const year = day * 365
 
-const formatDatePast = (seconds) => {
+const formatDatePast = (seconds: number): string => {
   if (seconds < minute) {
     if (seconds === 1) {
       return FormatDateStrings.oneSecondAgo()
@@ -57,7 +57,7 @@ const formatDatePast = (seconds) => {
   return FormatDateStrings.someYearsAgo(years)
 }
 
-const formatDateFuture = (seconds) => {
+const formatDateFuture = (seconds: number): string => {
   if (seconds < minute) {
     if (seconds === 1) {
       return FormatDateStrings.inOneSecond()
@@ -106,11 +106,7 @@ const formatDateFuture = (seconds) => {
   return FormatDateStrings.inSomeYears(years)
 }
 
-/**
- * @param {number} date
- * @param {number} now
- */
-export const formatDate = (date, now) => {
+export const formatDate = (date: number, now: number): string => {
   const difference = now - date
   const seconds = Math.round(difference / 1000)
   if (seconds >= 0) {
