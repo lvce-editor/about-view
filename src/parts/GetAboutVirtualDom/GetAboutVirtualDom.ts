@@ -3,7 +3,14 @@ import * as GetAboutContentVirtualDom from '../GetAboutContentVirtualDom/GetAbou
 import * as GetDialogVirtualDom from '../GetDialogVirtualDom/GetDialogVirtualDom.js'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
-export const getAboutVirtualDom = (productName, lines, closeMessage, okMessage, copyMessage, infoMessage) => {
+export const getAboutVirtualDom = (
+  productName: string,
+  lines: readonly string[],
+  closeMessage: string,
+  okMessage: string,
+  copyMessage: string,
+  infoMessage: string
+) => {
   const content = GetAboutContentVirtualDom.getAboutContentVirtualDom(lines)
   return [
     {

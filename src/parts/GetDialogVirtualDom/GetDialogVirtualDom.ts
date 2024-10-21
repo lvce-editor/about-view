@@ -7,7 +7,7 @@ import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getDialogVirtualDom = (
-  content: string,
+  content: any,
   closeMessage: string,
   infoMessage: string,
   okMessage: string,
