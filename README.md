@@ -1,1 +1,1 @@
-# about-view
+# keybindings-view
