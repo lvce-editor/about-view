@@ -1,7 +1,7 @@
-import * as AboutFocusId from '../AboutFocusId/AboutFocusId.js'
+import * as AboutFocusId from '../AboutFocusId/AboutFocusId.ts'
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as GetAboutDetailStringWeb from '../GetAboutDetailStringWeb/GetAboutDetailStringWeb.js'
-import * as Process from '../Process/Process.js'
+import * as GetAboutDetailStringWeb from '../GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts'
+import * as Process from '../Process/Process.ts'
 
 export const loadContent = async (state: AboutState): Promise<AboutState> => {
   const lines = await GetAboutDetailStringWeb.getDetailStringWeb()
