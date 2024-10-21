@@ -112,3 +112,8 @@ test('formatDate - in some months', () => {
 test('formatDate - in one year', () => {
   expect(FormatDateStrings.inOneYear()).toBe('in 1 year')
 })
+
+test('formatDate - in some year', () => {
+  const years = 2
+  expect(FormatDateStrings.inSomeYears(years)).toBe('in 2 years')
+})
