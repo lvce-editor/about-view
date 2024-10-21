@@ -45,3 +45,12 @@ test('formatDate - some weeks ago', () => {
   const weeks = 2
   expect(FormatDateStrings.someWeeksAgo(weeks)).toBe('2 weeks ago')
 })
+
+test('formatDate - one year ago', () => {
+  expect(FormatDateStrings.oneYearAgo()).toBe('1 year ago')
+})
+
+test('formatDate - some years ago', () => {
+  const years = 2
+  expect(FormatDateStrings.someYearsAgo(years)).toBe('2 years ago')
+})
