@@ -1,7 +1,7 @@
-import * as AboutFocusId from '../AboutFocusId/AboutFocusId.js'
+import * as AboutFocusId from '../AboutFocusId/AboutFocusId.ts'
 import { AboutState } from '../AboutState/AboutState.ts'
-import * as AboutStrings from '../AboutStrings/AboutStrings.js'
-import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.js'
+import * as AboutStrings from '../AboutStrings/AboutStrings.ts'
+import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 
 export const hasFunctionalRender = true
 
