@@ -39,3 +39,5 @@ export const getDate = () => {
 export const getArch = () => {
   return ''
 }
+
+export const productNameLong = 'Lvce Editor - OSS'
