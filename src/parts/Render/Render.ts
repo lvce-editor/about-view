@@ -43,3 +43,13 @@ export const renderFocus = {
 }
 
 export const render = [renderDialog, renderFocus]
+
+export const doRender = (oldState: AboutState, newState: AboutState): any => {
+  const commands = []
+  for (const fn of render) {
+    if (!fn.isEqual(oldState, newState)) {
+      commands.push(fn.apply(oldState, newState))
+    }
+  }
+  return commands
+}
