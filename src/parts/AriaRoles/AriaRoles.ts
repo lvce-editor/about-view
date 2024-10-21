@@ -1,1 +1,2 @@
-export const None = 'none'
+export const Button = 'button'
+export const Dialog = 'dialog'
