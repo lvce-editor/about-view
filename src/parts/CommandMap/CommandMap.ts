@@ -5,7 +5,7 @@ import * as Render from '../Render/Render.ts'
 
 export const commandMap = {
   'About.getVirtualDom': GetAboutVirtualDom.getAboutVirtualDom,
-  'About.getDetailStringWeb': GetAboutDetailStringWeb.getDetailStringWeb(),
-  'About.getDetailString': GetAboutDetailString.getDetailString(),
+  'About.getDetailStringWeb': GetAboutDetailStringWeb.getDetailStringWeb,
+  'About.getDetailString': GetAboutDetailString.getDetailString,
   'About.render': Render.doRender,
 }
