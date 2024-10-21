@@ -99,3 +99,16 @@ test('formatDate - in some weeks', () => {
   const weeks = 2
   expect(FormatDateStrings.inSomeWeeks(weeks)).toBe('in 2 weeks')
 })
+
+test('formatDate - in one month', () => {
+  expect(FormatDateStrings.inOneMonth()).toBe('in 1 month')
+})
+
+test('formatDate - in some months', () => {
+  const months = 2
+  expect(FormatDateStrings.inSomeMonths(months)).toBe('in 2 months')
+})
+
+test('formatDate - in one year', () => {
+  expect(FormatDateStrings.inOneYear()).toBe('in 1 year')
+})
