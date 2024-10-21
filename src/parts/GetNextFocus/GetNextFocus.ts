@@ -1,4 +1,4 @@
-import * as AboutFocusId from '../AboutFocusId/AboutFocusId.js'
+import * as AboutFocusId from '../AboutFocusId/AboutFocusId.ts'
 
 export const getNextFocus = (focusId: number): number => {
   switch (focusId) {

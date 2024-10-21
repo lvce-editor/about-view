@@ -1,5 +1,5 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as GetPreviousFocus from '../GetPreviousFocus/GetPreviousFocus.js'
+import * as GetPreviousFocus from '../GetPreviousFocus/GetPreviousFocus.ts'
 
 export const focusPrevious = (state: AboutState): AboutState => {
   const { focusId } = state
