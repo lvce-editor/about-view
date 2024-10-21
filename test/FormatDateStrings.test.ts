@@ -54,3 +54,30 @@ test('formatDate - some years ago', () => {
   const years = 2
   expect(FormatDateStrings.someYearsAgo(years)).toBe('2 years ago')
 })
+
+test('formatDate - in one second', () => {
+  expect(FormatDateStrings.inOneSecond()).toBe('in 1 second')
+})
+
+test('formatDate - in some seconds', () => {
+  const seconds = 2
+  expect(FormatDateStrings.inSomeSeconds(seconds)).toBe('in 2 seconds')
+})
+
+test('formatDate - in one minute', () => {
+  expect(FormatDateStrings.inOneMinute()).toBe('in 1 minute')
+})
+
+test('formatDate - in some minutes', () => {
+  const minutes = 2
+  expect(FormatDateStrings.inSomeMinutes(minutes)).toBe('in 2 minutes')
+})
+
+test('formatDate - in one hour', () => {
+  expect(FormatDateStrings.inOneHour()).toBe('in 1 hour')
+})
+
+test('formatDate - in some hours', () => {
+  const hours = 2
+  expect(FormatDateStrings.inSomeHours(hours)).toBe('in 2 hours')
+})
