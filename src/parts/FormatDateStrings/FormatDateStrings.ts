@@ -1,5 +1,5 @@
 // based on https://github.com/microsoft/vscode/blob/bd782eb059e133d3a20fdb446b8feb0010a278ad/src/vs/base/common/date.ts (License MIT)
-import * as I18nString from '../I18NString/I18NString.js'
+import * as I18nString from '../I18NString/I18NString.ts'
 
 /**
  * @enum {string}

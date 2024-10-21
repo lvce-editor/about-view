@@ -1,6 +1,6 @@
-import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.js'
-import * as JoinLines from '../JoinLines/JoinLines.js'
-import * as Process from '../Process/Process.js'
+import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.ts'
+import * as JoinLines from '../JoinLines/JoinLines.ts'
+import * as Process from '../Process/Process.ts'
 
 export const getDetailString = async () => {
   const [electronVersion, nodeVersion, chromeVersion, version, commit, v8Version, date] = await Promise.all([

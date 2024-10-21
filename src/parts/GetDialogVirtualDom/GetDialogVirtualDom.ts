@@ -1,8 +1,8 @@
 import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
-import * as GetButtonVirtualDom from '../GetButtonVirtualDom/GetButtonVirtualDom.js'
-import * as TabIndex from '../TabIndex/TabIndex.js'
+import * as GetButtonVirtualDom from '../GetButtonVirtualDom/GetButtonVirtualDom.ts'
+import * as TabIndex from '../TabIndex/TabIndex.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 

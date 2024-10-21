@@ -1,6 +1,6 @@
-import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.js'
-import * as GetBrowser from '../GetBrowser/GetBrowser.js'
-import * as Process from '../Process/Process.js'
+import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.ts'
+import * as GetBrowser from '../GetBrowser/GetBrowser.ts'
+import * as Process from '../Process/Process.ts'
 
 export const getDetailStringWeb = () => {
   const version = Process.version

@@ -1,6 +1,6 @@
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import * as GetAboutContentVirtualDom from '../GetAboutContentVirtualDom/GetAboutContentVirtualDom.ts'
-import * as GetDialogVirtualDom from '../GetDialogVirtualDom/GetDialogVirtualDom.js'
+import * as GetDialogVirtualDom from '../GetDialogVirtualDom/GetDialogVirtualDom.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
 export const getAboutVirtualDom = (
