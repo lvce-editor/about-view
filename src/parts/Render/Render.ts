@@ -1,5 +1,5 @@
 import * as AboutFocusId from '../AboutFocusId/AboutFocusId.ts'
-import { AboutState } from '../AboutState/AboutState.ts'
+import type { AboutState } from '../AboutState/AboutState.ts'
 import * as AboutStrings from '../AboutStrings/AboutStrings.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 
