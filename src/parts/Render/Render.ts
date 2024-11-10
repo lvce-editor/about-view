@@ -3,11 +3,7 @@ import type { AboutState } from '../AboutState/AboutState.ts'
 import * as AboutStrings from '../AboutStrings/AboutStrings.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 
-export const hasFunctionalRender = true
-
-export const hasFunctionalRootRender = true
-
-export const renderDialog = {
+const renderDialog = {
   isEqual(oldState: AboutState, newState: AboutState) {
     return oldState.productName === newState.productName && oldState.lines === newState.lines
   },
@@ -32,7 +28,7 @@ const getFocusSelector = (focusId: number) => {
   }
 }
 
-export const renderFocus = {
+const renderFocus = {
   isEqual(oldState: AboutState, newState: AboutState) {
     return oldState.focusId === newState.focusId
   },
@@ -42,7 +38,7 @@ export const renderFocus = {
   },
 }
 
-export const render = [renderDialog, renderFocus]
+const render = [renderDialog, renderFocus]
 
 export const doRender = (oldState: AboutState, newState: AboutState): any => {
   const commands = []
