@@ -15,8 +15,10 @@
     "build": "node scripts/build.js",
     "build:watch": "nodemon"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "about"
+  ],
+  "author": "Lvce Editor",
   "license": "MIT",
   "jest": {
     "injectGlobals": false,
