@@ -2,7 +2,7 @@ import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.ts'
 import * as GetBrowser from '../GetBrowser/GetBrowser.ts'
 import * as Process from '../Process/Process.ts'
 
-export const getDetailStringWeb = () => {
+export const getDetailStringWeb = (): readonly string[] => {
   const version = Process.version
   const commit = Process.commit
   const date = Process.date
