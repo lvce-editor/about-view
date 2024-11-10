@@ -2,7 +2,7 @@ import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.ts'
 import * as JoinLines from '../JoinLines/JoinLines.ts'
 import * as Process from '../Process/Process.ts'
 
-export const getDetailString = async () => {
+export const getDetailString = async (): Promise<string> => {
   const [electronVersion, nodeVersion, chromeVersion, version, commit, v8Version, date] = await Promise.all([
     Process.getElectronVersion(),
     Process.getNodeVersion(),
