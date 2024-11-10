@@ -4,10 +4,6 @@ export const commit = 'unknown commit'
 
 export const date = ''
 
-export const getPid = () => {
-  return ''
-}
-
 export const getElectronVersion = () => {
   return ''
 }
@@ -34,10 +30,6 @@ export const getV8Version = () => {
 
 export const getDate = () => {
   return date
-}
-
-export const getArch = () => {
-  return ''
 }
 
 export const productNameLong = 'Lvce Editor - OSS'
