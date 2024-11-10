@@ -1,6 +1,6 @@
 import * as FormatDate from '../FormatDate/FormatDate.ts'
 
-export const formatAboutDate = (isoDate: string): string => {
+export const formatAboutDate = (isoDate: string, now: number): string => {
   if (!isoDate) {
     return 'unknown'
   }
@@ -8,7 +8,6 @@ export const formatAboutDate = (isoDate: string): string => {
   if (isNaN(date)) {
     return `Invalid Date: ${isoDate}`
   }
-  const now = Date.now()
   const ago = FormatDate.formatDate(date, now)
   return `${isoDate} (${ago})`
 }

@@ -6,7 +6,8 @@ export const getDetailStringWeb = () => {
   const version = Process.version
   const commit = Process.commit
   const date = Process.date
-  const formattedDate = FormatAboutDate.formatAboutDate(date)
+  const now = Date.now()
+  const formattedDate = FormatAboutDate.formatAboutDate(date, now)
   const browser = GetBrowser.getBrowser()
   const lines = [`Version: ${version}`, `Commit: ${commit}`, `Date: ${formattedDate}`, `Browser: ${browser}`]
   return lines
