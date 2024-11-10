@@ -12,7 +12,8 @@ export const getDetailString = async () => {
     Process.getV8Version(),
     Process.getDate(),
   ])
-  const formattedDate = FormatAboutDate.formatAboutDate(date)
+  const now = Date.now()
+  const formattedDate = FormatAboutDate.formatAboutDate(date, now)
   const lines = [
     `Version: ${version}`,
     `Commit: ${commit}`,
