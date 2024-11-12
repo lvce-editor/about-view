@@ -1,3 +1,5 @@
+import * as JoinBySpace from '../JoinBySpace/JoinBySpace.ts'
+
 export const mergeClassNames = (...classNames: readonly string[]): string => {
-  return classNames.filter(Boolean).join(' ')
+  return JoinBySpace.joinBySpace(...classNames.filter(Boolean))
 }
