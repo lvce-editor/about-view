@@ -1,7 +1,11 @@
+import * as AriaBoolean from '../AriaBoolean/AriaBoolean.ts'
 import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import * as GetButtonVirtualDom from '../GetButtonVirtualDom/GetButtonVirtualDom.ts'
+import * as Ids from '../Ids/Ids.ts'
+import * as JoinBySpace from '../JoinBySpace/JoinBySpace.ts'
+import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as TabIndex from '../TabIndex/TabIndex.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
@@ -21,8 +25,8 @@ export const getDialogVirtualDom = (
       className: ClassNames.DialogContent,
       tabIndex: TabIndex.Focusable,
       role: AriaRoles.Dialog,
-      ariaModal: 'true',
-      ariaLabelledBy: 'DialogIcon DialogHeading',
+      ariaModal: AriaBoolean.True,
+      ariaLabelledBy: JoinBySpace.joinBySpace(Ids.DialogIcon, Ids.DialogHeading),
       onFocusIn: DomEventListenerFunctions.HandleFocusIn,
       childCount: 3,
     },
@@ -41,7 +45,7 @@ export const getDialogVirtualDom = (
     },
     {
       type: VirtualDomElements.Div,
-      className: 'MaskIcon MaskIconClose',
+      className: MergeClassNames.mergeClassNames(ClassNames.MaskIcon, ClassNames.MaskIconClose),
       childCount: 0,
     },
     {
@@ -51,8 +55,8 @@ export const getDialogVirtualDom = (
     },
     {
       type: VirtualDomElements.Div,
-      className: 'DialogIcon DialogInfoIcon MaskIcon MaskIconInfo',
-      id: 'DialogIcon',
+      className: MergeClassNames.mergeClassNames(ClassNames.DialogIcon, ClassNames.DialogInfoIcon, ClassNames.MaskIcon, ClassNames.MaskIconInfo),
+      id: Ids.DialogIcon,
       ariaLabel: infoMessage,
       childCount: 0,
     },
@@ -63,7 +67,7 @@ export const getDialogVirtualDom = (
     },
     {
       type: VirtualDomElements.Div,
-      id: 'DialogHeading',
+      id: Ids.DialogHeading,
       className: ClassNames.DialogHeading,
       childCount: 1,
     },
