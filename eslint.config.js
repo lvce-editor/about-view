@@ -13,7 +13,7 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['dist', 'coverage', 'scripts', 'rollup.config.js', 'eslint.config.js'],
+    ignores: ['dist', 'coverage', 'scripts', 'rollup.config.js', 'eslint.config.js', 'src/aboutWorkerMain.ts'],
   },
   {
     rules: {
