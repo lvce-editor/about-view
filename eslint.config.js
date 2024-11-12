@@ -3,9 +3,17 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
   {
-    ignores: ['dist', 'coverage', 'scripts'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    ignores: ['dist', 'coverage', 'scripts', 'rollup.config.js'],
   },
   {
     rules: {
