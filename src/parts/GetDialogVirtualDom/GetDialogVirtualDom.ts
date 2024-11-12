@@ -5,9 +5,10 @@ import * as GetButtonVirtualDom from '../GetButtonVirtualDom/GetButtonVirtualDom
 import * as TabIndex from '../TabIndex/TabIndex.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
+import type { VirtualDomNode } from '../VirtualDomNode/VirtualDomNode.ts'
 
 export const getDialogVirtualDom = (
-  content: any,
+  content: readonly VirtualDomNode[],
   closeMessage: string,
   infoMessage: string,
   okMessage: string,
