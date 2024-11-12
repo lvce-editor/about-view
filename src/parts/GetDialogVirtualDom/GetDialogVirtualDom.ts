@@ -12,7 +12,7 @@ export const getDialogVirtualDom = (
   infoMessage: string,
   okMessage: string,
   copyMessage: string,
-  productName: string
+  productName: string,
 ) => {
   const dom = [
     {
