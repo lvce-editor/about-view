@@ -14,7 +14,7 @@ jest.unstable_mockModule('../src/parts/Process/Process.ts', () => {
 
 jest.unstable_mockModule('../src/parts/GetBrowser/GetBrowser.ts', () => {
   return {
-    getBrowser() {
+    getBrowser(): string {
       return 'Browser: Node.js/22'
     },
   }

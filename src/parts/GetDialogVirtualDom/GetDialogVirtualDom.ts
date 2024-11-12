@@ -18,7 +18,7 @@ export const getDialogVirtualDom = (
   okMessage: string,
   copyMessage: string,
   productName: string,
-) => {
+): readonly VirtualDomNode[] => {
   const dom = [
     {
       type: VirtualDomElements.Div,

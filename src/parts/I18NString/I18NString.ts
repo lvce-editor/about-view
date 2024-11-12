@@ -6,7 +6,7 @@ export const i18nString = (key: string, placeholders = emptyObject): string => {
   if (placeholders === emptyObject) {
     return key
   }
-  const replacer = (match: string, rest: string) => {
+  const replacer = (match: string, rest: string): string => {
     // @ts-ignore
     return placeholders[rest]
   }
