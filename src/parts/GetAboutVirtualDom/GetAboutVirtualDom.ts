@@ -9,7 +9,7 @@ export const getAboutVirtualDom = (
   closeMessage: string,
   okMessage: string,
   copyMessage: string,
-  infoMessage: string
+  infoMessage: string,
 ) => {
   const content = GetAboutContentVirtualDom.getAboutContentVirtualDom(lines)
   return [
