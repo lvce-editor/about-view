@@ -6,25 +6,25 @@ beforeEach(() => {
 
 jest.unstable_mockModule('../src/parts/Process/Process.ts', () => {
   return {
-    getElectronVersion() {
+    getElectronVersion(): string {
       return '0.0.0-dev'
     },
-    getNodeVersion() {
+    getNodeVersion(): string {
       return '0.0.0-dev'
     },
-    getChromeVersion() {
+    getChromeVersion(): string {
       return '0.0.0-dev'
     },
-    getVersion() {
+    getVersion(): string {
       return '0.0.0-dev'
     },
-    getCommit() {
+    getCommit(): string {
       return 'abc'
     },
-    getV8Version() {
+    getV8Version(): string {
       return '0.0.0-dev'
     },
-    getDate() {
+    getDate(): string {
       return 'n/a'
     },
   }

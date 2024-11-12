@@ -4,10 +4,10 @@ import * as AboutStrings from '../AboutStrings/AboutStrings.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 
 const renderDialog = {
-  isEqual(oldState: AboutState, newState: AboutState) {
+  isEqual(oldState: AboutState, newState: AboutState): boolean {
     return oldState.productName === newState.productName && oldState.lines === newState.lines
   },
-  apply(oldState: AboutState, newState: AboutState) {
+  apply(oldState: AboutState, newState: AboutState): any {
     const okMessage = AboutStrings.ok()
     const copyMessage = AboutStrings.copy()
     const closeMessage = AboutStrings.closeDialog()
@@ -17,7 +17,7 @@ const renderDialog = {
   },
 }
 
-const getFocusSelector = (focusId: number) => {
+const getFocusSelector = (focusId: number): string => {
   switch (focusId) {
     case AboutFocusId.Copy:
       return '.ButtonPrimary'
@@ -29,10 +29,10 @@ const getFocusSelector = (focusId: number) => {
 }
 
 const renderFocus = {
-  isEqual(oldState: AboutState, newState: AboutState) {
+  isEqual(oldState: AboutState, newState: AboutState): boolean {
     return oldState.focusId === newState.focusId
   },
-  apply(oldState: AboutState, newState: AboutState) {
+  apply(oldState: AboutState, newState: AboutState): any {
     const selector = getFocusSelector(newState.focusId)
     return ['setFocused', selector]
   },
