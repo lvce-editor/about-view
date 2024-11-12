@@ -4,11 +4,11 @@ const ReferencePort = 3
 export const ModuleWorkerAndMessagePort = 8
 
 export const Auto = () => {
-  // @ts-ignore
+  // @ts-expect-error
   if (globalThis.acceptPort) {
     return MessagePort
   }
-  // @ts-ignore
+  // @ts-expect-error
   if (globalThis.acceptReferencePort) {
     return ReferencePort
   }
