@@ -14,7 +14,7 @@ const logError = (): void => {
   // handled by renderer worker
 }
 
-export const handleMessage = (event: any) => {
+export const handleMessage = (event: any): Promise<void> => {
   return HandleJsonRpcMessage.handleJsonRpcMessage(
     event.target,
     event.data,
