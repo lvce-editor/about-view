@@ -2,15 +2,15 @@ import * as Callback from '../Callback/Callback.ts'
 import * as Command from '../Command/Command.ts'
 import * as HandleJsonRpcMessage from '../JsonRpc/JsonRpc.ts'
 
-const requiresSocket = () => {
+const requiresSocket = (): boolean => {
   return false
 }
 
-const preparePrettyError = (error: any) => {
+const preparePrettyError = (error: any): any => {
   return error
 }
 
-const logError = () => {
+const logError = (): void => {
   // handled by renderer worker
 }
 
