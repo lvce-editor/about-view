@@ -1,6 +1,6 @@
 const emptyObject = {}
 
-const RE_PLACEHOLDER = /\{(PH\d+)\}/g
+const RE_PLACEHOLDER = /{(PH\d+)}/g
 
 export const i18nString = (key: string, placeholders = emptyObject): string => {
   if (placeholders === emptyObject) {
