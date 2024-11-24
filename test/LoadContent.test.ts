@@ -12,7 +12,7 @@ jest.unstable_mockModule('../src/parts/Process/Process.ts', () => {
 
 jest.unstable_mockModule('../src/parts/GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts', () => {
   return {
-    getDetailStringWeb() {
+    getDetailStringWeb(): readonly string[] {
       return ['Version: 1.0.0', 'Date: today']
     },
   }
