@@ -1,12 +1,6 @@
 import { expect, test } from '@jest/globals'
 import * as FormatDateFuture from '../src/parts/FormatDateFuture/FormatDateFuture.ts'
 
-const millisecond = 1
-const second = 1000 * millisecond
-const minute = 60 * second
-const hour = minute * 60
-const day = hour * 24
-
 test('formatDateFuture - in 1 second', () => {
   const seconds = 1
   expect(FormatDateFuture.formatDateFuture(seconds)).toBe('in 1 second')
