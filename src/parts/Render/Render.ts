@@ -1,7 +1,7 @@
-import * as AboutFocusId from '../AboutFocusId/AboutFocusId.ts'
 import type { AboutState } from '../AboutState/AboutState.ts'
 import * as AboutStrings from '../AboutStrings/AboutStrings.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
+import * as GetFocusSelector from '../GetFocusSelector/GetFocusSelector.ts'
 
 const renderDialog = {
   isEqual(oldState: AboutState, newState: AboutState): boolean {
@@ -17,23 +17,12 @@ const renderDialog = {
   },
 }
 
-const getFocusSelector = (focusId: number): string => {
-  switch (focusId) {
-    case AboutFocusId.Copy:
-      return '.ButtonPrimary'
-    case AboutFocusId.Ok:
-      return '.ButtonSecondary'
-    default:
-      return ''
-  }
-}
-
 const renderFocus = {
   isEqual(oldState: AboutState, newState: AboutState): boolean {
     return oldState.focusId === newState.focusId
   },
   apply(oldState: AboutState, newState: AboutState): any {
-    const selector = getFocusSelector(newState.focusId)
+    const selector = GetFocusSelector.getFocusSelector(newState.focusId)
     return ['setFocused', selector]
   },
 }
