@@ -9,9 +9,7 @@ test('render - no changes', () => {
     focusId: AboutFocusId.Ok,
   }
   const newState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
-    focusId: AboutFocusId.Ok,
+    ...oldState,
   }
   expect(Render.doRender(oldState, newState)).toEqual([])
 })
@@ -23,9 +21,8 @@ test('render - content changed', () => {
     focusId: AboutFocusId.Ok,
   }
   const newState = {
-    productName: 'Test Editor 2',
+    ...oldState,
     lines: ['Version: 2.0.0'],
-    focusId: AboutFocusId.Ok,
   }
   expect(Render.doRender(oldState, newState)).toEqual([
     [
@@ -46,8 +43,7 @@ test('render - focus changed', () => {
     focusId: AboutFocusId.Ok,
   }
   const newState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
+    ...oldState,
     focusId: AboutFocusId.Copy,
   }
   expect(Render.doRender(oldState, newState)).toEqual([['setFocused', '.ButtonPrimary']])
