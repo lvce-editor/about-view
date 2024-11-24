@@ -14,7 +14,7 @@ jest.unstable_mockModule('../src/parts/Listen/Listen.ts', () => {
 
 const Main = await import('../src/parts/Main/Main.ts')
 
-test('main', () => {
-  Main.main()
+test('main', async () => {
+  await Main.main()
   expect(mockListen).toHaveBeenCalled()
 })
