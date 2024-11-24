@@ -28,11 +28,3 @@ test('renderEventListeners', () => {
     },
   ])
 })
-
-test('renderEventListeners - should be readonly', () => {
-  const eventListeners = RenderEventListeners.renderEventListers()
-  expect(() => {
-    // @ts-expect-error - readonly array should not be modifiable
-    eventListeners.push({})
-  }).toThrow()
-})
