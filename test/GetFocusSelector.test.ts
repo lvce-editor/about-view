@@ -4,12 +4,12 @@ import * as GetFocusSelector from '../src/parts/GetFocusSelector/GetFocusSelecto
 
 test('ok', () => {
   const focusId = AboutFocusId.Ok
-  expect(GetFocusSelector.getFocusSelector(focusId)).toBe('.ButtonSecondary')
+  expect(GetFocusSelector.getFocusSelector(focusId)).toBe('Ok')
 })
 
 test('copy', () => {
   const focusId = AboutFocusId.Copy
-  expect(GetFocusSelector.getFocusSelector(focusId)).toBe('.ButtonPrimary')
+  expect(GetFocusSelector.getFocusSelector(focusId)).toBe('Copy')
 })
 
 test('other', () => {

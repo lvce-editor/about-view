@@ -46,7 +46,7 @@ test('render - focus changed', () => {
     ...oldState,
     focusId: AboutFocusId.Copy,
   }
-  expect(Render.doRender(oldState, newState)).toEqual([['setFocused', '.ButtonPrimary']])
+  expect(Render.doRender(oldState, newState)).toEqual([['Viewlet.focusElementByName', 'Copy']])
 })
 
 test('render - both content and focus changed', () => {
@@ -69,6 +69,6 @@ test('render - both content and focus changed', () => {
         }),
       ]),
     ],
-    ['setFocused', '.ButtonPrimary'],
+    ['Viewlet.focusElementByName', 'Copy'],
   ])
 })
