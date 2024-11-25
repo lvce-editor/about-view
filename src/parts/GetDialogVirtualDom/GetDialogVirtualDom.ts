@@ -4,6 +4,7 @@ import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import * as GetButtonVirtualDom from '../GetButtonVirtualDom/GetButtonVirtualDom.ts'
 import * as Ids from '../Ids/Ids.ts'
+import * as InputName from '../InputName/InputName.ts'
 import * as JoinBySpace from '../JoinBySpace/JoinBySpace.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as TabIndex from '../TabIndex/TabIndex.ts'
@@ -78,8 +79,8 @@ export const getDialogVirtualDom = (
       className: ClassNames.DialogButtonsRow,
       childCount: 2,
     },
-    ...GetButtonVirtualDom.getSecondaryButtonVirtualDom(okMessage, DomEventListenerFunctions.HandleClickOk),
-    ...GetButtonVirtualDom.getPrimaryButtonVirtualDom(copyMessage, DomEventListenerFunctions.HandleClickCopy),
+    ...GetButtonVirtualDom.getSecondaryButtonVirtualDom(okMessage, DomEventListenerFunctions.HandleClickOk, InputName.Ok),
+    ...GetButtonVirtualDom.getPrimaryButtonVirtualDom(copyMessage, DomEventListenerFunctions.HandleClickCopy, InputName.Copy),
   ]
   return dom
 }

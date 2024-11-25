@@ -22,8 +22,8 @@ const renderFocus = {
     return oldState.focusId === newState.focusId
   },
   apply(oldState: AboutState, newState: AboutState): any {
-    const selector = GetFocusSelector.getFocusSelector(newState.focusId)
-    return ['setFocused', selector]
+    const name = GetFocusSelector.getFocusSelector(newState.focusId)
+    return ['Viewlet.focusElementByName', name]
   },
 }
 
