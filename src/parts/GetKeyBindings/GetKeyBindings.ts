@@ -1,12 +1,7 @@
+import type { KeyBinding } from '../KeyBinding/KeyBinding.ts'
 import * as KeyCode from '../KeyCode/KeyCode.ts'
-import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 import * as KeyModifier from '../KeyModifier/KeyModifier.ts'
-
-interface KeyBinding {
-  readonly key: number
-  readonly command: string
-  readonly when: number
-}
+import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 
 export const getKeyBindings = (): readonly KeyBinding[] => {
   return [
