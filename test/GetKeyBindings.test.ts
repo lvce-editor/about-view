@@ -14,9 +14,9 @@ test('getKeyBindings', () => {
       when: 4,
     },
     {
-      key: 8,
+      key: 1026,
       command: 'About.focusPrevious',
-      when: 1026,
+      when: 4,
     },
   ])
 })
