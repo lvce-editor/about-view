@@ -2,7 +2,13 @@ import * as KeyCode from '../KeyCode/KeyCode.ts'
 import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 import * as KeyModifier from '../KeyModifier/KeyModifier.ts'
 
-export const getKeyBindings = () => {
+interface KeyBinding {
+  readonly key: number
+  readonly command: string
+  readonly when: number
+}
+
+export const getKeyBindings = (): readonly KeyBinding[] => {
   return [
     {
       key: KeyCode.Escape,
