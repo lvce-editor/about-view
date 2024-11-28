@@ -1,5 +1,5 @@
 const productNameLong = 'Lvce Editor - OSS'
 
-export const getProductNameLong = () => {
+export const getProductNameLong = (): string => {
   return productNameLong
 }

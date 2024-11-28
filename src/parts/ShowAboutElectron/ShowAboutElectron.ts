@@ -6,7 +6,7 @@ import * as GetAboutDetailString from '../GetAboutDetailString/GetAboutDetailStr
 import * as GetWindowId from '../GetWindowId/GetWindowId.ts'
 import * as Product from '../Product/Product.ts'
 
-export const showAboutElectron = async () => {
+export const showAboutElectron = async (): Promise<void> => {
   const windowId = await GetWindowId.getWindowId()
   const detail = await GetAboutDetailString.getDetailString()
   const productNameLong = await Product.getProductNameLong()
