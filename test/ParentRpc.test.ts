@@ -23,9 +23,9 @@ test('invoke - handles error from rpc', async () => {
   await expect(ParentRpc.invoke('test.method')).rejects.toThrow('test error')
 })
 
-test('invoke - throws if rpc is not set', async () => {
+test('invoke - throws if rpc is not set', () => {
   ParentRpc.setRpc(undefined)
-  await expect(() => ParentRpc.invoke('test.method')).toThrow()
+  expect(() => ParentRpc.invoke('test.method')).toThrow()
 })
 
 test('setRpc - sets rpc instance', () => {
