@@ -22,6 +22,7 @@ test('showMessageBox - calls ParentRpc.invoke with correct arguments', async () 
     buttons: ['Ok', 'Cancel'],
     type: 'info',
     detail: 'test detail',
+    productName: 'Lvce Editor - OSS',
   }
   const result = await ElectronDialog.showMessageBox(options)
   expect(mockInvoke).toHaveBeenCalledWith('ElectronDialog.showMessageBox', options)
@@ -35,6 +36,7 @@ test('showMessageBox - handles error from ParentRpc', async () => {
     message: 'test message',
     buttons: ['Ok'],
     type: 'info',
+    productName: 'Lvce Editor - OSS',
   }
   await expect(ElectronDialog.showMessageBox(options)).rejects.toThrow('Failed to show message box')
 })
