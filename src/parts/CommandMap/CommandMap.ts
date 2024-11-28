@@ -7,6 +7,7 @@ import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as Render from '../Render/Render.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
+import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
 export const commandMap = {
   'About.focusNext': FocusNext.focusNext,
@@ -18,4 +19,5 @@ export const commandMap = {
   'About.loadContent': LoadContent.loadContent,
   'About.render': Render.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListers,
+  'About.showAboutElectron': ShowAboutElectron.showAboutElectron,
 }
