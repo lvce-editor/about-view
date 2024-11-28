@@ -35,7 +35,7 @@ const ShowAboutElectron = await import('../src/parts/ShowAboutElectron/ShowAbout
 test('showAboutElectron - clicks ok button', async () => {
   mockGetWindowId.mockResolvedValue(1)
   mockGetDetailString.mockResolvedValue('test detail')
-  mockGetProductNameLong.mockResolvedValue('Test Editor')
+  mockGetProductNameLong.mockReturnValue('Test Editor')
   mockShowMessageBox.mockResolvedValue(1)
 
   await ShowAboutElectron.showAboutElectron()
@@ -53,7 +53,7 @@ test('showAboutElectron - clicks ok button', async () => {
 test('showAboutElectron - clicks copy button', async () => {
   mockGetWindowId.mockResolvedValue(1)
   mockGetDetailString.mockResolvedValue('test detail')
-  mockGetProductNameLong.mockResolvedValue('Test Editor')
+  mockGetProductNameLong.mockReturnValue('Test Editor')
   mockShowMessageBox.mockResolvedValue(0)
 
   await ShowAboutElectron.showAboutElectron()
