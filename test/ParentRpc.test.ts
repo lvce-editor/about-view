@@ -1,10 +1,9 @@
 import { beforeEach, expect, jest, test } from '@jest/globals'
+import * as ParentRpc from '../src/parts/ParentRpc/ParentRpc.ts'
 
 beforeEach(() => {
   jest.resetAllMocks()
 })
-
-const ParentRpc = await import('../src/parts/ParentRpc/ParentRpc.ts')
 
 const mockRpc: any = {
   invoke: jest.fn(),
@@ -26,10 +25,10 @@ test('invoke - handles error from rpc', async () => {
 
 test('invoke - throws if rpc is not set', async () => {
   ParentRpc.setRpc(undefined)
-  await expect(ParentRpc.invoke('test.method')).rejects.toThrow()
+  await expect(() => ParentRpc.invoke('test.method')).toThrow()
 })
 
 test('setRpc - sets rpc instance', () => {
   ParentRpc.setRpc(mockRpc)
-  expect(ParentRpc.invoke('test')).resolves.not.toThrow()
+  expect(() => ParentRpc.invoke('test')).not.toThrow()
 })
