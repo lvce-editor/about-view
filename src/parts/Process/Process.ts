@@ -1,19 +1,21 @@
+import * as ParentRpc from '../ParentRpc/ParentRpc.ts'
+
 export const version = '0.0.0-dev'
 
 export const commit = 'unknown commit'
 
 export const date = ''
 
-export const getElectronVersion = (): string => {
-  return ''
+export const getElectronVersion = (): Promise<string> => {
+  return ParentRpc.invoke('Process.getElectronVersion')
 }
 
-export const getNodeVersion = (): string => {
-  return ''
+export const getNodeVersion = (): Promise<string> => {
+  return ParentRpc.invoke('Process.getNodeVersion')
 }
 
-export const getChromeVersion = (): string => {
-  return ''
+export const getChromeVersion = (): Promise<string> => {
+  return ParentRpc.invoke('Process.getChromeVersion')
 }
 
 export const getVersion = (): string => {
