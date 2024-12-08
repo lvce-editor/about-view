@@ -1,19 +1,5 @@
 import * as I18nString from '../I18NString/I18NString.ts'
-
-/**
- * @enum {string}
- */
-const UiStrings = {
-  Ok: 'Ok',
-  Copy: 'Copy',
-  Version: 'Version',
-  Commit: 'Commit',
-  Date: 'Date',
-  Browser: 'Browser',
-  Info: 'Info',
-  Close: 'Close',
-  CloseDialog: 'Close Dialog',
-}
+import * as UiStrings from '../UiStrings/UiStrings.ts'
 
 export const ok = (): string => {
   return I18nString.i18nString(UiStrings.Ok)
