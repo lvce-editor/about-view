@@ -16,16 +16,3 @@ export const getPrimaryButtonVirtualDom = (message: string, onClick: string, nam
     text(message),
   ]
 }
-
-export const getSecondaryButtonVirtualDom = (message: string, onClick: string, name: string): readonly VirtualDomNode[] => {
-  return [
-    {
-      type: VirtualDomElements.Button,
-      className: MergeClassNames.mergeClassNames(ClassNames.Button, ClassNames.ButtonSecondary),
-      onClick,
-      childCount: 1,
-      name,
-    },
-    text(message),
-  ]
-}

@@ -2,7 +2,8 @@ import * as AriaBoolean from '../AriaBoolean/AriaBoolean.ts'
 import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
-import * as GetButtonVirtualDom from '../GetButtonVirtualDom/GetButtonVirtualDom.ts'
+import * as GetPrimaryButtonVirtualDom from '../GetPrimaryButtonVirtualDom/GetPrimaryButtonVirtualDom.ts'
+import * as GetButtonVirtualDom from '../GetSecondaryButtonVirtualDom/GetSecondaryButtonVirtualDom.ts'
 import * as Ids from '../Ids/Ids.ts'
 import * as InputName from '../InputName/InputName.ts'
 import * as JoinBySpace from '../JoinBySpace/JoinBySpace.ts'
@@ -80,7 +81,7 @@ export const getDialogVirtualDom = (
       childCount: 2,
     },
     ...GetButtonVirtualDom.getSecondaryButtonVirtualDom(okMessage, DomEventListenerFunctions.HandleClickOk, InputName.Ok),
-    ...GetButtonVirtualDom.getPrimaryButtonVirtualDom(copyMessage, DomEventListenerFunctions.HandleClickCopy, InputName.Copy),
+    ...GetPrimaryButtonVirtualDom.getPrimaryButtonVirtualDom(copyMessage, DomEventListenerFunctions.HandleClickCopy, InputName.Copy),
   ]
   return dom
 }
