@@ -3,7 +3,7 @@ import * as RenderEventListeners from '../src/parts/RenderEventListeners/RenderE
 import * as DomEventListenersFunctions from '../src/parts/DomEventListenerFunctions/DomEventListenerFunctions.ts'
 
 test('renderEventListeners', () => {
-  const eventListeners = RenderEventListeners.renderEventListers()
+  const eventListeners = RenderEventListeners.renderEventListeners()
   expect(eventListeners).toEqual([
     {
       name: DomEventListenersFunctions.HandleClickOk,

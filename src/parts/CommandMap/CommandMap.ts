@@ -18,6 +18,6 @@ export const commandMap = {
   'About.getVirtualDom': GetAboutVirtualDom.getAboutVirtualDom,
   'About.loadContent': LoadContent.loadContent,
   'About.render': Render.doRender,
-  'About.renderEventListeners': RenderEventListeners.renderEventListers,
+  'About.renderEventListeners': RenderEventListeners.renderEventListeners,
   'About.showAboutElectron': ShowAboutElectron.showAboutElectron,
 }
