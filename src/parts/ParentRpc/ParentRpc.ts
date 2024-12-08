@@ -1,8 +1,13 @@
+import { RendererWorkerApi } from '../RendererWorkerApi/RendererWorkerApi.ts'
+
 const state = {
   rpc: undefined,
 }
 
-export const invoke = (method: string, ...params: any[]): Promise<any> => {
+export const invoke = <T extends keyof RendererWorkerApi>(
+  method: T,
+  ...params: Parameters<RendererWorkerApi[T]>
+): ReturnType<RendererWorkerApi[T]> => {
   const rpc = state.rpc
   // @ts-ignore
   return rpc.invoke(method, ...params)
