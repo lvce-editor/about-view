@@ -13,7 +13,21 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['dist', 'coverage', 'scripts', 'rollup.config.js', 'eslint.config.js', 'src/aboutWorkerMain.ts'],
+    ignores: [
+      'dist',
+      '.tmp',
+      '**/build/**',
+      '**/coverage/**',
+      '**/server/**',
+      '**/e2e/**',
+      '**/memory/**',
+      '**/test-integration/**',
+      '**/test-integration-util/**',
+      'scripts',
+      'rollup.config.js',
+      'eslint.config.js',
+      'packages/about-view/src/aboutWorkerMain.ts',
+    ],
   },
   {
     rules: {
