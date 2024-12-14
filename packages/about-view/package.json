@@ -1,5 +1,5 @@
 {
-  "name": "@lvce-editor/about-worker",
+  "name": "@lvce-editor/about-view",
   "version": "0.0.0-dev",
   "description": "About View Worker",
   "main": "src/aboutWorkerMain.ts",
