@@ -1,39 +1,6 @@
 // based on https://github.com/microsoft/vscode/blob/bd782eb059e133d3a20fdb446b8feb0010a278ad/src/vs/base/common/date.ts (License MIT)
+import * as UiStrings from '../DateUiStrings/DateUiStrings.ts'
 import * as I18nString from '../I18NString/I18NString.ts'
-
-/**
- * @enum {string}
- */
-const UiStrings = {
-  OneSecondAgo: '1 second ago',
-  SomeSecondsAgo: '{PH1} seconds ago',
-  OneMinuteAgo: '1 minute ago',
-  SomeMinutesAgo: '{PH1} minutes ago',
-  OneHourAgo: '1 hour ago',
-  SomeHoursAgo: '{PH1} hours ago',
-  OneDayAgo: '1 day ago',
-  SomeDaysAgo: '{PH1} days ago',
-  OneWeekAgo: '1 week ago',
-  SomeWeeksAgo: '{PH1} weeks ago',
-  OneMonthAgo: '1 month ago',
-  SomeMonthsAgo: '{PH1} months ago',
-  OneYearAgo: '1 year ago',
-  SomeYearsAgo: '{PH1} years ago',
-  InOneSecond: 'in 1 second',
-  InSomeSeconds: 'in {PH1} seconds',
-  InOneMinute: 'in 1 minute',
-  InSomeMinutes: 'in {PH1} minutes',
-  InOneHour: 'in 1 hour',
-  InSomeHours: 'in {PH1} hours',
-  InOneDay: 'in 1 day',
-  InSomeDays: 'in {PH1} days',
-  InOneWeek: 'in 1 week',
-  InSomeWeeks: 'in {PH1} weeks',
-  InOneMonth: 'in 1 month',
-  InSomeMonths: 'in {PH1} months',
-  InOneYear: 'in 1 year',
-  InSomeYears: 'in {PH1} years',
-}
 
 export const oneSecondAgo = (): string => {
   return I18nString.i18nString(UiStrings.OneSecondAgo)
