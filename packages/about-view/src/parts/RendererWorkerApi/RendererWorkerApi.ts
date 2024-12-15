@@ -5,4 +5,5 @@ export interface RendererWorkerApi {
   readonly 'Process.getChromeVersion': () => Promise<string>
   readonly 'Process.getNodeVersion': () => Promise<string>
   readonly 'Process.getElectronVersion': () => Promise<string>
+  readonly 'Viewlet.closeWidget': (widgetId: string) => Promise<string>
 }
