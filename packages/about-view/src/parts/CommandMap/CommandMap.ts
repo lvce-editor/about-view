@@ -4,6 +4,7 @@ import * as GetAboutDetailString from '../GetAboutDetailString/GetAboutDetailStr
 import * as GetAboutDetailStringWeb from '../GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
+import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as Render from '../Render/Render.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
@@ -16,6 +17,7 @@ export const commandMap = {
   'About.getDetailStringWeb': GetAboutDetailStringWeb.getDetailStringWeb,
   'About.getKeyBindings': GetKeyBindings.getKeyBindings,
   'About.getVirtualDom': GetAboutVirtualDom.getAboutVirtualDom,
+  'About.handleClickCopy': HandleClickCopy.handleClickCopy,
   'About.loadContent': LoadContent.loadContent,
   'About.render': Render.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
