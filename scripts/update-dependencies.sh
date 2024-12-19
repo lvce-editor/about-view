@@ -27,11 +27,11 @@ function updateDependencies {
 }
 
                                                        updateDependencies             &&
+cd packages/about-view                              && updateDependencies && cd ../.. &&
 cd packages/build                                   && updateDependencies && cd ../.. &&
 cd packages/e2e                                     && updateDependencies && cd ../.. &&
 cd packages/memory                                  && updateDependencies && cd ../.. &&
 cd packages/server                                  && updateDependencies && cd ../.. &&
-cd packages/about-view                              && updateDependencies && cd ../.. &&
 
 echo "Great Success!"
 
