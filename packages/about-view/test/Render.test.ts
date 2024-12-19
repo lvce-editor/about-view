@@ -1,6 +1,6 @@
 import { expect, test } from '@jest/globals'
-import * as Render from '../src/parts/Render/Render.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
+import * as Render from '../src/parts/Render/Render.ts'
 
 test('render - no changes', () => {
   const oldState = {
