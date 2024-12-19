@@ -1,6 +1,6 @@
 import { expect, test } from '@jest/globals'
-import * as FocusPrevious from '../src/parts/FocusPrevious/FocusPrevious.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
+import * as FocusPrevious from '../src/parts/FocusPrevious/FocusPrevious.ts'
 
 test('focusPrevious - from Ok to Copy', () => {
   const state = {
