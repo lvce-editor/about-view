@@ -1,15 +1,15 @@
 import { beforeEach, expect, jest, test } from '@jest/globals'
 import * as ParentRpc from '../src/parts/ParentRpc/ParentRpc.ts'
-import * as RpcRegistry from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as RpcId from '../src/parts/RpcId/RpcId.ts'
+import * as RpcRegistry from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 beforeEach(() => {
   jest.resetAllMocks()
 })
 
-const mockRpc: any = {
+const mockRpc = {
   invoke: jest.fn(),
-}
+} as any
 
 test('invoke - calls rpc.invoke with correct arguments', async () => {
   mockRpc.invoke.mockResolvedValue(42)

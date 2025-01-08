@@ -1,6 +1,6 @@
 import { RendererWorkerApi } from '../RendererWorkerApi/RendererWorkerApi.ts'
-import * as RpcRegistry from '../RpcRegistry/RpcRegistry.ts'
 import * as RpcId from '../RpcId/RpcId.ts'
+import * as RpcRegistry from '../RpcRegistry/RpcRegistry.ts'
 
 export const invoke = <T extends keyof RendererWorkerApi>(
   method: T,
