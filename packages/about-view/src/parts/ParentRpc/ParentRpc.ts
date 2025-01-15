@@ -1,4 +1,4 @@
-import { RendererWorkerApi } from '../RendererWorkerApi/RendererWorkerApi.ts'
+import type { RendererWorkerApi } from '../RendererWorkerApi/RendererWorkerApi.ts'
 import * as RpcId from '../RpcId/RpcId.ts'
 import * as RpcRegistry from '../RpcRegistry/RpcRegistry.ts'
 
