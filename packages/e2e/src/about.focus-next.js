@@ -1,5 +1,9 @@
 export const name = 'about.click-close'
 
+/**
+ *
+ * @param {import('@lvce-editor/test-with-playwright').Test} param0
+ */
 export const test = async ({ Locator, expect, Command, About }) => {
   // arrange
   await About.show()
