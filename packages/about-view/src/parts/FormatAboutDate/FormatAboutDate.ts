@@ -5,7 +5,7 @@ export const formatAboutDate = (isoDate: string, now: number): string => {
     return 'unknown'
   }
   const date = new Date(isoDate).getTime()
-  if (isNaN(date)) {
+  if (Number.isNaN(date)) {
     return `Invalid Date: ${isoDate}`
   }
   const ago = FormatDate.formatDate(date, now)
