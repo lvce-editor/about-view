@@ -2,36 +2,23 @@
   "name": "@lvce-editor/about-view-monorepo",
   "version": "0.0.0-dev",
   "description": "",
-  "main": "",
-  "type": "module",
-  "scripts": {
-    "postinstall": "lerna bootstrap --ci",
-    "lint": "eslint .",
-    "test": "lerna run test",
-    "type-check": "tsc -b",
-    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/about-view/src/aboutWorkerMain.ts --outfile=.tmp/dist/dist/aboutWorkerMain.js",
-    "build": "node packages/build/src/build.js",
-    "build:static": "node packages/build/src/build-static.js",
-    "dev": "node packages/build/src/dev.js",
-    "measure": "cd packages/memory && npm run measure"
-  },
   "keywords": [
     "about"
   ],
-  "author": "Lvce Editor",
   "license": "MIT",
-  "devDependencies": {
-    "@lerna/legacy-package-management": "^8.1.9",
-    "@lvce-editor/eslint-config": "^1.9.0",
-    "eslint": "^9.18.0",
-    "lerna": "^8.1.9",
-    "prettier": "^3.4.2",
-    "typescript": "^5.7.3"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 150
+  "author": "Lvce Editor",
+  "type": "module",
+  "main": "",
+  "scripts": {
+    "build": "node packages/build/src/build.js",
+    "build:static": "node packages/build/src/build-static.js",
+    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/about-view/src/aboutWorkerMain.ts --outfile=.tmp/dist/dist/aboutWorkerMain.js",
+    "dev": "node packages/build/src/dev.js",
+    "lint": "eslint .",
+    "measure": "cd packages/memory && npm run measure",
+    "postinstall": "lerna bootstrap --ci",
+    "test": "lerna run test",
+    "type-check": "tsc -b"
   },
   "nodemonConfig": {
     "watch": [
@@ -39,5 +26,18 @@
     ],
     "ext": "ts,js",
     "exec": "node scripts/build.js"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 150
+  },
+  "devDependencies": {
+    "@lerna/legacy-package-management": "^8.1.9",
+    "@lvce-editor/eslint-config": "^1.12.0",
+    "eslint": "^9.18.0",
+    "lerna": "^8.1.9",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3"
   }
 }
