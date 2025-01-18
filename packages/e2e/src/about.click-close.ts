@@ -1,10 +1,8 @@
-export const name = 'about.click-ok'
+import type { Test } from '@lvce-editor/test-with-playwright'
 
-/**
- *
- * @param {import('@lvce-editor/test-with-playwright').Test} param0
- */
-export const test = async ({ Locator, expect, About }) => {
+export const name = 'about.click-close'
+
+export const test: Test = async ({ Locator, expect, About }) => {
   // arrange
   await About.show()
   const dialogContent = Locator('.DialogContent')
@@ -13,7 +11,7 @@ export const test = async ({ Locator, expect, About }) => {
   await expect(infoIcon).toBeVisible()
 
   // act
-  await About.handleClickOk()
+  await About.handleClickClose()
 
   // assert
   await expect(dialogContent).toBeHidden()
