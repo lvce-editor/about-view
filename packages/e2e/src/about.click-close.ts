@@ -1,6 +1,8 @@
+import type { Test } from '@lvce-editor/test-with-playwright'
+
 export const name = 'about.click-close'
 
-export const test = async ({ Locator, expect, About }) => {
+export const test: Test = async ({ Locator, expect, About }) => {
   // arrange
   await About.show()
   const dialogContent = Locator('.DialogContent')
