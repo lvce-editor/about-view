@@ -2,11 +2,7 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'about.click-close'
 
-<<<<<<< HEAD:packages/e2e/src/about.focus-next.ts
 export const test: Test = async ({ Locator, expect, Command, About }) => {
-=======
-export const test = async ({ Locator, expect, Command, About }) => {
->>>>>>> origin/main:packages/e2e/src/about.focus-next.js
   // arrange
   await About.show()
   const dialogContent = Locator('.DialogContent')
