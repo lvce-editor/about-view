@@ -1,9 +1,5 @@
 export const name = 'about.open'
 
-/**
- *
- * @param {import('@lvce-editor/test-with-playwright').Test} param0
- */
 export const test = async ({ Locator, expect, About }) => {
   await About.show()
   const dialogContent = Locator('.DialogContent')
