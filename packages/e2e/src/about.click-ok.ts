@@ -2,7 +2,11 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'about.click-ok'
 
+<<<<<<< HEAD:packages/e2e/src/about.click-ok.ts
 export const test: Test = async ({ Locator, expect, About }) => {
+=======
+export const test = async ({ Locator, expect, About }) => {
+>>>>>>> origin/main:packages/e2e/src/about.click-ok.js
   // arrange
   await About.show()
   const dialogContent = Locator('.DialogContent')
