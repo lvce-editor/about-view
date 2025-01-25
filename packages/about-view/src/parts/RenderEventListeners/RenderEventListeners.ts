@@ -1,6 +1,7 @@
 import * as DomEventListenersFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
+import { DomEventListener } from '../DomEventListener/DomEventListener.ts'
 
-export const renderEventListeners = (): readonly any[] => {
+export const renderEventListeners = (): readonly DomEventListener[] => {
   return [
     {
       name: DomEventListenersFunctions.HandleClickOk,
