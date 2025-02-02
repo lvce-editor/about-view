@@ -1,12 +1,12 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
 import * as AboutStrings from '../AboutStrings/AboutStrings.ts'
+import * as DiffAbout from '../DiffAbout/DiffAbout.ts'
+import * as DiffFocus from '../DiffFocus/DiffFocus.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 import * as GetFocusSelector from '../GetFocusSelector/GetFocusSelector.ts'
 
 const renderDialog = {
-  isEqual(oldState: AboutState, newState: AboutState): boolean {
-    return oldState.productName === newState.productName && oldState.lines === newState.lines
-  },
+  isEqual:DiffAbout.isEqual,
   apply(oldState: AboutState, newState: AboutState): any {
     const okMessage = AboutStrings.ok()
     const copyMessage = AboutStrings.copy()
@@ -18,9 +18,7 @@ const renderDialog = {
 }
 
 const renderFocus = {
-  isEqual(oldState: AboutState, newState: AboutState): boolean {
-    return oldState.focusId === newState.focusId
-  },
+  isEqual:DiffFocus.isEqual,
   apply(oldState: AboutState, newState: AboutState): any {
     const name = GetFocusSelector.getFocusSelector(newState.focusId)
     return ['Viewlet.focusElementByName', name]
