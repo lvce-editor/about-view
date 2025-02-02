@@ -1,3 +1,4 @@
+import * as Diff from '../Diff/Diff.ts'
 import * as FocusNext from '../FocusNext/FocusNext.ts'
 import * as FocusPrevious from '../FocusPrevious/FocusPrevious.ts'
 import * as GetAboutDetailString from '../GetAboutDetailString/GetAboutDetailString.ts'
@@ -14,6 +15,7 @@ import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
 export const commandMap = {
   'About.focusNext': FocusNext.focusNext,
+  'About.diff': Diff.diff,
   'About.focusPrevious': FocusPrevious.focusPrevious,
   'About.getDetailString': GetAboutDetailString.getDetailString,
   'About.getDetailStringWeb': GetAboutDetailStringWeb.getDetailStringWeb,

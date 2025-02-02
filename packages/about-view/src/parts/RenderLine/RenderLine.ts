@@ -2,7 +2,7 @@ import type { VirtualDomNode } from '../VirtualDomNode/VirtualDomNode.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
-const br:VirtualDomNode = {
+const br: VirtualDomNode = {
   type: VirtualDomElements.Br,
   childCount: 0,
 }
