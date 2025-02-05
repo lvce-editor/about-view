@@ -9,6 +9,7 @@ import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleClickClose from '../HandleClickClose/HandleClickClose.ts'
 import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
 import * as HandleClickOk from '../HandleClickOk/HandleClickOk.ts'
+import * as HandleFocusIn from '../HandleFocusIn/HandleFocusIn.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as Render from '../Render/Render.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
@@ -26,6 +27,7 @@ export const commandMap = {
   'About.handleClickClose': HandleClickClose.handleClickClose,
   'About.handleClickCopy': HandleClickCopy.handleClickCopy,
   'About.handleClickOk': HandleClickOk.handleClickOk,
+  'About.handleFocusIn': HandleFocusIn.handleFocusIn,
   'About.loadContent': LoadContent.loadContent,
   'About.render': Render.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
