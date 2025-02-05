@@ -8,6 +8,7 @@ import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleClickClose from '../HandleClickClose/HandleClickClose.ts'
 import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
 import * as HandleClickOk from '../HandleClickOk/HandleClickOk.ts'
+import * as HandleFocusIn from '../HandleFocusIn/HandleFocusIn.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as Render from '../Render/Render.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
@@ -16,6 +17,7 @@ import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 export const commandMap = {
   'About.focusNext': FocusNext.focusNext,
   'About.diff': Diff.diff,
+  'About.handleFocusIn': HandleFocusIn.handleFocusIn,
   'About.focusPrevious': FocusPrevious.focusPrevious,
   'About.getDetailString': GetAboutDetailString.getDetailString,
   'About.getDetailStringWeb': GetAboutDetailStringWeb.getDetailStringWeb,
