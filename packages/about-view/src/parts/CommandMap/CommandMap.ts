@@ -4,6 +4,7 @@ import * as FocusPrevious from '../FocusPrevious/FocusPrevious.ts'
 import * as GetAboutDetailString from '../GetAboutDetailString/GetAboutDetailString.ts'
 import * as GetAboutDetailStringWeb from '../GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
+import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleClickClose from '../HandleClickClose/HandleClickClose.ts'
 import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
@@ -14,9 +15,10 @@ import * as RenderEventListeners from '../RenderEventListeners/RenderEventListen
 import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
 export const commandMap = {
-  'About.focusNext': FocusNext.focusNext,
   'About.diff': Diff.diff,
+  'About.focusNext': FocusNext.focusNext,
   'About.focusPrevious': FocusPrevious.focusPrevious,
+  'About.getCommandIds': GetCommandIds.getCommandIds,
   'About.getDetailString': GetAboutDetailString.getDetailString,
   'About.getDetailStringWeb': GetAboutDetailStringWeb.getDetailStringWeb,
   'About.getKeyBindings': GetKeyBindings.getKeyBindings,
