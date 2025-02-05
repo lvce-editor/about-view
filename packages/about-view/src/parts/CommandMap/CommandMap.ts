@@ -17,7 +17,6 @@ import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
 export const commandMap = {
   'About.diff': Diff.diff,
-  'About.handleFocusIn': HandleFocusIn.handleFocusIn,
   'About.focusNext': FocusNext.focusNext,
   'About.focusPrevious': FocusPrevious.focusPrevious,
   'About.getCommandIds': GetCommandIds.getCommandIds,
@@ -28,6 +27,7 @@ export const commandMap = {
   'About.handleClickClose': HandleClickClose.handleClickClose,
   'About.handleClickCopy': HandleClickCopy.handleClickCopy,
   'About.handleClickOk': HandleClickOk.handleClickOk,
+  'About.handleFocusIn': HandleFocusIn.handleFocusIn,
   'About.loadContent': LoadContent.loadContent,
   'About.render': Render.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
