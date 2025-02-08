@@ -1,12 +1,9 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as DiffAbout from '../DiffAbout/DiffAbout.ts'
-import * as DiffFocus from '../DiffFocus/DiffFocus.ts'
-
-const modules = [DiffAbout, DiffFocus]
+import * as DiffModules from '../DiffModules/DiffModules.ts'
 
 export const diff = (oldState: AboutState, newState: AboutState): readonly number[] => {
   const diffResult: number[] = []
-  for (const module of modules) {
+  for (const module of DiffModules.modules) {
     if (!module.isEqual(oldState, newState)) {
       diffResult.push(module.diffType)
     }
