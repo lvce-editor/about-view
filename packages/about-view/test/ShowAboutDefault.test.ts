@@ -4,7 +4,7 @@ import * as RpcRegistry from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 beforeEach(() => {
   const mockRpc = {
-    invoke: async (method: string, ...params: any[]) => {
+    invoke: async (method: string, ...params: readonly any[]) => {
       if (method === 'Viewlet.openWidget' && params[0] === 'About') {
         return undefined
       }
