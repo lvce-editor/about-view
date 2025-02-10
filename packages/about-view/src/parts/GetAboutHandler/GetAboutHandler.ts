@@ -1,5 +1,5 @@
 import type { AboutHandler } from '../AboutHandler/AboutHandler.ts'
-import * as PlatformType from '../PlatformType/PlatformType.js'
+import * as PlatformType from '../PlatformType/PlatformType.ts'
 import * as ShowAboutDefault from '../ShowAboutDefault/ShowAboutDefault.ts'
 import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
