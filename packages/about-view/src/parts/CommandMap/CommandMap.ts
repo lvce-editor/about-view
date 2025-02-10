@@ -13,6 +13,7 @@ import * as HandleFocusIn from '../HandleFocusIn/HandleFocusIn.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as Render from '../Render/Render.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
+import * as ShowAbout from '../ShowAbout/ShowAbout.ts'
 import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
 export const commandMap = {
@@ -31,5 +32,6 @@ export const commandMap = {
   'About.loadContent': LoadContent.loadContent,
   'About.render': Render.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
+  'About.showAbout': ShowAbout.showAbout,
   'About.showAboutElectron': ShowAboutElectron.showAboutElectron,
 }
