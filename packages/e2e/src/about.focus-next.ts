@@ -11,8 +11,7 @@ export const test: Test = async ({ Locator, expect, Command, About }) => {
   await expect(infoIcon).toBeVisible()
 
   // act
-  // TODO use PageObject
-  await Command.execute('About.focusNext')
+  await About.focusNext()
 
   // assert
   const okButton = dialogContent.locator('.ButtonSecondary')
