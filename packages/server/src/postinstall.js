@@ -28,10 +28,10 @@ const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'r
 
 const content = await readFile(rendererWorkerMainPath, 'utf-8')
 const remoteUrl = getRemoteUrl(aboutWorkerPath)
-if (!content.includes('// const aboutWorkerUrl = ')) {
-  const occurrence = `const aboutWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\``
-  const replacement = `// const aboutWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\`
-  const aboutWorkerUrl = \`${remoteUrl}\``
+if (!content.includes('// const aboutViewWorkerUrl = ')) {
+  const occurrence = `const aboutViewWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\``
+  const replacement = `// const aboutViewWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\`
+  const aboutViewWorkerUrl = \`${remoteUrl}\``
 
   const newContent = content.replace(occurrence, replacement)
   await writeFile(rendererWorkerMainPath, newContent)
