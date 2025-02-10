@@ -33,6 +33,12 @@ test('showAbout - electron platform', async () => {
       if (method === 'Process.getElectronVersion') {
         return '1.0.0'
       }
+      if (method === 'Process.getChromeVersion') {
+        return '123.0.0'
+      }
+      if (method === 'Process.getNodeVersion') {
+        return '22.0.0'
+      }
       throw new Error('unexpected call')
     },
   } as any
