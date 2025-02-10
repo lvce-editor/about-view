@@ -1,8 +1,3 @@
-import config from '@lvce-editor/eslint-config'
+import * as config from '@lvce-editor/eslint-config'
 
-export default [
-  ...config,
-  {
-    ignores: ['packages/about-view/src/aboutWorkerMain.ts'],
-  },
-]
+export default [...config.default]
