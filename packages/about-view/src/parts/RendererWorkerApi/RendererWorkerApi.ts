@@ -6,5 +6,6 @@ export interface RendererWorkerApi {
   readonly 'Process.getNodeVersion': () => Promise<string>
   readonly 'Process.getElectronVersion': () => Promise<string>
   readonly 'Viewlet.closeWidget': (widgetId: string) => Promise<string>
+  readonly 'Viewlet.openWidget': (widgetId: string) => Promise<string>
   readonly 'Focus.setFocus': (focusId: number) => Promise<string>
 }
