@@ -1,12 +1,16 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as AboutStrings from '../AboutStrings/AboutStrings.ts'
+import * as CreateViewModel from '../CreateViewModel/CreateViewModel.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 
 export const renderDialog = (oldState: AboutState, newState: AboutState): any => {
-  const okMessage = AboutStrings.ok()
-  const copyMessage = AboutStrings.copy()
-  const closeMessage = AboutStrings.closeDialog()
-  const infoMessage = AboutStrings.info()
-  const dom = GetAboutVirtualDom.getAboutVirtualDom(newState.productName, newState.lines, closeMessage, okMessage, copyMessage, infoMessage)
+  const viewModel = CreateViewModel.createViewModel(newState)
+  const dom = GetAboutVirtualDom.getAboutVirtualDom(
+    viewModel.productName,
+    viewModel.lines,
+    viewModel.closeMessage,
+    viewModel.okMessage,
+    viewModel.copyMessage,
+    viewModel.infoMessage,
+  )
   return ['Viewlet.setDom2', dom]
 }
