@@ -3,9 +3,7 @@ import * as GetBrowser from '../GetBrowser/GetBrowser.ts'
 import * as Process from '../Process/Process.ts'
 
 export const getDetailStringWeb = (): readonly string[] => {
-  const { version } = Process
-  const { commit } = Process
-  const { date } = Process
+  const { date, commit, version } = Process
   const now = Date.now()
   const formattedDate = FormatAboutDate.formatAboutDate(date, now)
   const browser = GetBrowser.getBrowser()
