@@ -1,4 +1,4 @@
-import { AboutState } from '../AboutState/AboutState.ts'
+import type { AboutState } from '../AboutState/AboutState.ts'
 import * as DiffModules from '../DiffModules/DiffModules.ts'
 
 export const diff = (oldState: AboutState, newState: AboutState): readonly number[] => {
