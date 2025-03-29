@@ -28,7 +28,7 @@ const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'r
 
 const content = await readFile(rendererWorkerMainPath, 'utf-8')
 const remoteUrl = getRemoteUrl(aboutWorkerPath)
-if (!content.includes('// const aboutViewWorkerUrl = ')) {
+if (content.includes('// const aboutViewWorkerUrl = ')) {
   const occurrence = `const aboutViewWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\``
   const replacement = `// const aboutViewWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\`
   const aboutViewWorkerUrl = \`${remoteUrl}\``
