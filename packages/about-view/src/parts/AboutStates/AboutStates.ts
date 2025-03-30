@@ -11,9 +11,13 @@ export const get = (
   return states[uid]
 }
 
+export const remove = (uid: string | number): void => {
+  delete states[uid]
+}
+
 export const clear = (): void => {
   for (const key of Object.keys(states)) {
-    delete states[key]
+    remove(key)
   }
 }
 

@@ -1,6 +1,7 @@
 import * as Create from '../Create/Create.ts'
 import * as Diff2 from '../Diff2/Diff2.ts'
 import * as Diff from '../Diff/Diff.ts'
+import * as Dispose from '../Dispose/Dispose.ts'
 import * as FocusNext from '../FocusNext/FocusNext.ts'
 import * as FocusPrevious from '../FocusPrevious/FocusPrevious.ts'
 import * as GetAboutDetailString from '../GetAboutDetailString/GetAboutDetailString.ts'
@@ -23,15 +24,16 @@ import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 export const commandMap = {
   'About.create': Create.create,
   'About.diff2': Diff2.diff2,
+  'About.dispose': Dispose.dispose,
   'About.focusNext': FocusNext.focusNext,
   'About.focusPrevious': FocusPrevious.focusPrevious,
   'About.getCommandIds': GetCommandIds.getCommandIds,
   'About.getKeyBindings': GetKeyBindings.getKeyBindings,
   'About.handleClickClose': HandleClickClose.handleClickClose,
   'About.handleClickCopy': HandleClickCopy.handleClickCopy,
-  'About.loadContent2': LoadContent2.loadContent2,
   'About.handleClickOk': HandleClickOk.handleClickOk,
   'About.handleFocusIn': HandleFocusIn.handleFocusIn,
+  'About.loadContent2': LoadContent2.loadContent2,
   'About.render2': Render2.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
   'About.showAbout': ShowAbout.showAbout,
