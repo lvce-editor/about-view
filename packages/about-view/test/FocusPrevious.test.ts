@@ -30,6 +30,7 @@ test('focusPrevious - from Copy to Ok', () => {
     productName: 'Test Product',
     lines: [],
     focusId: AboutFocusId.Ok,
+    uid: 1,
   })
 })
 
@@ -44,5 +45,6 @@ test('focusPrevious - from None stays None', () => {
     productName: 'Test Product',
     lines: [],
     focusId: AboutFocusId.None,
+    uid: 1,
   })
 })
