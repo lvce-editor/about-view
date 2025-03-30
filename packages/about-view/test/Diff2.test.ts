@@ -13,11 +13,13 @@ test('diff2 returns diff between old and new state', () => {
     productName: 'Test App',
     lines: ['line 1', 'line 2'],
     focusId: 0,
+    uid: 1,
   }
   const newState: AboutState = {
     productName: 'Test App',
     lines: ['line 1', 'line 3'],
     focusId: 0,
+    uid: 1,
   }
 
   AboutStates.set(uid, oldState, newState)

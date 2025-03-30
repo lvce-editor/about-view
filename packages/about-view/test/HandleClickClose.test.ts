@@ -1,4 +1,5 @@
 import { beforeEach, expect, jest, test } from '@jest/globals'
+import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 
 beforeEach(() => {
   jest.resetAllMocks()
@@ -15,10 +16,11 @@ jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => {
 const HandleClickClose = await import('../src/parts/HandleClickClose/HandleClickClose.ts')
 
 test('handleClickClose', async () => {
-  const state = {
+  const state: AboutState = {
     productName: 'Test Editor',
     lines: ['Version: 1.0.0'],
     focusId: 1,
+    uid: 1,
   }
   // @ts-expect-error
   mockInvoke.mockResolvedValue(undefined)
@@ -28,10 +30,11 @@ test('handleClickClose', async () => {
 })
 
 test('handleClickClose - error', async () => {
-  const state = {
+  const state: AboutState = {
     productName: 'Test Editor',
     lines: ['Version: 1.0.0'],
     focusId: 1,
+    uid: 1,
   }
   const error = new Error('Failed to close widget')
   // @ts-expect-error

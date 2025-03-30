@@ -12,11 +12,13 @@ test('set and get state', () => {
     productName: 'Test App',
     lines: ['line 1', 'line 2'],
     focusId: 0,
+    uid: 1,
   }
   const newState: AboutState = {
     productName: 'Test App',
     lines: ['line 1', 'line 2', 'line 3'],
     focusId: 1,
+    uid: 1,
   }
 
   AboutStates.set(uid, oldState, newState)
@@ -40,6 +42,7 @@ test('getKeys returns all state keys', () => {
     productName: 'Test App',
     lines: ['line 1'],
     focusId: 0,
+    uid: 1,
   }
 
   AboutStates.set(uid1, state, state)
