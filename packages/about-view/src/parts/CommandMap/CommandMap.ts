@@ -12,6 +12,7 @@ import * as HandleClickClose from '../HandleClickClose/HandleClickClose.ts'
 import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
 import * as HandleClickOk from '../HandleClickOk/HandleClickOk.ts'
 import * as HandleFocusIn from '../HandleFocusIn/HandleFocusIn.ts'
+import * as LoadContent2 from '../LoadContent2/LoadContent2.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as Render2 from '../Render2/Render2.ts'
 import * as Render from '../Render/Render.ts'
@@ -28,15 +29,16 @@ export const commandMap = {
   'About.getKeyBindings': GetKeyBindings.getKeyBindings,
   'About.handleClickClose': HandleClickClose.handleClickClose,
   'About.handleClickCopy': HandleClickCopy.handleClickCopy,
+  'About.loadContent2': LoadContent2.loadContent2,
   'About.handleClickOk': HandleClickOk.handleClickOk,
   'About.handleFocusIn': HandleFocusIn.handleFocusIn,
-  'About.loadContent': LoadContent.loadContent,
   'About.render2': Render2.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
   'About.showAbout': ShowAbout.showAbout,
   'About.showAboutElectron': ShowAboutElectron.showAboutElectron,
 
   // deprecated
+  'About.loadContent': LoadContent.loadContent,
   'About.diff': Diff.diff,
   'About.render': Render.doRender,
   'About.getVirtualDom': GetAboutVirtualDom.getAboutVirtualDom,
