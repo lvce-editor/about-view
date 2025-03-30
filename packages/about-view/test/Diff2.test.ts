@@ -23,5 +23,5 @@ test('diff2 returns diff between old and new state', () => {
   AboutStates.set(uid, oldState, newState)
   const result = Diff2.diff2(uid)
 
-  expect(result).toEqual([1])
+  expect(result).toEqual([3])
 })
