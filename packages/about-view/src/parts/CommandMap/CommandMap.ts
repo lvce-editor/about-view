@@ -31,7 +31,7 @@ export const commandMap = {
   'About.handleClickOk': HandleClickOk.handleClickOk,
   'About.handleFocusIn': HandleFocusIn.handleFocusIn,
   'About.loadContent': LoadContent.loadContent,
-  'About.render2': Render2.render2,
+  'About.render2': Render2.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
   'About.showAbout': ShowAbout.showAbout,
   'About.showAboutElectron': ShowAboutElectron.showAboutElectron,
