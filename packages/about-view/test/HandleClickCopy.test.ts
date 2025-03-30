@@ -1,4 +1,5 @@
 import { beforeEach, expect, jest, test } from '@jest/globals'
+import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 
 beforeEach(() => {
   jest.resetAllMocks()
@@ -15,10 +16,11 @@ jest.unstable_mockModule('../src/parts/ClipBoard/ClipBoard.ts', () => {
 const HandleClickCopy = await import('../src/parts/HandleClickCopy/HandleClickCopy.ts')
 
 test('handleClickCopy', async () => {
-  const state = {
+  const state: AboutState = {
     productName: 'Test Editor',
     lines: ['Version: 1.0.0', 'Commit: abc'],
     focusId: 1,
+    uid: 1,
   }
   // @ts-expect-error
   mockWriteText.mockResolvedValue(undefined)
@@ -28,10 +30,11 @@ test('handleClickCopy', async () => {
 })
 
 test('handleClickCopy - error', async () => {
-  const state = {
+  const state: AboutState = {
     productName: 'Test Editor',
     lines: ['Version: 1.0.0', 'Commit: abc'],
     focusId: 1,
+    uid: 1,
   }
   const error = new Error('Failed to copy to clipboard')
   // @ts-expect-error

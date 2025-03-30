@@ -14,6 +14,7 @@ test('render - no changes', () => {
     productName: 'Test Editor',
     lines: ['Version: 1.0.0'],
     focusId: AboutFocusId.Ok,
+    uid: 1,
   }
   AboutStates.set(uid, state, state)
   expect(Render2.doRender(uid, [])).toEqual([])
