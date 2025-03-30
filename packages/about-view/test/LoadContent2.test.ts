@@ -6,7 +6,7 @@ import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 const detailString = ['Version: 1.0.0', 'Build: 123']
 
 jest.unstable_mockModule('../src/parts/GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts', () => ({
-  getDetailStringWeb: () => detailString,
+  getDetailStringWeb: (): readonly string[] => detailString,
 }))
 
 jest.unstable_mockModule('../src/parts/Process/Process.ts', () => ({
