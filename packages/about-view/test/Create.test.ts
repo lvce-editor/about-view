@@ -8,7 +8,7 @@ beforeEach(() => {
 
 test('create initializes state with default values', () => {
   const uid = 123
-  Create.create(uid, 0, 0, 100, 100)
+  Create.create(uid)
   const result = AboutStates.get(uid)
 
   expect(result).toEqual({
