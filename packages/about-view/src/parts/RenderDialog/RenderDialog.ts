@@ -2,7 +2,7 @@ import type { AboutState } from '../AboutState/AboutState.ts'
 import * as CreateViewModel from '../CreateViewModel/CreateViewModel.ts'
 import * as GetAboutVirtualDom from '../GetAboutVirtualDom/GetAboutVirtualDom.ts'
 
-export const renderDialog = (oldState: AboutState, newState: AboutState): any => {
+export const renderDialog = (oldState: AboutState, newState: AboutState): readonly any[] => {
   const viewModel = CreateViewModel.createViewModel(newState)
   const dom = GetAboutVirtualDom.getAboutVirtualDom(
     viewModel.productName,
