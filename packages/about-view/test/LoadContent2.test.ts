@@ -25,6 +25,7 @@ test('loadContent2', async () => {
     productName: 'Old Name',
     lines: ['old line'],
     focusId: AboutFocusId.Ok,
+    uid: 1,
   }
   AboutStates.set(uid, oldState, oldState)
 
@@ -35,5 +36,6 @@ test('loadContent2', async () => {
     productName: 'Lvce Editor - OSS',
     lines: detailString,
     focusId: AboutFocusId.Ok,
+    uid: 1,
   })
 })
