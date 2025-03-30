@@ -14,6 +14,8 @@ test('focusPrevious - from Ok to Copy', () => {
     productName: 'Test Product',
     lines: [],
     focusId: AboutFocusId.Copy,
+
+    uid: 1,
   })
 })
 
