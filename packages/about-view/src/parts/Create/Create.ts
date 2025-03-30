@@ -3,6 +3,7 @@ import * as AboutStates from '../AboutStates/AboutStates.ts'
 
 export const create = (uid: number): void => {
   const state: AboutState = {
+    uid,
     focusId: 0,
     lines: [],
     productName: '',

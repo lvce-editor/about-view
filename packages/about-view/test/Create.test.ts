@@ -16,11 +16,13 @@ test('create initializes state with default values', () => {
       productName: '',
       lines: [],
       focusId: 0,
+      uid: 123,
     },
     newState: {
       productName: '',
       lines: [],
       focusId: 0,
+      uid: 123,
     },
   })
 })
