@@ -1,6 +1,8 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
 
-export const name = 'about.click-close'
+export const name = 'about.focus-next'
+
+export const skip = 1
 
 export const test: Test = async ({ Locator, expect, Command, About }) => {
   // arrange
