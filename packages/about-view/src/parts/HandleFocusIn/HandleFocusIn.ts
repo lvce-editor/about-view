@@ -4,6 +4,7 @@ import * as ParentRpc from '../ParentRpc/ParentRpc.ts'
 import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 
 export const handleFocusIn = async (state: AboutState): Promise<AboutState> => {
+  // TODO remove side effect
   await ParentRpc.invoke('Focus.setFocus', WhenExpression.FocusAbout)
   if (state.focusId) {
     return state
