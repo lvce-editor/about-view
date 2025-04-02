@@ -10,6 +10,10 @@ const createState = (uid: number): AboutState => ({
   uid,
 })
 
+const fn1 = async (state: AboutState): Promise<AboutState> => {
+  return { ...state, productName: 'new' }
+}
+
 test('wrapCommand should update state when function returns new state', async () => {
   const uid = 123
   const oldState = createState(uid)
@@ -17,13 +21,14 @@ test('wrapCommand should update state when function returns new state', async ()
 
   AboutStates.set(uid, oldState, oldState)
 
-  const fn = async (state: AboutState): Promise<AboutState> => newState
-  const wrapped = wrapCommand(fn)
+  const wrapped = wrapCommand(fn1)
   await wrapped(uid)
 
   const { newState: currentState } = AboutStates.get(uid)
   expect(currentState).toEqual(newState)
 })
+
+const fn2 = async (state: AboutState): Promise<AboutState> => state
 
 test('wrapCommand should not update state when function returns same state', async () => {
   const uid = 123
@@ -31,8 +36,7 @@ test('wrapCommand should not update state when function returns same state', asy
 
   AboutStates.set(uid, state, state)
 
-  const fn = async (state: AboutState): Promise<AboutState> => state
-  const wrapped = wrapCommand(fn)
+  const wrapped = wrapCommand(fn2)
   await wrapped(uid)
 
   const { newState: currentState } = AboutStates.get(uid)
