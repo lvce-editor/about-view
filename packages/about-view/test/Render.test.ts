@@ -50,7 +50,10 @@ test('render - focus changed', () => {
     ...oldState,
     focusId: AboutFocusId.Copy,
   }
-  expect(Render.doRender(oldState, newState)).toEqual([['Viewlet.focusElementByName', 'Copy']])
+  expect(Render.doRender(oldState, newState)).toEqual([
+    ['Viewlet.focusElementByName', 'Copy'],
+    ['Viewlet.setFocusContext', 4],
+  ])
 })
 
 test('render - both content and focus changed', () => {
@@ -76,5 +79,6 @@ test('render - both content and focus changed', () => {
       ]),
     ],
     ['Viewlet.focusElementByName', 'Copy'],
+    ['Viewlet.setFocusContext', 4],
   ])
 })
