@@ -14,19 +14,20 @@ import * as Render2 from '../Render2/Render2.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
 import * as ShowAbout from '../ShowAbout/ShowAbout.ts'
 import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
+import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
 export const commandMap = {
   'About.create': Create.create,
   'About.diff2': Diff2.diff2,
   'About.dispose': Dispose.dispose,
-  'About.focusNext': FocusNext.focusNext,
-  'About.focusPrevious': FocusPrevious.focusPrevious,
+  'About.focusNext': WrapCommand.wrapCommand(FocusNext.focusNext),
+  'About.focusPrevious': WrapCommand.wrapCommand(FocusPrevious.focusPrevious),
   'About.getCommandIds': GetCommandIds.getCommandIds,
   'About.getKeyBindings': GetKeyBindings.getKeyBindings,
-  'About.handleClickClose': HandleClickClose.handleClickClose,
-  'About.handleClickCopy': HandleClickCopy.handleClickCopy,
-  'About.handleClickOk': HandleClickOk.handleClickOk,
-  'About.handleFocusIn': HandleFocusIn.handleFocusIn,
+  'About.handleClickClose': WrapCommand.wrapCommand(HandleClickClose.handleClickClose),
+  'About.handleClickCopy': WrapCommand.wrapCommand(HandleClickCopy.handleClickCopy),
+  'About.handleClickOk': WrapCommand.wrapCommand(HandleClickOk.handleClickOk),
+  'About.handleFocusIn': WrapCommand.wrapCommand(HandleFocusIn.handleFocusIn),
   'About.loadContent2': LoadContent2.loadContent2,
   'About.render2': Render2.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
