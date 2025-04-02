@@ -1,7 +1,7 @@
-import { jest, test, expect } from '@jest/globals'
-import { wrapCommand } from '../src/parts/WrapCommand/WrapCommand.ts'
-import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
+import { expect, test } from '@jest/globals'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
+import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
+import { wrapCommand } from '../src/parts/WrapCommand/WrapCommand.ts'
 
 const createState = (uid: number): AboutState => ({
   productName: 'test',
