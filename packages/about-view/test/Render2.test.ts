@@ -1,9 +1,9 @@
 import { beforeEach, expect, test } from '@jest/globals'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
-import * as Render2 from '../src/parts/Render2/Render2.ts'
 import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import * as Diff2 from '../src/parts/Diff2/Diff2.ts'
+import * as Render2 from '../src/parts/Render2/Render2.ts'
 
 beforeEach(() => {
   AboutStates.clear()
