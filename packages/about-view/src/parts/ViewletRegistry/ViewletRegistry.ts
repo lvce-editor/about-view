@@ -19,5 +19,10 @@ export const create = <T>(): IViewletRegistry<T> => {
         return Number.parseInt(key)
       })
     },
+    clear(): void {
+      for (const key of Object.keys(states)) {
+        delete states[key]
+      }
+    },
   }
 }

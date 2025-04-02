@@ -5,4 +5,5 @@ export interface IViewletRegistry<T> {
   readonly set: (uid: number, oldState: T, newState: T) => void
   readonly dispose: (uid: number) => void
   readonly getKeys: () => readonly number[]
+  readonly clear: () => void
 }
