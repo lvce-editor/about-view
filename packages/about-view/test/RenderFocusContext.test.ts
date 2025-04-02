@@ -1,10 +1,21 @@
-import { jest, test, expect } from '@jest/globals'
+import { expect, test } from '@jest/globals'
 import { renderFocusContext } from '../src/parts/RenderFocusContext/RenderFocusContext.ts'
 import * as WhenExpression from '../src/parts/WhenExpression/WhenExpression.ts'
+import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 
 test('renderFocusContext returns correct array', () => {
-  const oldState = {} as any
-  const newState = {} as any
+  const oldState: AboutState = {
+    productName: 'test',
+    lines: [],
+    focusId: 0,
+    uid: 0,
+  }
+  const newState: AboutState = {
+    productName: 'test',
+    lines: [],
+    focusId: 0,
+    uid: 0,
+  }
 
   const result = renderFocusContext(oldState, newState)
 
