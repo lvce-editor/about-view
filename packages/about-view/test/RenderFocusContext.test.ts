@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals'
+import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import { renderFocusContext } from '../src/parts/RenderFocusContext/RenderFocusContext.ts'
 import * as WhenExpression from '../src/parts/WhenExpression/WhenExpression.ts'
-import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 
 test('renderFocusContext returns correct array', () => {
   const oldState: AboutState = {
