@@ -1,22 +1,18 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
-import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
+import { expect, jest, test } from '@jest/globals'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
+import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
+import * as HandleFocusIn from '../src/parts/HandleFocusIn/HandleFocusIn.ts'
+import * as RpcId from '../src/parts/RpcId/RpcId.ts'
+import * as RpcRegistry from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
-beforeEach(() => {
-  jest.resetAllMocks()
+const mockInvoke = jest.fn()
+
+RpcRegistry.set(RpcId.RendererWorker, {
+  // @ts-ignore
+  invoke: mockInvoke,
+  send: () => {},
+  invokeAndTransfer: async () => 'ok',
 })
-
-const mock = jest.fn()
-
-// TODO don't mock
-
-jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => {
-  return {
-    invoke: mock,
-  }
-})
-
-const HandleFocusIn = await import('../src/parts/HandleFocusIn/HandleFocusIn.ts')
 
 test('handleFocusIn - when focusId exists', async () => {
   const state: AboutState = {
@@ -25,11 +21,9 @@ test('handleFocusIn - when focusId exists', async () => {
     focusId: AboutFocusId.Ok,
     uid: 1,
   }
-  // @ts-expect-error
-  mock.mockResolvedValue(undefined)
   const newState = await HandleFocusIn.handleFocusIn(state)
-  expect(mock).toHaveBeenCalledWith('Focus.setFocus', 4)
   expect(newState).toBe(state)
+  expect(mockInvoke).toHaveBeenCalledWith('Focus.setFocus', 4)
 })
 
 test('handleFocusIn - when focusId is None', async () => {
@@ -39,14 +33,12 @@ test('handleFocusIn - when focusId is None', async () => {
     focusId: AboutFocusId.None,
     uid: 1,
   }
-  // @ts-expect-error
-  mock.mockResolvedValue(undefined)
   const newState = await HandleFocusIn.handleFocusIn(state)
-  expect(mock).toHaveBeenCalledWith('Focus.setFocus', 4)
   expect(newState).toEqual({
     ...state,
     focusId: AboutFocusId.Ok,
   })
+  expect(mockInvoke).toHaveBeenCalledWith('Focus.setFocus', 4)
 })
 
 test('handleFocusIn - when focusId is Copy', async () => {
@@ -56,9 +48,7 @@ test('handleFocusIn - when focusId is Copy', async () => {
     focusId: AboutFocusId.Copy,
     uid: 1,
   }
-  // @ts-expect-error
-  mock.mockResolvedValue(undefined)
   const newState = await HandleFocusIn.handleFocusIn(state)
-  expect(mock).toHaveBeenCalledWith('Focus.setFocus', 4)
   expect(newState).toBe(state)
+  expect(mockInvoke).toHaveBeenCalledWith('Focus.setFocus', 4)
 })
