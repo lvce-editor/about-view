@@ -7,7 +7,7 @@ beforeEach(() => {
 })
 
 test('set and get state', () => {
-  const uid = 'test-uid'
+  const uid = 1
   const oldState: AboutState = {
     productName: 'Test App',
     lines: ['line 1', 'line 2'],
@@ -31,13 +31,13 @@ test('set and get state', () => {
 })
 
 test('get non-existent state', () => {
-  const result = AboutStates.get('non-existent')
+  const result = AboutStates.get(123)
   expect(result).toBeUndefined()
 })
 
 test('getKeys returns all state keys', () => {
-  const uid1 = 'test-uid-1'
-  const uid2 = 'test-uid-2'
+  const uid1 = 1
+  const uid2 = 2
   const state: AboutState = {
     productName: 'Test App',
     lines: ['line 1'],
