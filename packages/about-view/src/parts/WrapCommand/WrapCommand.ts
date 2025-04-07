@@ -1,13 +1,23 @@
+import type { AboutState } from '../AboutState/AboutState.ts'
 import * as AboutStates from '../AboutStates/AboutStates.ts'
 
-export const wrapCommand = (fn: any): any => {
+export interface WrappedFn {
+  (uid: number, ...args: readonly any[]): Promise<void>
+}
+
+interface Fn {
+  (state: AboutState, ...args: readonly any[]): AboutState | Promise<AboutState>
+}
+
+export const wrapCommand = (fn: Fn): WrappedFn => {
   const wrapped = async (uid: number, ...args: readonly any[]): Promise<void> => {
     const { newState } = AboutStates.get(uid)
     const newerState = await fn(newState, ...args)
     if (newState === newerState) {
       return
     }
-    AboutStates.set(uid, newState, newerState)
+    const latest = AboutStates.get(uid)
+    AboutStates.set(uid, latest.oldState, newerState)
   }
   return wrapped
 }
