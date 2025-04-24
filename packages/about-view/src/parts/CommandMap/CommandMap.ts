@@ -14,7 +14,7 @@ import * as Render2 from '../Render2/Render2.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
 import * as ShowAbout from '../ShowAbout/ShowAbout.ts'
 import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
-import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
+import * as WrapCommand from '../AboutStates/AboutStates.ts'
 
 export const commandMap = {
   'About.create': Create.create,

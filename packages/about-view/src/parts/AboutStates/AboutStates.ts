@@ -1,4 +1,4 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as ViewletRegistry from '../ViewletRegistry/ViewletRegistry.ts'
+import * as ViewletRegistry from '@lvce-editor/viewlet-registry'
 
-export const { get, set, dispose, getKeys, clear } = ViewletRegistry.create<AboutState>()
+export const { get, set, dispose, getKeys, clear, wrapCommand } = ViewletRegistry.create<AboutState>()
