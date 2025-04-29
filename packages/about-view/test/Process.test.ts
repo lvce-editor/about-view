@@ -53,8 +53,8 @@ test('getCommit', () => {
   expect(Process.getCommit()).toBe('unknown commit')
 })
 
-test('getV8Version', () => {
-  expect(Process.getV8Version()).toBe('')
+test('getV8Version', async () => {
+  expect(await Process.getV8Version()).toBe(undefined)
 })
 
 test('getDate', () => {

@@ -26,8 +26,8 @@ export const getCommit = (): string => {
   return commit
 }
 
-export const getV8Version = (): string => {
-  return ''
+export const getV8Version = (): Promise<string> => {
+  return ParentRpc.invoke('Process.getV8Version')
 }
 
 export const getDate = (): string => {
