@@ -39,6 +39,9 @@ test('showAbout - electron platform', async () => {
       if (method === 'Process.getNodeVersion') {
         return '22.0.0'
       }
+      if (method === 'Process.getV8Version') {
+        return '10.0.0'
+      }
       throw new Error('unexpected call')
     },
   } as any
