@@ -2,12 +2,11 @@ import { expect, jest, test } from '@jest/globals'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
 import * as HandleFocusIn from '../src/parts/HandleFocusIn/HandleFocusIn.ts'
-import * as RpcId from '../src/parts/RpcId/RpcId.ts'
-import * as RpcRegistry from '../src/parts/RpcRegistry/RpcRegistry.ts'
+import * as ParentRpc from '../src/parts/ParentRpc/ParentRpc.ts'
 
 const mockInvoke = jest.fn()
 
-RpcRegistry.set(RpcId.RendererWorker, {
+ParentRpc.set({
   // @ts-ignore
   invoke: mockInvoke,
   send: () => {},
