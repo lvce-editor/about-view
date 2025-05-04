@@ -1,6 +1,5 @@
 import { beforeEach, expect, test } from '@jest/globals'
 import * as ParentRpc from '../src/parts/ParentRpc/ParentRpc.ts'
-import * as RpcId from '../src/parts/RpcId/RpcId.ts'
 
 beforeEach(() => {
   const mockRpc = {
