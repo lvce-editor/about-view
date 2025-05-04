@@ -1,7 +1,6 @@
 import { beforeEach, expect, test } from '@jest/globals'
+import * as ParentRpc from '../src/parts/ParentRpc/ParentRpc.ts'
 import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
-import * as RpcId from '../src/parts/RpcId/RpcId.ts'
-import * as RpcRegistry from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 beforeEach(() => {
   const mockRpc = {
@@ -12,7 +11,7 @@ beforeEach(() => {
       throw new Error('unexpected call')
     },
   } as any
-  RpcRegistry.set(RpcId.RendererWorker, mockRpc)
+  ParentRpc.set(mockRpc)
 })
 
 const ShowAbout = await import('../src/parts/ShowAbout/ShowAbout.ts')
@@ -45,7 +44,7 @@ test('showAbout - electron platform', async () => {
       throw new Error('unexpected call')
     },
   } as any
-  RpcRegistry.set(RpcId.RendererWorker, mockRpc)
+  ParentRpc.set(mockRpc)
   await ShowAbout.showAbout(PlatformType.Electron)
 })
 
@@ -55,6 +54,6 @@ test('showAbout - error', async () => {
       throw new Error('Failed to show about')
     },
   } as any
-  RpcRegistry.set(RpcId.RendererWorker, mockRpc)
+  ParentRpc.set(mockRpc)
   await expect(ShowAbout.showAbout(PlatformType.Web)).rejects.toThrow('Failed to show about')
 })

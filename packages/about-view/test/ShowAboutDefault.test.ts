@@ -1,6 +1,6 @@
 import { beforeEach, expect, test } from '@jest/globals'
+import * as ParentRpc from '../src/parts/ParentRpc/ParentRpc.ts'
 import * as RpcId from '../src/parts/RpcId/RpcId.ts'
-import * as RpcRegistry from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 beforeEach(() => {
   const mockRpc = {
@@ -11,7 +11,7 @@ beforeEach(() => {
       throw new Error('unexpected call')
     },
   } as any
-  RpcRegistry.set(RpcId.RendererWorker, mockRpc)
+  ParentRpc.set(mockRpc)
 })
 
 const ShowAboutDefault = await import('../src/parts/ShowAboutDefault/ShowAboutDefault.ts')
@@ -26,6 +26,6 @@ test('showAboutDefault - handles error', async () => {
       throw new Error('Failed to open widget')
     },
   } as any
-  RpcRegistry.set(RpcId.RendererWorker, mockRpc)
+  ParentRpc.set(mockRpc)
   await expect(ShowAboutDefault.showAboutDefault()).rejects.toThrow('Failed to open widget')
 })
