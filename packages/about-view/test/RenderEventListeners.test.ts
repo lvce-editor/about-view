@@ -6,16 +6,12 @@ test('renderEventListeners', () => {
   const eventListeners = RenderEventListeners.renderEventListeners()
   expect(eventListeners).toEqual([
     {
-      name: DomEventListenersFunctions.HandleClickOk,
-      params: ['handleClickOk'],
+      name: DomEventListenersFunctions.HandleClickButton,
+      params: ['handleClickButton', 'event.target.name'],
     },
     {
       name: DomEventListenersFunctions.HandleClickClose,
       params: ['handleClickClose'],
-    },
-    {
-      name: DomEventListenersFunctions.HandleClickCopy,
-      params: ['handleClickCopy'],
     },
     {
       name: DomEventListenersFunctions.HandleFocusIn,
