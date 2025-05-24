@@ -1,7 +1,7 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as CloseWidget from '../CloseWidget/CloseWidget.ts'
+import * as Close from '../Close/Close.ts'
 
 export const handleClickOk = async (state: AboutState): Promise<AboutState> => {
-  await CloseWidget.closeWidget('About')
+  await Close.close()
   return state
 }
