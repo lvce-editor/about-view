@@ -14,10 +14,7 @@ jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => {
   }
 })
 
-const HandleClickOk = await import('../src/parts/HandleClickOk/HandleClickOk.ts')
 const HandleClickButton = await import('../src/parts/HandleClickButton/HandleClickButton.ts')
-const HandleClickClose = await import('../src/parts/HandleClickClose/HandleClickClose.ts')
-const HandleClickCopy = await import('../src/parts/HandleClickCopy/HandleClickCopy.ts')
 
 test('handleClickButton - ok', async () => {
   const state: AboutState = {
