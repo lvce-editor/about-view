@@ -1,5 +1,4 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as CloseWidget from '../CloseWidget/CloseWidget.ts'
 import * as InputName from '../InputName/InputName.ts'
 import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
 import * as HandleClickOk from '../HandleClickOk/HandleClickOk.ts'
