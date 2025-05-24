@@ -121,7 +121,7 @@ test('formatDate - 1 millisecond ago', () => {
     {
       childCount: 1,
       className: 'Button ButtonSecondary',
-      onClick: 'handleClickOk',
+      onClick: 'handleClickButton',
       name: 'Ok',
       type: 1,
     },
@@ -133,7 +133,7 @@ test('formatDate - 1 millisecond ago', () => {
     {
       childCount: 1,
       className: 'Button ButtonPrimary',
-      onClick: 'handleClickCopy',
+      onClick: 'handleClickButton',
       name: 'Copy',
       type: 1,
     },
