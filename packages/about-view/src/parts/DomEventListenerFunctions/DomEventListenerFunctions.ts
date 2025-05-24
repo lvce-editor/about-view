@@ -1,5 +1,6 @@
 export const HandleClickClose = 'handleClickClose'
 export const HandleClickCopy = 'handleClickCopy'
 export const HandleClickOk = 'handleClickOk'
+export const HandleClickButton = 'handleClickButton'
 export const HandleContextMenu = 'handleContextMenu'
 export const HandleFocusIn = 'handleFocusIn'

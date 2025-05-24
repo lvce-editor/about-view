@@ -6,6 +6,7 @@ import * as FocusNext from '../FocusNext/FocusNext.ts'
 import * as FocusPrevious from '../FocusPrevious/FocusPrevious.ts'
 import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
+import * as HandleClickButton from '../HandleClickButton/HandleClickButton.ts'
 import * as HandleClickClose from '../HandleClickClose/HandleClickClose.ts'
 import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
 import * as HandleClickOk from '../HandleClickOk/HandleClickOk.ts'
@@ -24,6 +25,7 @@ export const commandMap = {
   'About.focusPrevious': WrapCommand.wrapCommand(FocusPrevious.focusPrevious),
   'About.getCommandIds': GetCommandIds.getCommandIds,
   'About.getKeyBindings': GetKeyBindings.getKeyBindings,
+  'About.handleClickButton': WrapCommand.wrapCommand(HandleClickButton.handleClickButton),
   'About.handleClickClose': WrapCommand.wrapCommand(HandleClickClose.handleClickClose),
   'About.handleClickCopy': WrapCommand.wrapCommand(HandleClickCopy.handleClickCopy),
   'About.handleClickOk': WrapCommand.wrapCommand(HandleClickOk.handleClickOk),
