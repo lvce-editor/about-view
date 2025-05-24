@@ -1,7 +1,7 @@
 import type { AboutState } from '../AboutState/AboutState.ts'
-import * as ParentRpc from '../ParentRpc/ParentRpc.ts'
+import * as Close from '../Close/Close.ts'
 
 export const handleClickClose = async (state: AboutState): Promise<AboutState> => {
-  await ParentRpc.invoke('Viewlet.closeWidget', 'About')
+  await Close.close()
   return state
 }

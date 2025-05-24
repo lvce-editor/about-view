@@ -6,10 +6,16 @@ beforeEach(() => {
 })
 
 const mockWriteText = jest.fn()
+const mockClose = jest.fn()
 
 jest.unstable_mockModule('../src/parts/ClipBoard/ClipBoard.ts', () => {
   return {
     writeText: mockWriteText,
+  }
+})
+jest.unstable_mockModule('../src/parts/Close/Close.ts', () => {
+  return {
+    close: mockClose,
   }
 })
 
@@ -26,6 +32,7 @@ test('handleClickCopy', async () => {
   mockWriteText.mockResolvedValue(undefined)
   const newState = await HandleClickCopy.handleClickCopy(state)
   expect(mockWriteText).toHaveBeenCalledWith('Version: 1.0.0\nCommit: abc')
+  expect(mockClose).toHaveBeenCalledTimes(1)
   expect(newState).toBe(state)
 })
 
