@@ -17,7 +17,7 @@ test('formatDate - 1 millisecond ago', () => {
     {
       childCount: 1,
       className: 'Viewlet About',
-      onContextMenu: 'handleContextMenu',
+      onContextMenu: 5,
       type: 4,
     },
     {
@@ -25,7 +25,7 @@ test('formatDate - 1 millisecond ago', () => {
       ariaModal: 'true',
       childCount: 3,
       className: 'DialogContent',
-      onFocusIn: 'handleFocusIn',
+      onFocusIn: 6,
       role: 'dialog',
       tabIndex: -1,
       type: 4,
@@ -39,7 +39,7 @@ test('formatDate - 1 millisecond ago', () => {
       ariaLabel: 'Close Dialog',
       childCount: 1,
       className: 'DialogClose',
-      onClick: 'handleClickClose',
+      onClick: 1,
       role: 'button',
       type: 4,
     },
@@ -121,7 +121,7 @@ test('formatDate - 1 millisecond ago', () => {
     {
       childCount: 1,
       className: 'Button ButtonSecondary',
-      onClick: 'handleClickButton',
+      onClick: 4,
       name: 'Ok',
       type: 1,
     },
@@ -133,7 +133,7 @@ test('formatDate - 1 millisecond ago', () => {
     {
       childCount: 1,
       className: 'Button ButtonPrimary',
-      onClick: 'handleClickButton',
+      onClick: 4,
       name: 'Copy',
       type: 1,
     },

@@ -80,8 +80,8 @@ export const getDialogVirtualDom = (
       className: ClassNames.DialogButtonsRow,
       childCount: 2,
     },
-    ...GetButtonVirtualDom.getSecondaryButtonVirtualDom(okMessage, DomEventListenerFunctions.HandleClickOk, InputName.Ok),
-    ...GetPrimaryButtonVirtualDom.getPrimaryButtonVirtualDom(copyMessage, DomEventListenerFunctions.HandleClickCopy, InputName.Copy),
+    ...GetButtonVirtualDom.getSecondaryButtonVirtualDom(okMessage, InputName.Ok),
+    ...GetPrimaryButtonVirtualDom.getPrimaryButtonVirtualDom(copyMessage, InputName.Copy),
   ]
   return dom
 }
