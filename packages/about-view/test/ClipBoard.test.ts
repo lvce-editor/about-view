@@ -6,7 +6,7 @@ beforeEach(() => {
 
 const mockInvoke = jest.fn()
 
-jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => {
+jest.unstable_mockModule('../src/parts/RendererWorker/RendererWorker.ts', () => {
   return {
     invoke: mockInvoke,
   }
@@ -14,7 +14,7 @@ jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => {
 
 const ClipBoard = await import('../src/parts/ClipBoard/ClipBoard.ts')
 
-test('writeText - calls ParentRpc.invoke with correct arguments', async () => {
+test('writeText - calls RendererWorker.invoke with correct arguments', async () => {
   await ClipBoard.writeText('test text')
   expect(mockInvoke).toHaveBeenCalledWith('ClipBoard.writeText', 'test text')
 })

@@ -1,5 +1,5 @@
-import * as ParentRpc from '../ParentRpc/ParentRpc.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 export const getWindowId = async (): Promise<number> => {
-  return ParentRpc.invoke('GetWindowId.getWindowId')
+  return RendererWorker.invoke('GetWindowId.getWindowId')
 }

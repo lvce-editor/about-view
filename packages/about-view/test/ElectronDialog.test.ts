@@ -6,7 +6,7 @@ beforeEach(() => {
 
 const mockInvoke: any = jest.fn()
 
-jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => {
+jest.unstable_mockModule('../src/parts/RendererWorker/RendererWorker.ts', () => {
   return {
     invoke: mockInvoke,
   }
@@ -14,7 +14,7 @@ jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => {
 
 const ElectronDialog = await import('../src/parts/ElectronDialog/ElectronDialog.ts')
 
-test('showMessageBox - calls ParentRpc.invoke with correct arguments', async () => {
+test('showMessageBox - calls RendererWorker.invoke with correct arguments', async () => {
   mockInvoke.mockResolvedValue(1)
   const options = {
     windowId: 1,
@@ -29,7 +29,7 @@ test('showMessageBox - calls ParentRpc.invoke with correct arguments', async () 
   expect(result).toBe(1)
 })
 
-test('showMessageBox - handles error from ParentRpc', async () => {
+test('showMessageBox - handles error from RendererWorker', async () => {
   mockInvoke.mockRejectedValue(new Error('Failed to show message box'))
   const options = {
     windowId: 1,
