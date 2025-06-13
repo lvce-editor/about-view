@@ -1,5 +1,5 @@
 import * as GetWindowId from '../GetWindowId/GetWindowId.ts'
-import * as ParentRpc from '../ParentRpc/ParentRpc.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 import * as Product from '../Product/Product.ts'
 
 export const showMessageBox = async (options: any): Promise<any> => {
@@ -10,5 +10,5 @@ export const showMessageBox = async (options: any): Promise<any> => {
     productName,
     windowId,
   }
-  return ParentRpc.invoke('ElectronDialog.showMessageBox', finalOptions)
+  return RendererWorker.invoke('ElectronDialog.showMessageBox', finalOptions)
 }
