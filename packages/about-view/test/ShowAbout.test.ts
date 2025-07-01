@@ -1,6 +1,6 @@
 import { beforeEach, expect, test } from '@jest/globals'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
+import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
 beforeEach(() => {
   const mockRpc = {
