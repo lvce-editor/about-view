@@ -6,7 +6,6 @@ export const {
   getNodeVersion,
   getV8Version,
   getWindowId,
-  invoke,
   openWidget,
   set,
   setFocus,
