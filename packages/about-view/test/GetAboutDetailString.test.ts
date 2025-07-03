@@ -1,35 +1,6 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-jest.unstable_mockModule('../src/parts/Process/Process.ts', () => {
-  return {
-    getElectronVersion(): string {
-      return '0.0.0-dev'
-    },
-    getNodeVersion(): string {
-      return '0.0.0-dev'
-    },
-    getChromeVersion(): string {
-      return '0.0.0-dev'
-    },
-    getVersion(): string {
-      return '0.0.0-dev'
-    },
-    getCommit(): string {
-      return 'abc'
-    },
-    getV8Version(): string {
-      return '0.0.0-dev'
-    },
-    getDate(): string {
-      return 'n/a'
-    },
-  }
-})
-
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAboutDetailString.ts'
 
 test('getDetailStringWeb', async () => {
