@@ -87,5 +87,5 @@ test('handleClickButton - error', async () => {
     focusId: 1,
     uid: 1,
   }
-  await expect(() => HandleClickButton.handleClickButton(state, 'abc')).rejects.toThrow('unexpected button')
+  await expect(HandleClickButton.handleClickButton(state, 'abc')).rejects.toThrow(new Error('unexpected button'))
 })
