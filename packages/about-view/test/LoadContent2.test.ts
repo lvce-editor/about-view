@@ -13,7 +13,7 @@ jest.unstable_mockModule('../src/parts/Process/Process.ts', () => ({
   productNameLong: 'Lvce Editor - OSS',
 }))
 
-import * as LoadContent2 from '../src/parts/LoadContent2/LoadContent2.ts'
+const LoadContent2 = await import('../src/parts/LoadContent2/LoadContent2.ts')
 
 beforeEach(() => {
   AboutStates.clear()
