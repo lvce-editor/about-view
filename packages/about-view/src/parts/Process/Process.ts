@@ -6,17 +6,11 @@ export const commit = 'unknown commit'
 
 export const date = ''
 
-export const getElectronVersion = (): Promise<string> => {
-  return RendererWorker.invoke('Process.getElectronVersion')
-}
+export const { getElectronVersion } = RendererWorker
 
-export const getNodeVersion = (): Promise<string> => {
-  return RendererWorker.invoke('Process.getNodeVersion')
-}
+export const { getNodeVersion } = RendererWorker
 
-export const getChromeVersion = (): Promise<string> => {
-  return RendererWorker.invoke('Process.getChromeVersion')
-}
+export const { getChromeVersion } = RendererWorker
 
 export const getVersion = (): string => {
   return version
@@ -26,9 +20,7 @@ export const getCommit = (): string => {
   return commit
 }
 
-export const getV8Version = (): Promise<string> => {
-  return RendererWorker.invoke('Process.getV8Version')
-}
+export const { getV8Version } = RendererWorker
 
 export const getDate = (): string => {
   return date
