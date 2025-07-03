@@ -1,8 +1,7 @@
 import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
-
-const ShowAboutDefault = await import('../src/parts/ShowAboutDefault/ShowAboutDefault.ts')
+import * as ShowAboutDefault from '../src/parts/ShowAboutDefault/ShowAboutDefault.ts'
 
 test('showAboutDefault - opens About widget', async () => {
   const mockRpc = MockRpc.create({

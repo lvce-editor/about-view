@@ -20,7 +20,7 @@ jest.unstable_mockModule('../src/parts/GetBrowser/GetBrowser.ts', () => {
   }
 })
 
-const GetAboutDetailStringWeb = await import('../src/parts/GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts')
+import * as GetAboutDetailStringWeb from '../src/parts/GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts'
 
 test('getDetailStringWeb', () => {
   expect(GetAboutDetailStringWeb.getDetailStringWeb()).toEqual([

@@ -2,8 +2,7 @@ import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
-
-const HandleClickCopy = await import('../src/parts/HandleClickCopy/HandleClickCopy.ts')
+import * as HandleClickCopy from '../src/parts/HandleClickCopy/HandleClickCopy.ts'
 
 test('handleClickCopy', async () => {
   const state: AboutState = {
