@@ -1,3 +1,15 @@
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 
-export const { invoke, set } = RendererWorker
+export const {
+  getChromeVersion,
+  getElectronVersion,
+  getNodeVersion,
+  getV8Version,
+  getWindowId,
+  openWidget,
+  set,
+  setFocus,
+  showMessageBox,
+  writeClipBoardText,
+  closeWidget,
+} = RendererWorker

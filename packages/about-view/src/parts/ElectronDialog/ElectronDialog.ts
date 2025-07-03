@@ -10,5 +10,5 @@ export const showMessageBox = async (options: any): Promise<any> => {
     productName,
     windowId,
   }
-  return RendererWorker.invoke('ElectronDialog.showMessageBox', finalOptions)
+  return RendererWorker.showMessageBox(finalOptions)
 }
