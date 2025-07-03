@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals'
+import { expect, test, jest } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
@@ -12,21 +12,20 @@ test('handleFocusIn - when focusId exists', async () => {
     focusId: AboutFocusId.Ok,
     uid: 1,
   }
-  let called: { method: string; args: readonly any[] } | undefined
+  const mockInvoke = jest.fn((method: string, ...args: readonly any[]) => {
+    if (method === 'Focus.setFocus' && args[0] === 4) {
+      return undefined
+    }
+    throw new Error('unexpected method ' + method)
+  })
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: readonly any[]) => {
-      called = { method, args }
-      if (method === 'Focus.setFocus' && args[0] === 4) {
-        return undefined
-      }
-      throw new Error('unexpected method ' + method)
-    },
+    invoke: mockInvoke,
   })
   RendererWorker.set(mockRpc)
   const newState = await HandleFocusIn.handleFocusIn(state)
   expect(newState).toBe(state)
-  expect(called).toEqual({ method: 'Focus.setFocus', args: [4] })
+  expect(mockInvoke).toHaveBeenCalledWith('Focus.setFocus', 4)
 })
 
 test('handleFocusIn - when focusId is None', async () => {
@@ -36,16 +35,15 @@ test('handleFocusIn - when focusId is None', async () => {
     focusId: AboutFocusId.None,
     uid: 1,
   }
-  let called: { method: string; args: readonly any[] } | undefined
+  const mockInvoke = jest.fn((method: string, ...args: readonly any[]) => {
+    if (method === 'Focus.setFocus' && args[0] === 4) {
+      return undefined
+    }
+    throw new Error('unexpected method ' + method)
+  })
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: readonly any[]) => {
-      called = { method, args }
-      if (method === 'Focus.setFocus' && args[0] === 4) {
-        return undefined
-      }
-      throw new Error('unexpected method ' + method)
-    },
+    invoke: mockInvoke,
   })
   RendererWorker.set(mockRpc)
   const newState = await HandleFocusIn.handleFocusIn(state)
@@ -53,7 +51,7 @@ test('handleFocusIn - when focusId is None', async () => {
     ...state,
     focusId: AboutFocusId.Ok,
   })
-  expect(called).toEqual({ method: 'Focus.setFocus', args: [4] })
+  expect(mockInvoke).toHaveBeenCalledWith('Focus.setFocus', 4)
 })
 
 test('handleFocusIn - when focusId is Copy', async () => {
@@ -63,19 +61,18 @@ test('handleFocusIn - when focusId is Copy', async () => {
     focusId: AboutFocusId.Copy,
     uid: 1,
   }
-  let called: { method: string; args: readonly any[] } | undefined
+  const mockInvoke = jest.fn((method: string, ...args: readonly any[]) => {
+    if (method === 'Focus.setFocus' && args[0] === 4) {
+      return undefined
+    }
+    throw new Error('unexpected method ' + method)
+  })
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: readonly any[]) => {
-      called = { method, args }
-      if (method === 'Focus.setFocus' && args[0] === 4) {
-        return undefined
-      }
-      throw new Error('unexpected method ' + method)
-    },
+    invoke: mockInvoke,
   })
   RendererWorker.set(mockRpc)
   const newState = await HandleFocusIn.handleFocusIn(state)
   expect(newState).toBe(state)
-  expect(called).toEqual({ method: 'Focus.setFocus', args: [4] })
+  expect(mockInvoke).toHaveBeenCalledWith('Focus.setFocus', 4)
 })
