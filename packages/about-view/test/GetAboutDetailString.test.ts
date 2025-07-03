@@ -1,37 +1,38 @@
-import { expect, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
-import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAboutDetailString.ts'
+import { beforeEach, expect, jest, test } from '@jest/globals'
+
+beforeEach(() => {
+  jest.resetAllMocks()
+})
+
+jest.unstable_mockModule('../src/parts/Process/Process.ts', () => {
+  return {
+    getElectronVersion(): string {
+      return '0.0.0-dev'
+    },
+    getNodeVersion(): string {
+      return '0.0.0-dev'
+    },
+    getChromeVersion(): string {
+      return '0.0.0-dev'
+    },
+    getVersion(): string {
+      return '0.0.0-dev'
+    },
+    getCommit(): string {
+      return 'abc'
+    },
+    getV8Version(): string {
+      return '0.0.0-dev'
+    },
+    getDate(): string {
+      return 'n/a'
+    },
+  }
+})
+
+const GetAboutDetailString = await import('../src/parts/GetAboutDetailString/GetAboutDetailString.ts')
 
 test('getDetailStringWeb', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Process.getElectronVersion') {
-        return '0.0.0-dev'
-      }
-      if (method === 'Process.getNodeVersion') {
-        return '0.0.0-dev'
-      }
-      if (method === 'Process.getChromeVersion') {
-        return '0.0.0-dev'
-      }
-      if (method === 'Process.getVersion') {
-        return '0.0.0-dev'
-      }
-      if (method === 'Process.getCommit') {
-        return 'abc'
-      }
-      if (method === 'Process.getV8Version') {
-        return '0.0.0-dev'
-      }
-      if (method === 'Process.getDate') {
-        return 'n/a'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
-  })
-  RendererWorker.set(mockRpc)
   expect(await GetAboutDetailString.getDetailString()).toBe(
     `Version: 0.0.0-dev
 Commit: abc
