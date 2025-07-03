@@ -1,20 +1,9 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
+import * as HandleClickButton from '../src/parts/HandleClickButton/HandleClickButton.ts'
 import * as InputName from '../src/parts/InputName/InputName.ts'
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-const mockInvoke = jest.fn()
-
-jest.unstable_mockModule('../src/parts/RendererWorker/RendererWorker.ts', () => {
-  return {
-    invoke: mockInvoke,
-  }
-})
-
-const HandleClickButton = await import('../src/parts/HandleClickButton/HandleClickButton.ts')
 
 test('handleClickButton - ok', async () => {
   const state: AboutState = {
@@ -23,10 +12,20 @@ test('handleClickButton - ok', async () => {
     focusId: 1,
     uid: 1,
   }
-  // @ts-expect-error
-  mockInvoke.mockResolvedValue(undefined)
+  let called: { method: string; args: readonly any[] } | undefined
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      called = { method, args }
+      if (method === 'Viewlet.closeWidget' && args[0] === 'About') {
+        return undefined
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   const newState = await HandleClickButton.handleClickButton(state, InputName.Ok)
-  expect(mockInvoke).toHaveBeenCalledWith('Viewlet.closeWidget', 'About')
+  expect(called).toEqual({ method: 'Viewlet.closeWidget', args: ['About'] })
   expect(newState).toBe(state)
 })
 
@@ -37,10 +36,20 @@ test('handleClickButton - close', async () => {
     focusId: 1,
     uid: 1,
   }
-  // @ts-expect-error
-  mockInvoke.mockResolvedValue(undefined)
+  let called: { method: string; args: readonly any[] } | undefined
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      called = { method, args }
+      if (method === 'Viewlet.closeWidget' && args[0] === 'About') {
+        return undefined
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   const newState = await HandleClickButton.handleClickButton(state, InputName.Close)
-  expect(mockInvoke).toHaveBeenCalledWith('Viewlet.closeWidget', 'About')
+  expect(called).toEqual({ method: 'Viewlet.closeWidget', args: ['About'] })
   expect(newState).toBe(state)
 })
 
@@ -51,10 +60,23 @@ test('handleClickButton - copy', async () => {
     focusId: 1,
     uid: 1,
   }
-  // @ts-expect-error
-  mockInvoke.mockResolvedValue(undefined)
+  const calls: { method: string; args: readonly any[] }[] = []
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      calls.push({ method, args })
+      if ((method === 'ClipBoard.writeText' && args[0] === 'Version: 1.0.0') || (method === 'Viewlet.closeWidget' && args[0] === 'About')) {
+        return undefined
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   const newState = await HandleClickButton.handleClickButton(state, InputName.Copy)
-  expect(mockInvoke).toHaveBeenCalledWith('ClipBoard.writeText', 'Version: 1.0.0')
+  expect(calls).toEqual([
+    { method: 'ClipBoard.writeText', args: ['Version: 1.0.0'] },
+    { method: 'Viewlet.closeWidget', args: ['About'] },
+  ])
   expect(newState).toBe(state)
 })
 
@@ -65,5 +87,5 @@ test('handleClickButton - error', async () => {
     focusId: 1,
     uid: 1,
   }
-  await expect(() => HandleClickButton.handleClickButton(state, 'abc')).rejects.toThrow('unexpected button')
+  await expect(HandleClickButton.handleClickButton(state, 'abc')).rejects.toThrow(new Error('unexpected button'))
 })

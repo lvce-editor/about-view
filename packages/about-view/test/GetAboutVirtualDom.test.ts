@@ -1,5 +1,12 @@
-import { expect, test } from '@jest/globals'
+import { expect, test, beforeAll } from '@jest/globals'
 import * as GetAboutVirtualDom from '../src/parts/GetAboutVirtualDom/GetAboutVirtualDom.ts'
+
+beforeAll(() => {
+  // @ts-expect-error
+  globalThis.navigator = {
+    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+  }
+})
 
 test('formatDate - 1 millisecond ago', () => {
   const productName = 'Lvce Editor - OSS'

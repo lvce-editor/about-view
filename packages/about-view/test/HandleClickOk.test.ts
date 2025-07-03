@@ -1,19 +1,8 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-const mockInvoke = jest.fn()
-
-jest.unstable_mockModule('../src/parts/RendererWorker/RendererWorker.ts', () => {
-  return {
-    invoke: mockInvoke,
-  }
-})
-
-const HandleClickOk = await import('../src/parts/HandleClickOk/HandleClickOk.ts')
+import * as HandleClickOk from '../src/parts/HandleClickOk/HandleClickOk.ts'
 
 test('handleClickOk', async () => {
   const state: AboutState = {
@@ -22,10 +11,20 @@ test('handleClickOk', async () => {
     focusId: 1,
     uid: 1,
   }
-  // @ts-expect-error
-  mockInvoke.mockResolvedValue(undefined)
+  let called: { method: string; args: readonly any[] } | undefined
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      called = { method, args }
+      if (method === 'Viewlet.closeWidget' && args[0] === 'About') {
+        return undefined
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   const newState = await HandleClickOk.handleClickOk(state)
-  expect(mockInvoke).toHaveBeenCalledWith('Viewlet.closeWidget', 'About')
+  expect(called).toEqual({ method: 'Viewlet.closeWidget', args: ['About'] })
   expect(newState).toBe(state)
 })
 
@@ -37,7 +36,15 @@ test('handleClickOk - error', async () => {
     uid: 1,
   }
   const error = new Error('Failed to close widget')
-  // @ts-expect-error
-  mockInvoke.mockRejectedValue(error)
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      if (method === 'Viewlet.closeWidget' && args[0] === 'About') {
+        throw error
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   await expect(HandleClickOk.handleClickOk(state)).rejects.toThrow('Failed to close widget')
 })

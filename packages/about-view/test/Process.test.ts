@@ -1,19 +1,7 @@
 import { expect, test } from '@jest/globals'
-import { beforeEach, jest } from '@jest/globals'
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-const mockInvoke = jest.fn()
-
-jest.unstable_mockModule('../src/parts/RendererWorker/RendererWorker.ts', () => {
-  return {
-    invoke: mockInvoke,
-  }
-})
-
-const Process = await import('../src/parts/Process/Process.ts')
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
+import * as Process from '../src/parts/Process/Process.ts'
 
 test('version', () => {
   expect(Process.version).toBe('0.0.0-dev')
@@ -28,20 +16,44 @@ test('date', () => {
 })
 
 test('getElectronVersion', async () => {
-  // @ts-ignore
-  mockInvoke.mockResolvedValue('')
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string) => {
+      if (method === 'Process.getElectronVersion') {
+        return ''
+      }
+      throw new Error(`unexpected method ${method}`)
+    },
+  })
+  RendererWorker.set(mockRpc)
   expect(await Process.getElectronVersion()).toBe('')
 })
 
 test('getNodeVersion', async () => {
-  // @ts-ignore
-  mockInvoke.mockResolvedValue('')
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string) => {
+      if (method === 'Process.getNodeVersion') {
+        return ''
+      }
+      throw new Error(`unexpected method ${method}`)
+    },
+  })
+  RendererWorker.set(mockRpc)
   expect(await Process.getNodeVersion()).toBe('')
 })
 
 test('getChromeVersion', async () => {
-  // @ts-ignore
-  mockInvoke.mockResolvedValue('')
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string) => {
+      if (method === 'Process.getChromeVersion') {
+        return ''
+      }
+      throw new Error(`unexpected method ${method}`)
+    },
+  })
+  RendererWorker.set(mockRpc)
   expect(await Process.getChromeVersion()).toBe('')
 })
 
@@ -54,6 +66,16 @@ test('getCommit', () => {
 })
 
 test('getV8Version', async () => {
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string) => {
+      if (method === 'Process.getV8Version') {
+        return undefined
+      }
+      throw new Error(`unexpected method ${method}`)
+    },
+  })
+  RendererWorker.set(mockRpc)
   expect(await Process.getV8Version()).toBe(undefined)
 })
 

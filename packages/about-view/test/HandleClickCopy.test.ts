@@ -1,25 +1,8 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-const mockWriteText = jest.fn()
-const mockClose = jest.fn()
-
-jest.unstable_mockModule('../src/parts/ClipBoard/ClipBoard.ts', () => {
-  return {
-    writeText: mockWriteText,
-  }
-})
-jest.unstable_mockModule('../src/parts/Close/Close.ts', () => {
-  return {
-    close: mockClose,
-  }
-})
-
-const HandleClickCopy = await import('../src/parts/HandleClickCopy/HandleClickCopy.ts')
+import * as HandleClickCopy from '../src/parts/HandleClickCopy/HandleClickCopy.ts'
 
 test('handleClickCopy', async () => {
   const state: AboutState = {
@@ -28,11 +11,26 @@ test('handleClickCopy', async () => {
     focusId: 1,
     uid: 1,
   }
-  // @ts-expect-error
-  mockWriteText.mockResolvedValue(undefined)
+  const calls: { method: string; args: readonly any[] }[] = []
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      calls.push({ method, args })
+      if (
+        (method === 'ClipBoard.writeText' && args[0] === 'Version: 1.0.0\nCommit: abc') ||
+        (method === 'Viewlet.closeWidget' && args[0] === 'About')
+      ) {
+        return undefined
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   const newState = await HandleClickCopy.handleClickCopy(state)
-  expect(mockWriteText).toHaveBeenCalledWith('Version: 1.0.0\nCommit: abc')
-  expect(mockClose).toHaveBeenCalledTimes(1)
+  expect(calls).toEqual([
+    { method: 'ClipBoard.writeText', args: ['Version: 1.0.0\nCommit: abc'] },
+    { method: 'Viewlet.closeWidget', args: ['About'] },
+  ])
   expect(newState).toBe(state)
 })
 
@@ -44,7 +42,15 @@ test('handleClickCopy - error', async () => {
     uid: 1,
   }
   const error = new Error('Failed to copy to clipboard')
-  // @ts-expect-error
-  mockWriteText.mockRejectedValue(error)
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      if (method === 'ClipBoard.writeText' && args[0] === 'Version: 1.0.0\nCommit: abc') {
+        throw error
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   await expect(HandleClickCopy.handleClickCopy(state)).rejects.toThrow('Failed to copy to clipboard')
 })
