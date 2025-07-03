@@ -1,69 +1,126 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
+import { beforeEach, expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
+import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAboutDetailString.ts'
+
+let showMessageBoxCalls: any[] = []
+let writeTextCalls: any[] = []
 
 beforeEach(() => {
-  jest.resetAllMocks()
+  showMessageBoxCalls = []
+  writeTextCalls = []
 })
-
-const mockGetWindowId: any = jest.fn()
-const mockGetDetailString: any = jest.fn()
-const mockGetProductNameLong: any = jest.fn()
-const mockShowMessageBox: any = jest.fn()
-const mockWriteText: any = jest.fn()
-
-jest.unstable_mockModule('../src/parts/GetWindowId/GetWindowId.ts', () => ({
-  getWindowId: mockGetWindowId,
-}))
-
-jest.unstable_mockModule('../src/parts/GetAboutDetailString/GetAboutDetailString.ts', () => ({
-  getDetailString: mockGetDetailString,
-}))
-
-jest.unstable_mockModule('../src/parts/Product/Product.ts', () => ({
-  getProductNameLong: mockGetProductNameLong,
-}))
-
-jest.unstable_mockModule('../src/parts/ElectronDialog/ElectronDialog.ts', () => ({
-  showMessageBox: mockShowMessageBox,
-}))
-
-jest.unstable_mockModule('../src/parts/ClipBoard/ClipBoard.ts', () => ({
-  writeText: mockWriteText,
-}))
 
 const ShowAboutElectron = await import('../src/parts/ShowAboutElectron/ShowAboutElectron.ts')
 
+// Ok button
+
 test('showAboutElectron - clicks ok button', async () => {
-  mockGetWindowId.mockResolvedValue(1)
-  mockGetDetailString.mockResolvedValue('test detail')
-  mockGetProductNameLong.mockReturnValue('Test Editor')
-  mockShowMessageBox.mockResolvedValue(1)
+  const createMockRpc = (showMessageBoxResult: number): any => {
+    return MockRpc.create({
+      commandMap: {},
+      invoke: (method: string, ...args: any[]) => {
+        switch (method) {
+          case 'GetWindowId.getWindowId':
+            return 1
+          case 'GetAboutDetailString.getDetailString':
+            // Use the real implementation for detail string
+            return GetAboutDetailString.getDetailString()
+          case 'ElectronDialog.showMessageBox':
+            showMessageBoxCalls.push(args[0])
+            return showMessageBoxResult
+          case 'ClipBoard.writeText':
+            writeTextCalls.push(args[0])
+            return undefined
+          case 'Process.getElectronVersion':
+          case 'Process.getNodeVersion':
+          case 'Process.getChromeVersion':
+          case 'Process.getV8Version':
+            return 'x'
+          case 'Process.getVersion':
+            return '0.0.0-dev'
+          case 'Process.getCommit':
+            return 'unknown commit'
+          case 'Process.getDate':
+            return 'unknown'
+          default:
+            throw new Error(`unexpected method: ${method}`)
+        }
+      },
+    })
+  }
+  const mockRpc = createMockRpc(1)
+  RendererWorker.set(mockRpc)
+
+  const detail = await GetAboutDetailString.getDetailString()
 
   await ShowAboutElectron.showAboutElectron()
 
-  expect(mockShowMessageBox).toHaveBeenCalledWith({
-    windowId: 1,
-    message: 'Test Editor',
-    buttons: ['Copy', 'Ok'],
-    type: 'info',
-    detail: 'test detail',
-  })
-  expect(mockWriteText).not.toHaveBeenCalled()
+  expect(showMessageBoxCalls).toEqual([
+    {
+      windowId: 1,
+      message: 'Lvce Editor - OSS',
+      productName: 'Lvce Editor - OSS',
+      buttons: ['Copy', 'Ok'],
+      type: 'info',
+      detail,
+    },
+  ])
+  expect(writeTextCalls).toEqual([])
 })
 
+// Copy button
+
 test('showAboutElectron - clicks copy button', async () => {
-  mockGetWindowId.mockResolvedValue(1)
-  mockGetDetailString.mockResolvedValue('test detail')
-  mockGetProductNameLong.mockReturnValue('Test Editor')
-  mockShowMessageBox.mockResolvedValue(0)
+  const createMockRpc = (showMessageBoxResult: number): any => {
+    return MockRpc.create({
+      commandMap: {},
+      invoke: (method: string, ...args: any[]) => {
+        switch (method) {
+          case 'GetWindowId.getWindowId':
+            return 1
+          case 'GetAboutDetailString.getDetailString':
+            // Use the real implementation for detail string
+            return GetAboutDetailString.getDetailString()
+          case 'ElectronDialog.showMessageBox':
+            showMessageBoxCalls.push(args[0])
+            return showMessageBoxResult
+          case 'ClipBoard.writeText':
+            writeTextCalls.push(args[0])
+            return undefined
+          case 'Process.getElectronVersion':
+          case 'Process.getNodeVersion':
+          case 'Process.getChromeVersion':
+          case 'Process.getV8Version':
+            return 'x'
+          case 'Process.getVersion':
+            return '0.0.0-dev'
+          case 'Process.getCommit':
+            return 'unknown commit'
+          case 'Process.getDate':
+            return 'unknown'
+          default:
+            throw new Error(`unexpected method: ${method}`)
+        }
+      },
+    })
+  }
+  const mockRpc = createMockRpc(0)
+  RendererWorker.set(mockRpc)
+
+  const detail = await GetAboutDetailString.getDetailString()
 
   await ShowAboutElectron.showAboutElectron()
 
-  expect(mockShowMessageBox).toHaveBeenCalledWith({
-    windowId: 1,
-    message: 'Test Editor',
-    buttons: ['Copy', 'Ok'],
-    type: 'info',
-    detail: 'test detail',
-  })
-  expect(mockWriteText).toHaveBeenCalledWith('test detail')
+  expect(showMessageBoxCalls).toEqual([
+    {
+      windowId: 1,
+      message: 'Lvce Editor - OSS',
+      productName: 'Lvce Editor - OSS',
+      buttons: ['Copy', 'Ok'],
+      type: 'info',
+      detail,
+    },
+  ])
+  expect(writeTextCalls).toEqual([detail])
 })
