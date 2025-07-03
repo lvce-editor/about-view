@@ -1,3 +1,3 @@
 import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
-export const closeWidget = RendererWorker.closeWidget
+export const {closeWidget} = RendererWorker
