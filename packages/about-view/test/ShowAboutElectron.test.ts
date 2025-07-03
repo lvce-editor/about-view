@@ -30,7 +30,7 @@ jest.unstable_mockModule('../src/parts/ClipBoard/ClipBoard.ts', () => ({
   writeText: mockWriteText,
 }))
 
-import * as ShowAboutElectron from '../src/parts/ShowAboutElectron/ShowAboutElectron.ts'
+const ShowAboutElectron = await import('../src/parts/ShowAboutElectron/ShowAboutElectron.ts')
 
 test('showAboutElectron - clicks ok button', async () => {
   mockGetWindowId.mockResolvedValue(1)
