@@ -5,6 +5,7 @@ export default [
   {
     rules: {
       'jest/no-restricted-jest-methods': 'off',
+      '@typescript-eslint/prefer-readonly-parameter-types': 'off',
     },
   },
 ]
