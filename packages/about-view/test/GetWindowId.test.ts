@@ -1,23 +1,22 @@
-import { expect, test } from '@jest/globals'
+import { expect, test, jest } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetWindowId from '../src/parts/GetWindowId/GetWindowId.ts'
 
 test('getWindowId - calls RendererWorker.invoke with correct arguments', async () => {
-  let called: { method: string; args: readonly any[] } | undefined
+  const mockInvoke = jest.fn((method: string, ...args: readonly any[]) => {
+    if (method === 'GetWindowId.getWindowId') {
+      return 1
+    }
+    throw new Error('unexpected method ' + method)
+  })
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: readonly any[]) => {
-      called = { method, args }
-      if (method === 'GetWindowId.getWindowId') {
-        return 1
-      }
-      throw new Error('unexpected method ' + method)
-    },
+    invoke: mockInvoke,
   })
   RendererWorker.set(mockRpc)
   const result = await GetWindowId.getWindowId()
-  expect(called).toEqual({ method: 'GetWindowId.getWindowId', args: [] })
+  expect(mockInvoke).toHaveBeenCalledWith('GetWindowId.getWindowId')
   expect(result).toBe(1)
 })
 
