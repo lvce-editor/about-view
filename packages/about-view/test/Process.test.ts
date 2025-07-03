@@ -1,8 +1,7 @@
 import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
-
-const Process = await import('../src/parts/Process/Process.ts')
+import * as Process from '../src/parts/Process/Process.ts'
 
 test('version', () => {
   expect(Process.version).toBe('0.0.0-dev')
