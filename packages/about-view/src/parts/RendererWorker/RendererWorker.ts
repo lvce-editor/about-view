@@ -12,4 +12,5 @@ export const {
   setFocus,
   showMessageBox,
   writeClipBoardText,
+  closeWidget,
 } = RendererWorker
