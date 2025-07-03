@@ -1,30 +1,30 @@
-import { beforeEach, expect, test } from '@jest/globals'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
-beforeEach(() => {
-  const mockRpc = {
-    invoke: async (method: string, ...params: readonly any[]) => {
+const ShowAboutDefault = await import('../src/parts/ShowAboutDefault/ShowAboutDefault.ts')
+
+test('showAboutDefault - opens About widget', async () => {
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...params: readonly any[]) => {
       if (method === 'Viewlet.openWidget' && params[0] === 'About') {
         return undefined
       }
       throw new Error('unexpected call')
     },
-  } as any
+  })
   RendererWorker.set(mockRpc)
-})
-
-const ShowAboutDefault = await import('../src/parts/ShowAboutDefault/ShowAboutDefault.ts')
-
-test('showAboutDefault - opens About widget', async () => {
   await ShowAboutDefault.showAboutDefault()
 })
 
 test('showAboutDefault - handles error', async () => {
-  const mockRpc = {
+  const mockRpc = MockRpc.create({
+    commandMap: {},
     invoke: () => {
       throw new Error('Failed to open widget')
     },
-  } as any
+  })
   RendererWorker.set(mockRpc)
   await expect(ShowAboutDefault.showAboutDefault()).rejects.toThrow('Failed to open widget')
 })
