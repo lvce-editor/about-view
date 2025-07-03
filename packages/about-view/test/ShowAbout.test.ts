@@ -1,28 +1,28 @@
-import { beforeEach, expect, test } from '@jest/globals'
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 
-beforeEach(() => {
-  const mockRpc = {
-    invoke: async (method: string, ...params: readonly any[]) => {
+const ShowAbout = await import('../src/parts/ShowAbout/ShowAbout.ts')
+
+test('showAbout - web platform', async () => {
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...params: readonly any[]) => {
       if (method === 'Viewlet.openWidget' && params[0] === 'About') {
         return undefined
       }
       throw new Error('unexpected call')
     },
-  } as any
+  })
   RendererWorker.set(mockRpc)
-})
-
-const ShowAbout = await import('../src/parts/ShowAbout/ShowAbout.ts')
-
-test('showAbout - web platform', async () => {
   await ShowAbout.showAbout(PlatformType.Web)
 })
 
 test('showAbout - electron platform', async () => {
-  const mockRpc = {
-    invoke: async (method: string, ...params: readonly any[]) => {
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...params: readonly any[]) => {
       if (method === 'ElectronDialog.showMessageBox') {
         return 1
       }
@@ -43,17 +43,18 @@ test('showAbout - electron platform', async () => {
       }
       throw new Error('unexpected call')
     },
-  } as any
+  })
   RendererWorker.set(mockRpc)
   await ShowAbout.showAbout(PlatformType.Electron)
 })
 
 test('showAbout - error', async () => {
-  const mockRpc = {
+  const mockRpc = MockRpc.create({
+    commandMap: {},
     invoke: () => {
       throw new Error('Failed to show about')
     },
-  } as any
+  })
   RendererWorker.set(mockRpc)
   await expect(ShowAbout.showAbout(PlatformType.Web)).rejects.toThrow('Failed to show about')
 })

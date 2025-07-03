@@ -1,21 +1,24 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-const mockInvoke: any = jest.fn()
-
-jest.unstable_mockModule('../src/parts/RendererWorker/RendererWorker.ts', () => {
-  return {
-    invoke: mockInvoke,
-  }
-})
-
-const ElectronDialog = await import('../src/parts/ElectronDialog/ElectronDialog.ts')
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
+import * as ElectronDialog from '../src/parts/ElectronDialog/ElectronDialog.ts'
 
 test('showMessageBox - calls RendererWorker.invoke with correct arguments', async () => {
-  mockInvoke.mockResolvedValue(1)
+  const calls: { method: string; args: readonly any[] }[] = []
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      calls.push({ method, args })
+      if (method === 'GetWindowId.getWindowId') {
+        return 1
+      }
+      if (method === 'ElectronDialog.showMessageBox') {
+        return 1
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   const options = {
     windowId: 1,
     message: 'test message',
@@ -25,12 +28,18 @@ test('showMessageBox - calls RendererWorker.invoke with correct arguments', asyn
     productName: 'Lvce Editor - OSS',
   }
   const result = await ElectronDialog.showMessageBox(options)
-  expect(mockInvoke).toHaveBeenCalledWith('ElectronDialog.showMessageBox', options)
+  expect(calls).toContainEqual({ method: 'ElectronDialog.showMessageBox', args: [options] })
   expect(result).toBe(1)
 })
 
 test('showMessageBox - handles error from RendererWorker', async () => {
-  mockInvoke.mockRejectedValue(new Error('Failed to show message box'))
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: () => {
+      throw new Error('Failed to show message box')
+    },
+  })
+  RendererWorker.set(mockRpc)
   const options = {
     windowId: 1,
     message: 'test message',

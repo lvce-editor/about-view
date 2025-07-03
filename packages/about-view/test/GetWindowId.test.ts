@@ -1,27 +1,33 @@
-import { beforeEach, expect, jest, test } from '@jest/globals'
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-const mockInvoke: any = jest.fn()
-
-jest.unstable_mockModule('../src/parts/RendererWorker/RendererWorker.ts', () => {
-  return {
-    invoke: mockInvoke,
-  }
-})
-
-const GetWindowId = await import('../src/parts/GetWindowId/GetWindowId.ts')
+import { expect, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
+import * as GetWindowId from '../src/parts/GetWindowId/GetWindowId.ts'
 
 test('getWindowId - calls RendererWorker.invoke with correct arguments', async () => {
-  mockInvoke.mockResolvedValue(1)
+  let called: { method: string; args: readonly any[] } | undefined
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: (method: string, ...args: readonly any[]) => {
+      called = { method, args }
+      if (method === 'GetWindowId.getWindowId') {
+        return 1
+      }
+      throw new Error('unexpected method ' + method)
+    },
+  })
+  RendererWorker.set(mockRpc)
   const result = await GetWindowId.getWindowId()
-  expect(mockInvoke).toHaveBeenCalledWith('GetWindowId.getWindowId')
+  expect(called).toEqual({ method: 'GetWindowId.getWindowId', args: [] })
   expect(result).toBe(1)
 })
 
 test('getWindowId - handles error from RendererWorker', async () => {
-  mockInvoke.mockRejectedValue(new Error('Failed to get window id'))
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: () => {
+      throw new Error('Failed to get window id')
+    },
+  })
+  RendererWorker.set(mockRpc)
   await expect(GetWindowId.getWindowId()).rejects.toThrow('Failed to get window id')
 })
