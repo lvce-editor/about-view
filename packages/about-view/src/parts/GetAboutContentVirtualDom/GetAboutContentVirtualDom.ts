@@ -1,7 +1,7 @@
-import type { VirtualDomNode } from '../VirtualDomNode/VirtualDomNode.ts'
+import type { VirtualDomNode} from '@lvce-editor/virtual-dom-worker';
+import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as RenderLine from '../RenderLine/RenderLine.ts'
-import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
 export const getAboutContentVirtualDom = (lines: readonly string[]): readonly VirtualDomNode[] => {
   const dom = [

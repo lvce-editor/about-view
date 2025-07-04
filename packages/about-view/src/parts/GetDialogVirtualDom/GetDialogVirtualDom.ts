@@ -1,4 +1,5 @@
-import type { VirtualDomNode } from '../VirtualDomNode/VirtualDomNode.ts'
+import type { VirtualDomNode} from '@lvce-editor/virtual-dom-worker';
+import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import * as AriaBoolean from '../AriaBoolean/AriaBoolean.ts'
 import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
@@ -10,7 +11,6 @@ import * as InputName from '../InputName/InputName.ts'
 import * as JoinBySpace from '../JoinBySpace/JoinBySpace.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as TabIndex from '../TabIndex/TabIndex.ts'
-import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getDialogVirtualDom = (
