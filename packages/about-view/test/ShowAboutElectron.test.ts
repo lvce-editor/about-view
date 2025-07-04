@@ -1,55 +1,46 @@
-import { beforeEach, expect, test } from '@jest/globals'
+import { expect, test, jest } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAboutDetailString.ts'
-
-let showMessageBoxCalls: any[] = []
-let writeTextCalls: any[] = []
-
-beforeEach(() => {
-  showMessageBoxCalls = []
-  writeTextCalls = []
-})
-
-const ShowAboutElectron = await import('../src/parts/ShowAboutElectron/ShowAboutElectron.ts')
+import * as ShowAboutElectron from '../src/parts/ShowAboutElectron/ShowAboutElectron.ts'
 
 // Ok button
 
 test('showAboutElectron - clicks ok button', async () => {
-  const createMockRpc = (showMessageBoxResult: number): any => {
-    return MockRpc.create({
-      commandMap: {},
-      invoke: (method: string, ...args: any[]) => {
-        switch (method) {
-          case 'GetWindowId.getWindowId':
-            return 1
-          case 'GetAboutDetailString.getDetailString':
-            // Use the real implementation for detail string
-            return GetAboutDetailString.getDetailString()
-          case 'ElectronDialog.showMessageBox':
-            showMessageBoxCalls.push(args[0])
-            return showMessageBoxResult
-          case 'ClipBoard.writeText':
-            writeTextCalls.push(args[0])
-            return undefined
-          case 'Process.getElectronVersion':
-          case 'Process.getNodeVersion':
-          case 'Process.getChromeVersion':
-          case 'Process.getV8Version':
-            return 'x'
-          case 'Process.getVersion':
-            return '0.0.0-dev'
-          case 'Process.getCommit':
-            return 'unknown commit'
-          case 'Process.getDate':
-            return 'unknown'
-          default:
-            throw new Error(`unexpected method: ${method}`)
-        }
-      },
-    })
-  }
-  const mockRpc = createMockRpc(1)
+  const showMessageBoxCalls: any[] = []
+  const writeTextMock = jest.fn()
+  const mockInvoke = jest.fn((method: string, ...args: any[]) => {
+    switch (method) {
+      case 'GetWindowId.getWindowId':
+        return 1
+      case 'GetAboutDetailString.getDetailString':
+        return GetAboutDetailString.getDetailString()
+      case 'ElectronDialog.showMessageBox':
+        showMessageBoxCalls.push(args[0])
+        return 1
+      case 'ClipBoard.writeText':
+        writeTextMock(args[0])
+        return undefined
+      case 'Process.getElectronVersion':
+      case 'Process.getNodeVersion':
+      case 'Process.getChromeVersion':
+      case 'Process.getV8Version':
+        return 'x'
+      case 'Process.getVersion':
+        return '0.0.0-dev'
+      case 'Process.getCommit':
+        return 'unknown commit'
+      case 'Process.getDate':
+        return 'unknown'
+      default:
+        throw new Error(`unexpected method: ${method}`)
+    }
+  })
+
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
   RendererWorker.set(mockRpc)
 
   const detail = await GetAboutDetailString.getDetailString()
@@ -66,46 +57,46 @@ test('showAboutElectron - clicks ok button', async () => {
       detail,
     },
   ])
-  expect(writeTextCalls).toEqual([])
+  expect(writeTextMock).not.toHaveBeenCalled()
 })
 
 // Copy button
 
 test('showAboutElectron - clicks copy button', async () => {
-  const createMockRpc = (showMessageBoxResult: number): any => {
-    return MockRpc.create({
-      commandMap: {},
-      invoke: (method: string, ...args: any[]) => {
-        switch (method) {
-          case 'GetWindowId.getWindowId':
-            return 1
-          case 'GetAboutDetailString.getDetailString':
-            // Use the real implementation for detail string
-            return GetAboutDetailString.getDetailString()
-          case 'ElectronDialog.showMessageBox':
-            showMessageBoxCalls.push(args[0])
-            return showMessageBoxResult
-          case 'ClipBoard.writeText':
-            writeTextCalls.push(args[0])
-            return undefined
-          case 'Process.getElectronVersion':
-          case 'Process.getNodeVersion':
-          case 'Process.getChromeVersion':
-          case 'Process.getV8Version':
-            return 'x'
-          case 'Process.getVersion':
-            return '0.0.0-dev'
-          case 'Process.getCommit':
-            return 'unknown commit'
-          case 'Process.getDate':
-            return 'unknown'
-          default:
-            throw new Error(`unexpected method: ${method}`)
-        }
-      },
-    })
-  }
-  const mockRpc = createMockRpc(0)
+  const showMessageBoxCalls: any[] = []
+  const writeTextMock = jest.fn()
+  const mockInvoke = jest.fn((method: string, ...args: any[]) => {
+    switch (method) {
+      case 'GetWindowId.getWindowId':
+        return 1
+      case 'GetAboutDetailString.getDetailString':
+        return GetAboutDetailString.getDetailString()
+      case 'ElectronDialog.showMessageBox':
+        showMessageBoxCalls.push(args[0])
+        return 0
+      case 'ClipBoard.writeText':
+        writeTextMock(args[0])
+        return undefined
+      case 'Process.getElectronVersion':
+      case 'Process.getNodeVersion':
+      case 'Process.getChromeVersion':
+      case 'Process.getV8Version':
+        return 'x'
+      case 'Process.getVersion':
+        return '0.0.0-dev'
+      case 'Process.getCommit':
+        return 'unknown commit'
+      case 'Process.getDate':
+        return 'unknown'
+      default:
+        throw new Error(`unexpected method: ${method}`)
+    }
+  })
+
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
   RendererWorker.set(mockRpc)
 
   const detail = await GetAboutDetailString.getDetailString()
@@ -122,5 +113,5 @@ test('showAboutElectron - clicks copy button', async () => {
       detail,
     },
   ])
-  expect(writeTextCalls).toEqual([detail])
+  expect(writeTextMock).toHaveBeenCalledWith(detail)
 })
