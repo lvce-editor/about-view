@@ -4,7 +4,6 @@ import * as Diff2 from '../Diff2/Diff2.ts'
 import * as Dispose from '../Dispose/Dispose.ts'
 import * as FocusNext from '../FocusNext/FocusNext.ts'
 import * as FocusPrevious from '../FocusPrevious/FocusPrevious.ts'
-import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleClickButton from '../HandleClickButton/HandleClickButton.ts'
 import * as HandleClickClose from '../HandleClickClose/HandleClickClose.ts'
@@ -23,7 +22,7 @@ export const commandMap = {
   'About.dispose': Dispose.dispose,
   'About.focusNext': WrapCommand.wrapCommand(FocusNext.focusNext),
   'About.focusPrevious': WrapCommand.wrapCommand(FocusPrevious.focusPrevious),
-  'About.getCommandIds': GetCommandIds.getCommandIds,
+  'About.getCommandIds': WrapCommand.getCommandIds,
   'About.getKeyBindings': GetKeyBindings.getKeyBindings,
   'About.handleClickButton': WrapCommand.wrapCommand(HandleClickButton.handleClickButton),
   'About.handleClickClose': WrapCommand.wrapCommand(HandleClickClose.handleClickClose),
