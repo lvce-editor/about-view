@@ -1,6 +1,6 @@
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../AboutState/AboutState.ts'
 import * as AboutFocusId from '../AboutFocusId/AboutFocusId.ts'
-import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 
 export const handleFocusIn = async (state: AboutState): Promise<AboutState> => {
