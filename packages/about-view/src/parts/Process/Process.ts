@@ -6,11 +6,11 @@ export const commit = 'unknown commit'
 
 export const date = ''
 
-export const { getElectronVersion } = RendererWorker
+export const getElectronVersion = RendererWorker.getElectronVersion
 
-export const { getNodeVersion } = RendererWorker
+export const getNodeVersion = RendererWorker.getNodeVersion
 
-export const { getChromeVersion } = RendererWorker
+export const getChromeVersion = RendererWorker.getChromeVersion
 
 export const getVersion = (): string => {
   return version
@@ -20,7 +20,7 @@ export const getCommit = (): string => {
   return commit
 }
 
-export const { getV8Version } = RendererWorker
+export const getV8Version = RendererWorker.getV8Version
 
 export const getDate = (): string => {
   return date
