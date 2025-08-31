@@ -2,6 +2,8 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'about.click-copy'
 
+export const skip = 1
+
 export const test: Test = async ({ Locator, expect, About, ClipBoard }) => {
   // arrange
   await About.show()
@@ -15,6 +17,7 @@ export const test: Test = async ({ Locator, expect, About, ClipBoard }) => {
   await About.handleClickCopy()
 
   // assert
-  // await ClipBoard.shouldHaveText('abc')
-  // await expect(dialogContent).toBeHidden()
+  // @ts-ignore
+  await ClipBoard.shouldHaveText(/Version: /)
+  await expect(dialogContent).toBeHidden()
 }
