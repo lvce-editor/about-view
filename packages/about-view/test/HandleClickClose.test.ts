@@ -1,4 +1,4 @@
-import { expect, test, jest } from '@jest/globals'
+import { expect, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as HandleClickClose from '../src/parts/HandleClickClose/HandleClickClose.ts'
@@ -10,17 +10,15 @@ test('handleClickClose', async () => {
     focusId: 1,
     uid: 1,
   }
-  const mockInvoke = jest.fn((method: string, ...args: readonly any[]) => {})
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget'(widgetId: string): void {
-      mockInvoke('Viewlet.closeWidget', widgetId)
       if (widgetId !== 'About') {
         throw new Error('unexpected method Viewlet.closeWidget')
       }
     },
   })
   const newState = await HandleClickClose.handleClickClose(state)
-  expect(mockInvoke).toHaveBeenCalledWith('Viewlet.closeWidget', 'About')
+  expect(mockRpc.invocations).toEqual([['Viewlet.closeWidget', 'About']])
   expect(newState).toBe(state)
 })
 
