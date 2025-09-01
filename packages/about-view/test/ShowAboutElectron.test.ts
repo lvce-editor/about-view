@@ -1,5 +1,4 @@
 import { expect, test, jest } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAboutDetailString.ts'
 import * as ShowAboutElectron from '../src/parts/ShowAboutElectron/ShowAboutElectron.ts'
@@ -37,11 +36,42 @@ test('showAboutElectron - clicks ok button', async () => {
     }
   })
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: mockInvoke,
+  RendererWorker.registerMockRpc({
+    'GetWindowId.getWindowId'(): number {
+      return 1
+    },
+    'GetAboutDetailString.getDetailString'(): Promise<string> | string {
+      return GetAboutDetailString.getDetailString()
+    },
+    'ElectronDialog.showMessageBox'(options: any): number {
+      showMessageBoxCalls.push(options)
+      return 1
+    },
+    'ClipBoard.writeText'(_text: string): void {
+      writeTextMock(_text)
+    },
+    'Process.getElectronVersion'(): string {
+      return 'x'
+    },
+    'Process.getNodeVersion'(): string {
+      return 'x'
+    },
+    'Process.getChromeVersion'(): string {
+      return 'x'
+    },
+    'Process.getV8Version'(): string {
+      return 'x'
+    },
+    'Process.getVersion'(): string {
+      return '0.0.0-dev'
+    },
+    'Process.getCommit'(): string {
+      return 'unknown commit'
+    },
+    'Process.getDate'(): string {
+      return 'unknown'
+    },
   })
-  RendererWorker.set(mockRpc)
 
   const detail = await GetAboutDetailString.getDetailString()
 
@@ -93,11 +123,42 @@ test('showAboutElectron - clicks copy button', async () => {
     }
   })
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: mockInvoke,
+  RendererWorker.registerMockRpc({
+    'GetWindowId.getWindowId'(): number {
+      return 1
+    },
+    'GetAboutDetailString.getDetailString'(): Promise<string> | string {
+      return GetAboutDetailString.getDetailString()
+    },
+    'ElectronDialog.showMessageBox'(options: any): number {
+      showMessageBoxCalls.push(options)
+      return 0
+    },
+    'ClipBoard.writeText'(_text: string): void {
+      writeTextMock(_text)
+    },
+    'Process.getElectronVersion'(): string {
+      return 'x'
+    },
+    'Process.getNodeVersion'(): string {
+      return 'x'
+    },
+    'Process.getChromeVersion'(): string {
+      return 'x'
+    },
+    'Process.getV8Version'(): string {
+      return 'x'
+    },
+    'Process.getVersion'(): string {
+      return '0.0.0-dev'
+    },
+    'Process.getCommit'(): string {
+      return 'unknown commit'
+    },
+    'Process.getDate'(): string {
+      return 'unknown'
+    },
   })
-  RendererWorker.set(mockRpc)
 
   const detail = await GetAboutDetailString.getDetailString()
 
