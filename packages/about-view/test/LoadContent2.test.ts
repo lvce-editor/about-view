@@ -1,5 +1,4 @@
 import { expect, test, beforeAll } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
@@ -14,13 +13,7 @@ beforeAll(() => {
 })
 
 test('loadContent2', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      throw new Error(`unexpected method ${method}`)
-    },
-  })
-  RendererWorker.set(mockRpc)
+  RendererWorker.registerMockRpc({})
   AboutStates.clear()
 
   const uid = 1
