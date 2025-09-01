@@ -1,4 +1,4 @@
-import type { VirtualDomNode} from '@lvce-editor/virtual-dom-worker';
+import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 

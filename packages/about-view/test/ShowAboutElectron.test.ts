@@ -52,9 +52,10 @@ test('showAboutElectron - clicks ok button', async () => {
     type: 'info',
     detail,
   }
-  expect(
-    mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox'),
-  ).toEqual(['ElectronDialog.showMessageBox', expectedOptions])
+  expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox')).toEqual([
+    'ElectronDialog.showMessageBox',
+    expectedOptions,
+  ])
   expect(mockRpc.invocations.some((x: readonly any[]) => x[0] === 'ClipBoard.writeText')).toBe(false)
 })
 
@@ -107,10 +108,9 @@ test('showAboutElectron - clicks copy button', async () => {
     type: 'info',
     detail,
   }
-  expect(
-    mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox'),
-  ).toEqual(['ElectronDialog.showMessageBox', expectedOptions])
-  expect(
-    mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ClipBoard.writeText'),
-  ).toEqual(['ClipBoard.writeText', detail])
+  expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox')).toEqual([
+    'ElectronDialog.showMessageBox',
+    expectedOptions,
+  ])
+  expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ClipBoard.writeText')).toEqual(['ClipBoard.writeText', detail])
 })
