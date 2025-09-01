@@ -2,9 +2,7 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'about.focus-previous'
 
-export const skip = 1
-
-export const test: Test = async ({ Locator, expect, Command, About }) => {
+export const test: Test = async ({ Locator, expect, About }) => {
   // arrange
   await About.show()
   const dialogContent = Locator('.DialogContent')
@@ -21,6 +19,6 @@ export const test: Test = async ({ Locator, expect, Command, About }) => {
   await expect(copyButton).toBeFocused()
 
   // act
-  await Command.execute('About.focusPrevious')
+  await About.focusPrevious()
   await expect(okButton).toBeFocused()
 }
