@@ -29,6 +29,9 @@ test('showMessageBox - calls RendererWorker.invoke with correct arguments', asyn
 
 test('showMessageBox - handles error from RendererWorker', async () => {
   RendererWorker.registerMockRpc({
+    'GetWindowId.getWindowId'(): number {
+      return 1
+    },
     'ElectronDialog.showMessageBox'(): never {
       throw new Error('Failed to show message box')
     },
