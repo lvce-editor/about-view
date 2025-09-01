@@ -4,7 +4,7 @@ export const name = 'about.focus-next'
 
 export const skip = 1
 
-export const test: Test = async ({ Locator, expect, Command, About }) => {
+export const test: Test = async ({ Locator, expect, About }) => {
   // arrange
   await About.show()
   const dialogContent = Locator('.DialogContent')
@@ -21,6 +21,8 @@ export const test: Test = async ({ Locator, expect, Command, About }) => {
   await expect(copyButton).toBeFocused()
 
   // act
-  await Command.execute('About.focusNext')
+  await About.focusNext()
+
+  // assert
   await expect(okButton).toBeFocused()
 }
