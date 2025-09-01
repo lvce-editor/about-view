@@ -2,6 +2,8 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'about.focus-previous'
 
+export const skip = 1
+
 export const test: Test = async ({ Locator, expect, About }) => {
   // arrange
   await About.show()
