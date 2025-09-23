@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/await-thenable */
 import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.ts'
 import * as JoinLines from '../JoinLines/JoinLines.ts'
 import * as Process from '../Process/Process.ts'
