@@ -31,7 +31,7 @@ const remoteUrl = getRemoteUrl(aboutWorkerPath)
 if (!content.includes('// const aboutViewWorkerUrl = ')) {
   const occurrence = `const aboutViewWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\``
   const replacement = `// const aboutViewWorkerUrl = \`\${assetDir}/packages/about-view-worker/dist/aboutWorkerMain.js\`
-  const aboutViewWorkerUrl = \`${remoteUrl}\``
+const aboutViewWorkerUrl = \`${remoteUrl}\``
 
   const newContent = content.replace(occurrence, replacement)
   await writeFile(rendererWorkerMainPath, newContent)
