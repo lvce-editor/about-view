@@ -38,6 +38,4 @@ const aboutViewWorkerUrl = \`${remoteUrl}\``
     throw new Error(`replacement error`)
   }
   await writeFile(rendererWorkerMainPath, newContent)
-} else {
-  console.log('exis')
 }
