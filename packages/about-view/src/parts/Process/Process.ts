@@ -1,10 +1,7 @@
 import { RendererWorker } from '@lvce-editor/rpc-registry'
-
-export const version = '0.0.0-dev'
-
-export const commit = 'unknown commit'
-
-export const date = ''
+import { version } from '../Version/Version.ts'
+import { commit } from '../Commit/Commit.ts'
+import { commitDate } from '../CommitDate/CommitDate.ts'
 
 export const getElectronVersion = RendererWorker.getElectronVersion
 
@@ -23,7 +20,7 @@ export const getCommit = (): string => {
 export const getV8Version = RendererWorker.getV8Version
 
 export const getDate = (): string => {
-  return date
+  return commitDate
 }
 
 export const productNameLong = 'Lvce Editor - OSS'
