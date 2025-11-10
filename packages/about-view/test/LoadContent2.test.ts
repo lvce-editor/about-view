@@ -25,9 +25,8 @@ test('loadContent2', async () => {
   }
   AboutStates.set(uid, oldState, oldState)
 
-  LoadContent2.loadContent2(uid)
+  const newState = LoadContent2.loadContent2(oldState)
 
-  const { newState } = AboutStates.get(uid)
   expect(newState).toEqual({
     productName: 'Lvce Editor - OSS',
     lines: ['Version: 0.0.0-dev', 'Commit: unknown commit', 'Date: unknown', 'Browser: Test'],
