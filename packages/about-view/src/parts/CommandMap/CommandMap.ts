@@ -29,7 +29,7 @@ export const commandMap = {
   'About.handleClickCopy': WrapCommand.wrapCommand(HandleClickCopy.handleClickCopy),
   'About.handleClickOk': WrapCommand.wrapCommand(HandleClickOk.handleClickOk),
   'About.handleFocusIn': WrapCommand.wrapCommand(HandleFocusIn.handleFocusIn),
-  'About.loadContent2': LoadContent2.loadContent2,
+  'About.loadContent2': WrapCommand.wrapCommand(LoadContent2.loadContent2),
   'About.render2': Render2.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
   'About.showAbout': ShowAbout.showAbout,
