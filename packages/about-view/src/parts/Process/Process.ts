@@ -1,7 +1,7 @@
 import { RendererWorker } from '@lvce-editor/rpc-registry'
-import { version } from '../Version/Version.ts'
 import { commit } from '../Commit/Commit.ts'
 import { commitDate } from '../CommitDate/CommitDate.ts'
+import { version } from '../Version/Version.ts'
 
 export const getElectronVersion = RendererWorker.getElectronVersion
 
