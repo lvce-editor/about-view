@@ -4,18 +4,18 @@ import * as GetKeyBindings from '../src/parts/GetKeyBindings/GetKeyBindings.ts'
 test('getKeyBindings', () => {
   expect(GetKeyBindings.getKeyBindings()).toEqual([
     {
-      key: 8,
       command: 'About.handleClickClose',
+      key: 8,
       when: 4,
     },
     {
-      key: 2,
       command: 'About.focusNext',
+      key: 2,
       when: 4,
     },
     {
-      key: 1026,
       command: 'About.focusPrevious',
+      key: 1026,
       when: 4,
     },
   ])

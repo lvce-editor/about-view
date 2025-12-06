@@ -8,11 +8,11 @@ import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 export const getPrimaryButtonVirtualDom = (message: string, name: string): readonly VirtualDomNode[] => {
   return [
     {
-      type: VirtualDomElements.Button,
-      className: MergeClassNames.mergeClassNames(ClassNames.Button, ClassNames.ButtonPrimary),
-      onClick: DomEventListenerFunctions.HandleClickButton,
       childCount: 1,
+      className: MergeClassNames.mergeClassNames(ClassNames.Button, ClassNames.ButtonPrimary),
       name,
+      onClick: DomEventListenerFunctions.HandleClickButton,
+      type: VirtualDomElements.Button,
     },
     text(message),
   ]

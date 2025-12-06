@@ -1,6 +1,6 @@
 export interface AboutState {
-  readonly productName: string
-  readonly lines: readonly string[]
   readonly focusId: number
+  readonly lines: readonly string[]
+  readonly productName: string
   readonly uid: number
 }

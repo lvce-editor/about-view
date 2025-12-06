@@ -6,9 +6,9 @@ import * as InputName from '../src/parts/InputName/InputName.ts'
 
 test('handleClickButton - ok', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: 1,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const mockRpc = RendererWorker.registerMockRpc({
@@ -25,9 +25,9 @@ test('handleClickButton - ok', async () => {
 
 test('handleClickButton - close', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: 1,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const mockRpc = RendererWorker.registerMockRpc({
@@ -44,21 +44,21 @@ test('handleClickButton - close', async () => {
 
 test('handleClickButton - copy', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: 1,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const calls: { method: string; args: readonly any[] }[] = []
   RendererWorker.registerMockRpc({
     'ClipBoard.writeText'(text: string): void {
-      calls.push({ method: 'ClipBoard.writeText', args: [text] })
+      calls.push({ args: [text], method: 'ClipBoard.writeText' })
       if (text !== 'Version: 1.0.0') {
         throw new Error('unexpected method ClipBoard.writeText')
       }
     },
     'Viewlet.closeWidget'(widgetId: string): void {
-      calls.push({ method: 'Viewlet.closeWidget', args: [widgetId] })
+      calls.push({ args: [widgetId], method: 'Viewlet.closeWidget' })
       if (widgetId !== 'About') {
         throw new Error('unexpected method Viewlet.closeWidget')
       }
@@ -66,17 +66,17 @@ test('handleClickButton - copy', async () => {
   })
   const newState = await HandleClickButton.handleClickButton(state, InputName.Copy)
   expect(calls).toEqual([
-    { method: 'ClipBoard.writeText', args: ['Version: 1.0.0'] },
-    { method: 'Viewlet.closeWidget', args: ['About'] },
+    { args: ['Version: 1.0.0'], method: 'ClipBoard.writeText' },
+    { args: ['About'], method: 'Viewlet.closeWidget' },
   ])
   expect(newState).toBe(state)
 })
 
 test('handleClickButton - error', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: 1,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid: 1,
   }
   await expect(HandleClickButton.handleClickButton(state, 'abc')).rejects.toThrow(new Error('unexpected button'))

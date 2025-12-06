@@ -5,15 +5,15 @@ import * as FocusPrevious from '../src/parts/FocusPrevious/FocusPrevious.ts'
 
 test('focusPrevious - from Ok to Copy', () => {
   const state: AboutState = {
-    productName: 'Test Product',
-    lines: [],
     focusId: AboutFocusId.Ok,
+    lines: [],
+    productName: 'Test Product',
     uid: 1,
   }
   expect(FocusPrevious.focusPrevious(state)).toEqual({
-    productName: 'Test Product',
-    lines: [],
     focusId: AboutFocusId.Copy,
+    lines: [],
+    productName: 'Test Product',
 
     uid: 1,
   })
@@ -21,30 +21,30 @@ test('focusPrevious - from Ok to Copy', () => {
 
 test('focusPrevious - from Copy to Ok', () => {
   const state: AboutState = {
-    productName: 'Test Product',
-    lines: [],
     focusId: AboutFocusId.Copy,
+    lines: [],
+    productName: 'Test Product',
     uid: 1,
   }
   expect(FocusPrevious.focusPrevious(state)).toEqual({
-    productName: 'Test Product',
-    lines: [],
     focusId: AboutFocusId.Ok,
+    lines: [],
+    productName: 'Test Product',
     uid: 1,
   })
 })
 
 test('focusPrevious - from None stays None', () => {
   const state: AboutState = {
-    productName: 'Test Product',
-    lines: [],
     focusId: AboutFocusId.None,
+    lines: [],
+    productName: 'Test Product',
     uid: 1,
   }
   expect(FocusPrevious.focusPrevious(state)).toEqual({
-    productName: 'Test Product',
-    lines: [],
     focusId: AboutFocusId.None,
+    lines: [],
+    productName: 'Test Product',
     uid: 1,
   })
 })

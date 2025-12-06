@@ -5,15 +5,15 @@ import * as WhenExpression from '../src/parts/WhenExpression/WhenExpression.ts'
 
 test('renderFocusContext returns correct array', () => {
   const oldState: AboutState = {
-    productName: 'test',
-    lines: [],
     focusId: 0,
+    lines: [],
+    productName: 'test',
     uid: 0,
   }
   const newState: AboutState = {
-    productName: 'test',
-    lines: [],
     focusId: 0,
+    lines: [],
+    productName: 'test',
     uid: 0,
   }
 

@@ -5,43 +5,43 @@ import * as ElectronDialog from '../src/parts/ElectronDialog/ElectronDialog.ts'
 test('showMessageBox - calls RendererWorker.invoke with correct arguments', async () => {
   const calls: { method: string; args: readonly any[] }[] = []
   RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId'(): number {
-      calls.push({ method: 'GetWindowId.getWindowId', args: [] })
+    'ElectronDialog.showMessageBox'(options: any): number {
+      calls.push({ args: [options], method: 'ElectronDialog.showMessageBox' })
       return 1
     },
-    'ElectronDialog.showMessageBox'(options: any): number {
-      calls.push({ method: 'ElectronDialog.showMessageBox', args: [options] })
+    'GetWindowId.getWindowId'(): number {
+      calls.push({ args: [], method: 'GetWindowId.getWindowId' })
       return 1
     },
   })
   const options = {
-    windowId: 1,
-    message: 'test message',
     buttons: ['Ok', 'Cancel'],
-    type: 'info',
     detail: 'test detail',
+    message: 'test message',
     productName: 'Lvce Editor - OSS',
+    type: 'info',
+    windowId: 1,
   }
   const result = await ElectronDialog.showMessageBox(options)
-  expect(calls).toContainEqual({ method: 'ElectronDialog.showMessageBox', args: [options] })
+  expect(calls).toContainEqual({ args: [options], method: 'ElectronDialog.showMessageBox' })
   expect(result).toBe(1)
 })
 
 test('showMessageBox - handles error from RendererWorker', async () => {
   RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId'(): number {
-      return 1
-    },
     'ElectronDialog.showMessageBox'(): never {
       throw new Error('Failed to show message box')
     },
+    'GetWindowId.getWindowId'(): number {
+      return 1
+    },
   })
   const options = {
-    windowId: 1,
-    message: 'test message',
     buttons: ['Ok'],
-    type: 'info',
+    message: 'test message',
     productName: 'Lvce Editor - OSS',
+    type: 'info',
+    windowId: 1,
   }
   await expect(ElectronDialog.showMessageBox(options)).rejects.toThrow('Failed to show message box')
 })

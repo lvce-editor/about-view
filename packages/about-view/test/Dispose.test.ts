@@ -10,9 +10,9 @@ beforeEach(() => {
 test('dispose', () => {
   const uid = 1
   const state: AboutState = {
-    productName: 'Test',
-    lines: ['test'],
     focusId: 0,
+    lines: ['test'],
+    productName: 'Test',
     uid: 1,
   }
   AboutStates.set(uid, state, state)

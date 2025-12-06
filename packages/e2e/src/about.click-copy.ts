@@ -4,7 +4,7 @@ export const name = 'about.click-copy'
 
 export const skip = 1
 
-export const test: Test = async ({ Locator, expect, About, ClipBoard }) => {
+export const test: Test = async ({ About, ClipBoard, expect, Locator }) => {
   // arrange
   await About.show()
   const dialogContent = Locator('.DialogContent')

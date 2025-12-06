@@ -18,9 +18,9 @@ test('loadContent2', async () => {
 
   const uid = 1
   const oldState: AboutState = {
-    productName: 'Old Name',
-    lines: ['old line'],
     focusId: AboutFocusId.Ok,
+    lines: ['old line'],
+    productName: 'Old Name',
     uid: 1,
   }
   AboutStates.set(uid, oldState, oldState)
@@ -28,9 +28,9 @@ test('loadContent2', async () => {
   const newState = LoadContent2.loadContent2(oldState)
 
   expect(newState).toEqual({
-    productName: 'Lvce Editor - OSS',
-    lines: ['Version: 0.0.0-dev', 'Commit: unknown commit', 'Date: unknown', 'Browser: Test'],
     focusId: AboutFocusId.Ok,
+    lines: ['Version: 0.0.0-dev', 'Commit: unknown commit', 'Date: unknown', 'Browser: Test'],
+    productName: 'Lvce Editor - OSS',
     uid: 1,
   })
 })
