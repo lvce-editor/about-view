@@ -22,11 +22,11 @@ test('showAbout - electron platform', async () => {
     'GetWindowId.getWindowId'(): number {
       return 1
     },
-    'Process.getElectronVersion'(): string {
-      return '1.0.0'
-    },
     'Process.getChromeVersion'(): string {
       return '123.0.0'
+    },
+    'Process.getElectronVersion'(): string {
+      return '1.0.0'
     },
     'Process.getNodeVersion'(): string {
       return '22.0.0'

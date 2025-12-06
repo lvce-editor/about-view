@@ -6,9 +6,9 @@ import * as HandleFocusIn from '../src/parts/HandleFocusIn/HandleFocusIn.ts'
 
 test('handleFocusIn - when focusId exists', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0', 'Commit: abc'],
     focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.0.0', 'Commit: abc'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const mockRpc = RendererWorker.registerMockRpc({
@@ -25,9 +25,9 @@ test('handleFocusIn - when focusId exists', async () => {
 
 test('handleFocusIn - when focusId is None', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0', 'Commit: abc'],
     focusId: AboutFocusId.None,
+    lines: ['Version: 1.0.0', 'Commit: abc'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const mockRpc = RendererWorker.registerMockRpc({
@@ -47,9 +47,9 @@ test('handleFocusIn - when focusId is None', async () => {
 
 test('handleFocusIn - when focusId is Copy', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0', 'Commit: abc'],
     focusId: AboutFocusId.Copy,
+    lines: ['Version: 1.0.0', 'Commit: abc'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const mockRpc = RendererWorker.registerMockRpc({

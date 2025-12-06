@@ -17,10 +17,10 @@ export const getAboutVirtualDom = (
   const content = GetAboutContentVirtualDom.getAboutContentVirtualDom(lines)
   return [
     {
-      type: VirtualDomElements.Div,
+      childCount: 1,
       className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.About),
       onContextMenu: DomEventListenerFunctions.HandleContextMenu,
-      childCount: 1,
+      type: VirtualDomElements.Div,
     },
     ...GetDialogVirtualDom.getDialogVirtualDom(content, closeMessage, infoMessage, okMessage, copyMessage, productName),
   ]

@@ -12,16 +12,16 @@ test('create initializes state with default values', () => {
   const result = AboutStates.get(uid)
 
   expect(result).toEqual({
-    oldState: {
-      productName: '',
-      lines: [],
+    newState: {
       focusId: 0,
+      lines: [],
+      productName: '',
       uid: 123,
     },
-    newState: {
-      productName: '',
-      lines: [],
+    oldState: {
       focusId: 0,
+      lines: [],
+      productName: '',
       uid: 123,
     },
   })

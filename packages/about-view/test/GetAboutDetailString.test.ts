@@ -4,13 +4,13 @@ import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAbou
 
 test('getDetailStringWeb', async () => {
   RendererWorker.registerMockRpc({
+    'Process.getChromeVersion'(): string {
+      return '0.0.0-dev'
+    },
     'Process.getElectronVersion'(): string {
       return '0.0.0-dev'
     },
     'Process.getNodeVersion'(): string {
-      return '0.0.0-dev'
-    },
-    'Process.getChromeVersion'(): string {
       return '0.0.0-dev'
     },
     'Process.getV8Version'(): string {

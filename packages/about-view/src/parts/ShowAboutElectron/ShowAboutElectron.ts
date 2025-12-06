@@ -11,11 +11,11 @@ export const showAboutElectron = async (): Promise<void> => {
   const detail = await GetAboutDetailString.getDetailString()
   const productNameLong = Product.getProductNameLong()
   const options = {
-    windowId,
-    message: productNameLong,
     buttons: [AboutStrings.copy(), AboutStrings.ok()],
-    type: ElectronMessageBoxType.Info,
     detail,
+    message: productNameLong,
+    type: ElectronMessageBoxType.Info,
+    windowId,
   }
   const index = await ElectronDialog.showMessageBox(options)
   switch (index) {

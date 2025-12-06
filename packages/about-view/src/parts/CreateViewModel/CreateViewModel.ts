@@ -7,13 +7,13 @@ export const createViewModel = (state: AboutState): ViewModel => {
   const copyMessage = AboutStrings.copy()
   const closeMessage = AboutStrings.closeDialog()
   const infoMessage = AboutStrings.info()
-  const { productName, lines } = state
+  const { lines, productName } = state
   return {
-    productName,
-    lines,
     closeMessage,
-    okMessage,
     copyMessage,
     infoMessage,
+    lines,
+    okMessage,
+    productName,
   }
 }

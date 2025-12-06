@@ -9,15 +9,15 @@ beforeEach(() => {
 test('set and get state', () => {
   const uid = 1
   const oldState: AboutState = {
-    productName: 'Test App',
-    lines: ['line 1', 'line 2'],
     focusId: 0,
+    lines: ['line 1', 'line 2'],
+    productName: 'Test App',
     uid: 1,
   }
   const newState: AboutState = {
-    productName: 'Test App',
-    lines: ['line 1', 'line 2', 'line 3'],
     focusId: 1,
+    lines: ['line 1', 'line 2', 'line 3'],
+    productName: 'Test App',
     uid: 1,
   }
 
@@ -25,8 +25,8 @@ test('set and get state', () => {
   const result = AboutStates.get(uid)
 
   expect(result).toEqual({
-    oldState,
     newState,
+    oldState,
   })
 })
 
@@ -39,9 +39,9 @@ test('getKeys returns all state keys', () => {
   const uid1 = 1
   const uid2 = 2
   const state: AboutState = {
-    productName: 'Test App',
-    lines: ['line 1'],
     focusId: 0,
+    lines: ['line 1'],
+    productName: 'Test App',
     uid: 1,
   }
 

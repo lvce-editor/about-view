@@ -7,23 +7,29 @@ import * as ShowAboutElectron from '../src/parts/ShowAboutElectron/ShowAboutElec
 
 test('showAboutElectron - clicks ok button', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId'(): number {
+    'ClipBoard.writeText'(_text: string): void {},
+    'ElectronDialog.showMessageBox'(options: any): number {
       return 1
     },
     'GetAboutDetailString.getDetailString'(): Promise<string> | string {
       return GetAboutDetailString.getDetailString()
     },
-    'ElectronDialog.showMessageBox'(options: any): number {
+    'GetWindowId.getWindowId'(): number {
       return 1
     },
-    'ClipBoard.writeText'(_text: string): void {},
+    'Process.getChromeVersion'(): string {
+      return 'x'
+    },
+    'Process.getCommit'(): string {
+      return 'unknown commit'
+    },
+    'Process.getDate'(): string {
+      return 'unknown'
+    },
     'Process.getElectronVersion'(): string {
       return 'x'
     },
     'Process.getNodeVersion'(): string {
-      return 'x'
-    },
-    'Process.getChromeVersion'(): string {
       return 'x'
     },
     'Process.getV8Version'(): string {
@@ -32,12 +38,6 @@ test('showAboutElectron - clicks ok button', async () => {
     'Process.getVersion'(): string {
       return '0.0.0-dev'
     },
-    'Process.getCommit'(): string {
-      return 'unknown commit'
-    },
-    'Process.getDate'(): string {
-      return 'unknown'
-    },
   })
 
   const detail = await GetAboutDetailString.getDetailString()
@@ -45,12 +45,12 @@ test('showAboutElectron - clicks ok button', async () => {
   await ShowAboutElectron.showAboutElectron()
 
   const expectedOptions = {
-    windowId: 1,
+    buttons: ['Copy', 'Ok'],
+    detail,
     message: 'Lvce Editor - OSS',
     productName: 'Lvce Editor - OSS',
-    buttons: ['Copy', 'Ok'],
     type: 'info',
-    detail,
+    windowId: 1,
   }
   expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox')).toEqual([
     'ElectronDialog.showMessageBox',
@@ -63,23 +63,29 @@ test('showAboutElectron - clicks ok button', async () => {
 
 test('showAboutElectron - clicks copy button', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
-    'GetWindowId.getWindowId'(): number {
-      return 1
+    'ClipBoard.writeText'(_text: string): void {},
+    'ElectronDialog.showMessageBox'(options: any): number {
+      return 0
     },
     'GetAboutDetailString.getDetailString'(): Promise<string> | string {
       return GetAboutDetailString.getDetailString()
     },
-    'ElectronDialog.showMessageBox'(options: any): number {
-      return 0
+    'GetWindowId.getWindowId'(): number {
+      return 1
     },
-    'ClipBoard.writeText'(_text: string): void {},
+    'Process.getChromeVersion'(): string {
+      return 'x'
+    },
+    'Process.getCommit'(): string {
+      return 'unknown commit'
+    },
+    'Process.getDate'(): string {
+      return 'unknown'
+    },
     'Process.getElectronVersion'(): string {
       return 'x'
     },
     'Process.getNodeVersion'(): string {
-      return 'x'
-    },
-    'Process.getChromeVersion'(): string {
       return 'x'
     },
     'Process.getV8Version'(): string {
@@ -88,12 +94,6 @@ test('showAboutElectron - clicks copy button', async () => {
     'Process.getVersion'(): string {
       return '0.0.0-dev'
     },
-    'Process.getCommit'(): string {
-      return 'unknown commit'
-    },
-    'Process.getDate'(): string {
-      return 'unknown'
-    },
   })
 
   const detail = await GetAboutDetailString.getDetailString()
@@ -101,12 +101,12 @@ test('showAboutElectron - clicks copy button', async () => {
   await ShowAboutElectron.showAboutElectron()
 
   const expectedOptions = {
-    windowId: 1,
+    buttons: ['Copy', 'Ok'],
+    detail,
     message: 'Lvce Editor - OSS',
     productName: 'Lvce Editor - OSS',
-    buttons: ['Copy', 'Ok'],
     type: 'info',
-    detail,
+    windowId: 1,
   }
   expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox')).toEqual([
     'ElectronDialog.showMessageBox',

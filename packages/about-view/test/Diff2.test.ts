@@ -10,15 +10,15 @@ beforeEach(() => {
 test('diff2 returns diff between old and new state', () => {
   const uid = 123
   const oldState: AboutState = {
-    productName: 'Test App',
-    lines: ['line 1', 'line 2'],
     focusId: 0,
+    lines: ['line 1', 'line 2'],
+    productName: 'Test App',
     uid: 1,
   }
   const newState: AboutState = {
-    productName: 'Test App',
-    lines: ['line 1', 'line 3'],
     focusId: 0,
+    lines: ['line 1', 'line 3'],
+    productName: 'Test App',
     uid: 1,
   }
 

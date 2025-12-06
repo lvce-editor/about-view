@@ -4,9 +4,9 @@ import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import { wrapCommand } from '../src/parts/AboutStates/AboutStates.ts'
 
 const createState = (uid: number): AboutState => ({
-  productName: 'test',
-  lines: [],
   focusId: 0,
+  lines: [],
+  productName: 'test',
   uid,
 })
 

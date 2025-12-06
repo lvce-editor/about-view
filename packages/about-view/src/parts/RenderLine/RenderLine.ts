@@ -3,8 +3,8 @@ import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 const br: VirtualDomNode = {
-  type: VirtualDomElements.Br,
   childCount: 0,
+  type: VirtualDomElements.Br,
 }
 
 export const renderLine = (line: string, index: number): readonly VirtualDomNode[] => {

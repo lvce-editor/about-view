@@ -7,8 +7,8 @@ export const loadContent2 = (state: AboutState): AboutState => {
   const lines = GetAboutDetailStringWeb.getDetailStringWeb()
   return {
     ...state,
-    productName: Process.productNameLong,
-    lines,
     focusId: AboutFocusId.Ok,
+    lines,
+    productName: Process.productNameLong,
   }
 }

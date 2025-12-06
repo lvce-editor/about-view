@@ -5,9 +5,9 @@ import * as HandleClickOk from '../src/parts/HandleClickOk/HandleClickOk.ts'
 
 test('handleClickOk', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: 1,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const mockRpc = RendererWorker.registerMockRpc({
@@ -24,9 +24,9 @@ test('handleClickOk', async () => {
 
 test('handleClickOk - error', async () => {
   const state: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: 1,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid: 1,
   }
   const error = new Error('Failed to close widget')

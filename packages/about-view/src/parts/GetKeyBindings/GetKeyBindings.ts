@@ -5,18 +5,18 @@ import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 export const getKeyBindings = (): readonly KeyBinding[] => {
   return [
     {
-      key: KeyCode.Escape,
       command: 'About.handleClickClose',
+      key: KeyCode.Escape,
       when: WhenExpression.FocusAbout,
     },
     {
-      key: KeyCode.Tab,
       command: 'About.focusNext',
+      key: KeyCode.Tab,
       when: WhenExpression.FocusAbout,
     },
     {
-      key: KeyCode.Tab | KeyModifier.Shift,
       command: 'About.focusPrevious',
+      key: KeyCode.Tab | KeyModifier.Shift,
       when: WhenExpression.FocusAbout,
     },
   ]

@@ -13,9 +13,9 @@ const uid = 1
 
 test('render - no changes', () => {
   const oldState: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid,
   }
   const newState: AboutState = {
@@ -28,9 +28,9 @@ test('render - no changes', () => {
 
 test('render - content changed', () => {
   const oldState: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid,
   }
   const newState: AboutState = {
@@ -53,9 +53,9 @@ test('render - content changed', () => {
 
 test('render - focus changed', () => {
   const oldState: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid,
   }
   const newState: AboutState = {
@@ -73,15 +73,15 @@ test('render - focus changed', () => {
 
 test('render - both content and focus changed', () => {
   const oldState: AboutState = {
-    productName: 'Test Editor',
-    lines: ['Version: 1.0.0'],
     focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
     uid,
   }
   const newState: AboutState = {
-    productName: 'Test Editor 2',
-    lines: ['Version: 2.0.0'],
     focusId: AboutFocusId.Copy,
+    lines: ['Version: 2.0.0'],
+    productName: 'Test Editor 2',
     uid: 1,
   }
   AboutStates.set(uid, oldState, newState)
