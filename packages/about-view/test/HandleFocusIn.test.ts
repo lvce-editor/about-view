@@ -11,7 +11,7 @@ test('handleFocusIn - when focusId exists', async () => {
     productName: 'Test Editor',
     uid: 1,
   }
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus'(value: number): void {
       if (value !== 4) {
         throw new Error('unexpected method Focus.setFocus')
@@ -30,7 +30,7 @@ test('handleFocusIn - when focusId is None', async () => {
     productName: 'Test Editor',
     uid: 1,
   }
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus'(value: number): void {
       if (value !== 4) {
         throw new Error('unexpected method Focus.setFocus')
@@ -52,7 +52,7 @@ test('handleFocusIn - when focusId is Copy', async () => {
     productName: 'Test Editor',
     uid: 1,
   }
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus'(value: number): void {
       if (value !== 4) {
         throw new Error('unexpected method Focus.setFocus')

@@ -3,7 +3,7 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetWindowId from '../src/parts/GetWindowId/GetWindowId.ts'
 
 test('getWindowId - calls RendererWorker.invoke with correct arguments', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetWindowId.getWindowId'(): number {
       return 1
     },

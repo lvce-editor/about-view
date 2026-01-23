@@ -3,7 +3,7 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as ClipBoard from '../src/parts/ClipBoard/ClipBoard.ts'
 
 test('writeText - calls RendererWorker.invoke with correct arguments', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ClipBoard.writeText'() {},
   })
   await ClipBoard.writeText('test text')
@@ -11,7 +11,7 @@ test('writeText - calls RendererWorker.invoke with correct arguments', async () 
 })
 
 test('writeText - handles empty string', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ClipBoard.writeText'() {},
   })
 
@@ -21,7 +21,7 @@ test('writeText - handles empty string', async () => {
 
 test('writeText - handles long text', async () => {
   const longText = 'a'.repeat(1000)
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ClipBoard.writeText'() {},
   })
   await ClipBoard.writeText(longText)
