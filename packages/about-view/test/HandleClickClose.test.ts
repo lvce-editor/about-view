@@ -10,7 +10,7 @@ test('handleClickClose', async () => {
     productName: 'Test Editor',
     uid: 1,
   }
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget'(widgetId: string): void {
       if (widgetId !== 'About') {
         throw new Error('unexpected method Viewlet.closeWidget')

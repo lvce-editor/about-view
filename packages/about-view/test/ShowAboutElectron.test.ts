@@ -6,7 +6,7 @@ import * as ShowAboutElectron from '../src/parts/ShowAboutElectron/ShowAboutElec
 // Ok button
 
 test('showAboutElectron - clicks ok button', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ClipBoard.writeText'(_text: string): void {},
     'ElectronDialog.showMessageBox'(options: any): number {
       return 1
@@ -62,7 +62,7 @@ test('showAboutElectron - clicks ok button', async () => {
 // Copy button
 
 test('showAboutElectron - clicks copy button', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ClipBoard.writeText'(_text: string): void {},
     'ElectronDialog.showMessageBox'(options: any): number {
       return 0
