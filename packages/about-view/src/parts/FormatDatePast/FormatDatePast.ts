@@ -5,44 +5,44 @@ import { minute, hour, day, week, month, year } from '../TimeUnit/TimeUnit.ts'
 
 const ranges = [
   {
-    limit: minute,
     divisor: 1,
+    limit: minute,
     one: FormatDateStrings.oneSecondAgo,
     some: FormatDateStrings.someSecondsAgo,
   },
   {
-    limit: hour,
     divisor: minute,
+    limit: hour,
     one: FormatDateStrings.oneMinuteAgo,
     some: FormatDateStrings.someMinutesAgo,
   },
   {
-    limit: day,
     divisor: hour,
+    limit: day,
     one: FormatDateStrings.oneHourAgo,
     some: FormatDateStrings.someHoursAgo,
   },
   {
-    limit: week,
     divisor: day,
+    limit: week,
     one: FormatDateStrings.oneDayAgo,
     some: FormatDateStrings.someDaysAgo,
   },
   {
-    limit: month,
     divisor: week,
+    limit: month,
     one: FormatDateStrings.oneWeekAgo,
     some: FormatDateStrings.someWeeksAgo,
   },
   {
-    limit: year,
     divisor: month,
+    limit: year,
     one: FormatDateStrings.oneMonthAgo,
     some: FormatDateStrings.someMonthsAgo,
   },
   {
-    limit: Number.POSITIVE_INFINITY,
     divisor: year,
+    limit: Number.POSITIVE_INFINITY,
     one: FormatDateStrings.oneYearAgo,
     some: FormatDateStrings.someYearsAgo,
   },
