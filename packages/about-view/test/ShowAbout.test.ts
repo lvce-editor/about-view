@@ -6,9 +6,7 @@ import * as ShowAbout from '../src/parts/ShowAbout/ShowAbout.ts'
 test('showAbout - web platform', async () => {
   RendererWorker.registerMockRpc({
     'Viewlet.openWidget'(widgetId: string): void {
-      if (widgetId !== 'About') {
-        throw new Error('unexpected call')
-      }
+      expect(widgetId).toBe('About')
     },
   })
   await ShowAbout.showAbout(PlatformType.Web)
@@ -17,6 +15,7 @@ test('showAbout - web platform', async () => {
 test('showAbout - electron platform', async () => {
   RendererWorker.registerMockRpc({
     'ElectronDialog.showMessageBox'(): number {
+      expect(true).toBe(true)
       return 1
     },
     'GetWindowId.getWindowId'(): number {

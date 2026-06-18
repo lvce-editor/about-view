@@ -5,9 +5,7 @@ import * as ShowAboutDefault from '../src/parts/ShowAboutDefault/ShowAboutDefaul
 test('showAboutDefault - opens About widget', async () => {
   RendererWorker.registerMockRpc({
     'Viewlet.openWidget'(widgetId: string): void {
-      if (widgetId !== 'About') {
-        throw new Error('unexpected call')
-      }
+      expect(widgetId).toBe('About')
     },
   })
   await ShowAboutDefault.showAboutDefault()
