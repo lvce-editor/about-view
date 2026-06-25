@@ -66,7 +66,7 @@ test('render - focus changed', () => {
   const diffResult = Diff2.diff2(uid)
 
   expect(Render2.doRender(uid, diffResult)).toEqual([
-    ['Viewlet.focusElementByName', 'Copy'],
+    ['Viewlet.focusSelector', '[name="Copy"]'],
     ['Viewlet.setFocusContext', 4],
   ])
 })
@@ -95,7 +95,7 @@ test('render - both content and focus changed', () => {
         }),
       ]),
     ],
-    ['Viewlet.focusElementByName', 'Copy'],
+    ['Viewlet.focusSelector', '[name="Copy"]'],
     ['Viewlet.setFocusContext', 4],
   ])
 })
