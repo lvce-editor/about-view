@@ -1,27 +1,27 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
 import { closeAbout, getCopyButton, getOkButton, openAbout } from './_about.js'
 
-export const name = 'about.focus-previous'
+export const name = 'about.focus-wraparound'
 
 export const test: Test = async (api) => {
   const { About, expect } = api
-
-  // arrange
   const dialogContent = await openAbout(api)
   const okButton = getOkButton(dialogContent)
   const copyButton = getCopyButton(dialogContent)
 
   try {
-    // act
-    await About.focusPrevious()
+    await expect(okButton).toBeFocused()
 
-    // assert
+    await About.focusPrevious()
     await expect(copyButton).toBeFocused()
 
-    // act
-    await About.focusPrevious()
+    await About.focusNext()
+    await expect(okButton).toBeFocused()
 
-    // assert
+    await About.focusNext()
+    await expect(copyButton).toBeFocused()
+
+    await About.focusPrevious()
     await expect(okButton).toBeFocused()
   } finally {
     await closeAbout(api)

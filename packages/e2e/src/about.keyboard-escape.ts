@@ -1,17 +1,12 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
 import { openAbout } from './_about.js'
 
-export const name = 'about.click-ok'
+export const name = 'about.keyboard-escape'
 
 export const test: Test = async (api) => {
-  const { About, expect } = api
-
-  // arrange
+  const { expect, KeyBoard } = api
   const dialogContent = await openAbout(api)
 
-  // act
-  await About.handleClickOk()
-
-  // assert
+  await KeyBoard.press('Escape')
   await expect(dialogContent).toBeHidden()
 }
