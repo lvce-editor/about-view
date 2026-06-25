@@ -1,4 +1,5 @@
 import type { Test, TestApi } from '@lvce-editor/test-with-playwright'
+import { closeAbout, getCopyButton, getOkButton, openAbout } from './_about.js'
 
 type Expect = TestApi['expect']
 type Locator = ReturnType<TestApi['Locator']>
@@ -27,23 +28,27 @@ const waitForFocused = async (expect: Expect, locator: Locator): Promise<void> =
 export const name = 'about.focus-previous'
 
 export const test: Test = async ({ About, expect, Locator }) => {
+  const aboutApi = { About, expect, Locator }
+
   // arrange
-  await About.show()
-  const dialogContent = Locator('.DialogContent')
-  await expect(dialogContent).toBeVisible()
-  const infoIcon = dialogContent.locator('.DialogInfoIcon')
-  await expect(infoIcon).toBeVisible()
+  const dialogContent = await openAbout(aboutApi)
+  const okButton = getOkButton(dialogContent)
+  const copyButton = getCopyButton(dialogContent)
 
-  // act
-  await About.focusPrevious()
+  try {
+    // act
+    await About.focusPrevious()
 
-  // assert
-  const okButton = dialogContent.locator('.ButtonSecondary')
-  const copyButton = dialogContent.locator('.ButtonPrimary')
-  await waitForFocused(expect, copyButton)
-  await wait(50)
+    // assert
+    await waitForFocused(expect, copyButton)
+    await wait(50)
 
-  // act
-  await About.focusPrevious()
-  await waitForFocused(expect, okButton)
+    // act
+    await About.focusPrevious()
+
+    // assert
+    await waitForFocused(expect, okButton)
+  } finally {
+    await closeAbout(aboutApi)
+  }
 }

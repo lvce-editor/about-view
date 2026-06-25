@@ -25,28 +25,31 @@ const waitForFocused = async (expect: Expect, locator: Locator): Promise<void> =
   throw lastError
 }
 
-export const name = 'about.focus-next'
+export const name = 'about.focus-wraparound'
 
 export const test: Test = async ({ About, expect, Locator }) => {
   const aboutApi = { About, expect, Locator }
-
-  // arrange
   const dialogContent = await openAbout(aboutApi)
   const okButton = getOkButton(dialogContent)
   const copyButton = getCopyButton(dialogContent)
 
   try {
-    // act
-    await About.focusNext()
+    await waitForFocused(expect, okButton)
+    await wait(50)
 
-    // assert
+    await About.focusPrevious()
     await waitForFocused(expect, copyButton)
     await wait(50)
 
-    // act
     await About.focusNext()
+    await waitForFocused(expect, okButton)
+    await wait(50)
 
-    // assert
+    await About.focusNext()
+    await waitForFocused(expect, copyButton)
+    await wait(50)
+
+    await About.focusPrevious()
     await waitForFocused(expect, okButton)
   } finally {
     await closeAbout(aboutApi)
