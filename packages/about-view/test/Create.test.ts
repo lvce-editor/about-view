@@ -24,11 +24,5 @@ test('create initializes state with default values', () => {
       productName: '',
       uid: 123,
     },
-    scheduledState: {
-      focusId: 0,
-      lines: [],
-      productName: '',
-      uid: 123,
-    },
   })
 })
