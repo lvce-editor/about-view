@@ -42,7 +42,7 @@ const ranges = [
   },
   {
     divisor: year,
-    limit: Number.POSITIVE_INFINITY,
+    limit: Infinity,
     one: FormatDateStrings.oneYearAgo,
     some: FormatDateStrings.someYearsAgo,
   },

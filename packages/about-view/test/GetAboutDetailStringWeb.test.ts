@@ -2,10 +2,12 @@ import { expect, test, beforeAll } from '@jest/globals'
 import * as GetAboutDetailStringWeb from '../src/parts/GetAboutDetailStringWeb/GetAboutDetailStringWeb.ts'
 
 beforeAll(() => {
-  // @ts-expect-error
-  globalThis.navigator = {
-    userAgent: 'Test',
-  }
+  Object.defineProperty(globalThis, 'navigator', {
+    configurable: true,
+    value: {
+      userAgent: 'Test',
+    },
+  })
 })
 
 test('getDetailStringWeb', () => {

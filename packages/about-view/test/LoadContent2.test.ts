@@ -6,10 +6,12 @@ import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import * as LoadContent2 from '../src/parts/LoadContent2/LoadContent2.ts'
 
 beforeAll(() => {
-  // @ts-expect-error
-  globalThis.navigator = {
-    userAgent: 'Test',
-  }
+  Object.defineProperty(globalThis, 'navigator', {
+    configurable: true,
+    value: {
+      userAgent: 'Test',
+    },
+  })
 })
 
 test('loadContent2', async () => {

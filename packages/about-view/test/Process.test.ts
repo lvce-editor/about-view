@@ -43,7 +43,7 @@ test('getV8Version', async () => {
       return undefined
     },
   })
-  expect(await Process.getV8Version()).toBe(undefined)
+  expect(await Process.getV8Version()).toBeUndefined()
 })
 
 test('getDate', () => {

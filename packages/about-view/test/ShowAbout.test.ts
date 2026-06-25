@@ -13,9 +13,10 @@ test('showAbout - web platform', async () => {
 })
 
 test('showAbout - electron platform', async () => {
+  let wasCalled = false
   RendererWorker.registerMockRpc({
     'ElectronDialog.showMessageBox'(): number {
-      expect(true).toBe(true)
+      wasCalled = true
       return 1
     },
     'GetWindowId.getWindowId'(): number {
@@ -35,6 +36,7 @@ test('showAbout - electron platform', async () => {
     },
   })
   await ShowAbout.showAbout(PlatformType.Electron)
+  expect(wasCalled).toBe(true)
 })
 
 test('showAbout - error', async () => {
