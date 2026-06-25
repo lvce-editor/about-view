@@ -27,6 +27,7 @@ test('set and get state', () => {
   expect(result).toEqual({
     newState,
     oldState,
+    scheduledState: newState,
   })
 })
 
