@@ -3,11 +3,11 @@ import { openAbout } from './_about.js'
 
 export const name = 'about.click-copy'
 
-export const test: Test = async (api) => {
-  const { About, ClipBoard, expect } = api
+export const test: Test = async ({ About, ClipBoard, expect, Locator }) => {
+  const aboutApi = { About, expect, Locator }
 
   // arrange
-  const dialogContent = await openAbout(api)
+  const dialogContent = await openAbout(aboutApi)
   await ClipBoard.enableMemoryClipBoard()
 
   try {

@@ -3,16 +3,16 @@ import { closeAbout, getOkButton, openAbout } from './_about.js'
 
 export const name = 'about.reopen'
 
-export const test: Test = async (api) => {
-  const { expect } = api
-  const firstDialogContent = await openAbout(api)
-  await closeAbout(api)
+export const test: Test = async ({ About, expect, Locator }) => {
+  const aboutApi = { About, expect, Locator }
+  const firstDialogContent = await openAbout(aboutApi)
+  await closeAbout(aboutApi)
   await expect(firstDialogContent).toBeHidden()
 
-  const secondDialogContent = await openAbout(api)
+  const secondDialogContent = await openAbout(aboutApi)
   try {
     await expect(getOkButton(secondDialogContent)).toBeFocused()
   } finally {
-    await closeAbout(api)
+    await closeAbout(aboutApi)
   }
 }

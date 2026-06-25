@@ -27,9 +27,9 @@ const waitForFocused = async (expect: Expect, locator: Locator): Promise<void> =
 
 export const name = 'about.focus-wraparound'
 
-export const test: Test = async (api) => {
-  const { About, expect } = api
-  const dialogContent = await openAbout(api)
+export const test: Test = async ({ About, expect, Locator }) => {
+  const aboutApi = { About, expect, Locator }
+  const dialogContent = await openAbout(aboutApi)
   const okButton = getOkButton(dialogContent)
   const copyButton = getCopyButton(dialogContent)
 
@@ -52,6 +52,6 @@ export const test: Test = async (api) => {
     await About.focusPrevious()
     await waitForFocused(expect, okButton)
   } finally {
-    await closeAbout(api)
+    await closeAbout(aboutApi)
   }
 }

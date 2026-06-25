@@ -27,11 +27,11 @@ const waitForFocused = async (expect: Expect, locator: Locator): Promise<void> =
 
 export const name = 'about.focus-next'
 
-export const test: Test = async (api) => {
-  const { About, expect } = api
+export const test: Test = async ({ About, expect, Locator }) => {
+  const aboutApi = { About, expect, Locator }
 
   // arrange
-  const dialogContent = await openAbout(api)
+  const dialogContent = await openAbout(aboutApi)
   const okButton = getOkButton(dialogContent)
   const copyButton = getCopyButton(dialogContent)
 
@@ -49,6 +49,6 @@ export const test: Test = async (api) => {
     // assert
     await waitForFocused(expect, okButton)
   } finally {
-    await closeAbout(api)
+    await closeAbout(aboutApi)
   }
 }

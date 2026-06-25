@@ -3,11 +3,11 @@ import { openAbout } from './_about.js'
 
 export const name = 'about.click-close'
 
-export const test: Test = async (api) => {
-  const { About, expect } = api
+export const test: Test = async ({ About, expect, Locator }) => {
+  const aboutApi = { About, expect, Locator }
 
   // arrange
-  const dialogContent = await openAbout(api)
+  const dialogContent = await openAbout(aboutApi)
 
   // act
   await About.handleClickClose()

@@ -3,14 +3,14 @@ import { closeAbout, openAbout } from './_about.js'
 
 export const name = 'about.keyboard-tab'
 
-export const test: Test = async (api) => {
-  const { expect, KeyBoard } = api
-  const dialogContent = await openAbout(api)
+export const test: Test = async ({ About, expect, KeyBoard, Locator }) => {
+  const aboutApi = { About, expect, Locator }
+  const dialogContent = await openAbout(aboutApi)
 
   try {
     await KeyBoard.press('Tab')
     await expect(dialogContent).toBeVisible()
   } finally {
-    await closeAbout(api)
+    await closeAbout(aboutApi)
   }
 }

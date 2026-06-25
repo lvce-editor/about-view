@@ -3,9 +3,9 @@ import { closeAbout, getCloseButton, getHeading, getInfoIcon, openAbout } from '
 
 export const name = 'about.accessibility'
 
-export const test: Test = async (api) => {
-  const { expect } = api
-  const dialogContent = await openAbout(api)
+export const test: Test = async ({ About, expect, Locator }) => {
+  const aboutApi = { About, expect, Locator }
+  const dialogContent = await openAbout(aboutApi)
 
   try {
     await expect(getHeading(dialogContent)).toHaveId('DialogHeading')
@@ -14,6 +14,6 @@ export const test: Test = async (api) => {
     await expect(getCloseButton(dialogContent)).toHaveAttribute('aria-label', 'Close Dialog')
     await expect(getCloseButton(dialogContent)).toHaveAttribute('role', 'button')
   } finally {
-    await closeAbout(api)
+    await closeAbout(aboutApi)
   }
 }
