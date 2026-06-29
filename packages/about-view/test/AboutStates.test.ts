@@ -13,12 +13,14 @@ test('set and get state', () => {
     lines: ['line 1', 'line 2'],
     productName: 'Test App',
     uid: 1,
+    useNewLoadConfig: false,
   }
   const newState: AboutState = {
     focusId: 1,
     lines: ['line 1', 'line 2', 'line 3'],
     productName: 'Test App',
     uid: 1,
+    useNewLoadConfig: false,
   }
 
   AboutStates.set(uid, oldState, newState)
@@ -44,6 +46,7 @@ test('getKeys returns all state keys', () => {
     lines: ['line 1'],
     productName: 'Test App',
     uid: 1,
+    useNewLoadConfig: false,
   }
 
   AboutStates.set(uid1, state, state)

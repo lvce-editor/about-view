@@ -8,6 +8,7 @@ const createState = (uid: number): AboutState => ({
   lines: [],
   productName: 'test',
   uid,
+  useNewLoadConfig: false,
 })
 
 const fn1 = async (state: AboutState): Promise<AboutState> => {

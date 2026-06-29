@@ -1,16 +1,28 @@
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../AboutState/AboutState.ts'
+import * as GetConfigJsonPath from '../GetConfigJsonPath/GetConfigJsonPath.ts'
 
-interface Config {
+export interface Config {
   readonly commit: string
   readonly date: string
   readonly version: string
 }
 
-export const loadConfig = async (state: AboutState): Promise<Config> => {
-  // TODO
+const getString = (config: Record<string, unknown>, key: string): string => {
+  const value = config[key]
+  if (typeof value !== 'string') {
+    return ''
+  }
+  return value
+}
+
+export const loadConfig = async (_state: AboutState): Promise<Config> => {
+  const configJsonPath = await GetConfigJsonPath.getConfigJsonPath()
+  const content = await FileSystemWorker.readFile(configJsonPath)
+  const config = JSON.parse(content) as Record<string, unknown>
   return {
-    commit: '',
-    date: '',
-    version: '',
+    commit: getString(config, 'commit'),
+    date: getString(config, 'date'),
+    version: getString(config, 'version'),
   }
 }
