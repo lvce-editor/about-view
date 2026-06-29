@@ -29,12 +29,12 @@ test('getChromeVersion', async () => {
   expect(await Process.getChromeVersion()).toBe('')
 })
 
-test('getVersion', () => {
-  expect(Process.getVersion()).toBe('0.0.0-dev')
+test('getVersion', async () => {
+  expect(await Process.getVersion()).toBe('0.0.0-dev')
 })
 
-test('getCommit', () => {
-  expect(Process.getCommit()).toBe('unknown commit')
+test('getCommit', async () => {
+  expect(await Process.getCommit()).toBe('unknown commit')
 })
 
 test('getV8Version', async () => {
