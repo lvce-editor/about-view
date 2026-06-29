@@ -27,7 +27,7 @@ test('loadContent2', async () => {
   }
   AboutStates.set(uid, oldState, oldState)
 
-  const newState = LoadContent2.loadContent2(oldState)
+  const newState = await LoadContent2.loadContent2(oldState)
 
   expect(newState).toEqual({
     focusId: AboutFocusId.Ok,

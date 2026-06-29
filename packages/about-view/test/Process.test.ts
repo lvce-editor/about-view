@@ -50,6 +50,6 @@ test('getDate', () => {
   expect(Process.getDate()).toBe('')
 })
 
-test('productNameLong', () => {
-  expect(Process.productNameLong).toBe('Lvce Editor - OSS')
+test('getProductNameLong', async () => {
+  expect(await Process.getProductNameLong()).toBe('Lvce Editor - OSS')
 })
