@@ -23,4 +23,8 @@ export const getDate = (): string => {
   return commitDate
 }
 
-export const productNameLong = 'Lvce Editor - OSS'
+const productNameLong = 'Lvce Editor - OSS'
+
+export const getProductNameLong = async (): Promise<string> => {
+  return productNameLong
+}
