@@ -9,11 +9,11 @@ export const getNodeVersion = RendererWorker.getNodeVersion
 
 export const getChromeVersion = RendererWorker.getChromeVersion
 
-export const getVersion = (): string => {
+export const getVersion = async (): Promise<string> => {
   return version
 }
 
-export const getCommit = (): string => {
+export const getCommit = async (): Promise<string> => {
   return commit
 }
 
