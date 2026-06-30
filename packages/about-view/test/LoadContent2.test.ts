@@ -1,5 +1,5 @@
 import { expect, test, beforeAll } from '@jest/globals'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
 import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
@@ -24,6 +24,7 @@ test('loadContent2', async () => {
     lines: ['old line'],
     productName: 'Old Name',
     uid: 1,
+    useNewLoadConfig: false,
   }
   AboutStates.set(uid, oldState, oldState)
 
@@ -34,5 +35,104 @@ test('loadContent2', async () => {
     lines: ['Version: 0.0.0-dev', 'Commit: unknown commit', 'Date: unknown', 'Browser: Test'],
     productName: 'Lvce Editor - OSS',
     uid: 1,
+    useNewLoadConfig: false,
   })
+})
+
+test('loadContent2 - useNewLoadConfig', async () => {
+  RendererWorker.registerMockRpc({})
+  using mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(uri: string): string {
+      expect(uri).toBe('config.json')
+      return JSON.stringify({
+        commit: 'abc123',
+        date: 'config-date',
+        version: '1.2.3',
+      })
+    },
+  })
+  AboutStates.clear()
+
+  const uid = 1
+  const oldState: AboutState = {
+    focusId: AboutFocusId.Ok,
+    lines: ['old line'],
+    productName: 'Old Name',
+    uid: 1,
+    useNewLoadConfig: true,
+  }
+  AboutStates.set(uid, oldState, oldState)
+
+  const newState = await LoadContent2.loadContent2(oldState)
+
+  expect(newState).toEqual({
+    focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.2.3', 'Commit: abc123', 'Date: Invalid Date: config-date', 'Browser: Test'],
+    productName: 'Lvce Editor - OSS',
+    uid: 1,
+    useNewLoadConfig: true,
+  })
+  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+})
+
+test('loadContent2 - useNewLoadConfig falls back to current values', async () => {
+  RendererWorker.registerMockRpc({})
+  using mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(): string {
+      return JSON.stringify({})
+    },
+  })
+  AboutStates.clear()
+
+  const uid = 1
+  const oldState: AboutState = {
+    focusId: AboutFocusId.Ok,
+    lines: ['old line'],
+    productName: 'Old Name',
+    uid: 1,
+    useNewLoadConfig: true,
+  }
+  AboutStates.set(uid, oldState, oldState)
+
+  const newState = await LoadContent2.loadContent2(oldState)
+
+  expect(newState).toEqual({
+    focusId: AboutFocusId.Ok,
+    lines: ['Version: 0.0.0-dev', 'Commit: unknown commit', 'Date: unknown', 'Browser: Test'],
+    productName: 'Lvce Editor - OSS',
+    uid: 1,
+    useNewLoadConfig: true,
+  })
+  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+})
+
+test('loadContent2 - useNewLoadConfig falls back to current values for invalid config', async () => {
+  RendererWorker.registerMockRpc({})
+  using mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(): string {
+      return '{'
+    },
+  })
+  AboutStates.clear()
+
+  const uid = 1
+  const oldState: AboutState = {
+    focusId: AboutFocusId.Ok,
+    lines: ['old line'],
+    productName: 'Old Name',
+    uid: 1,
+    useNewLoadConfig: true,
+  }
+  AboutStates.set(uid, oldState, oldState)
+
+  const newState = await LoadContent2.loadContent2(oldState)
+
+  expect(newState).toEqual({
+    focusId: AboutFocusId.Ok,
+    lines: ['Version: 0.0.0-dev', 'Commit: unknown commit', 'Date: unknown', 'Browser: Test'],
+    productName: 'Lvce Editor - OSS',
+    uid: 1,
+    useNewLoadConfig: true,
+  })
+  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })

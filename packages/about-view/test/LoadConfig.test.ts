@@ -1,19 +1,60 @@
 import { expect, test } from '@jest/globals'
+import { FileSystemWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
 import * as LoadConfig from '../src/parts/LoadConfig/LoadConfig.ts'
 
 test('loadConfig', async () => {
+  using mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(uri: string): string {
+      expect(uri).toBe('config.json')
+      return JSON.stringify({
+        commit: 'abc123',
+        date: '2024-01-01T00:00:00.000Z',
+        version: '1.2.3',
+      })
+    },
+  })
+
   const state: AboutState = {
     focusId: AboutFocusId.Ok,
     lines: [],
     productName: '',
     uid: 1,
+    useNewLoadConfig: false,
   }
 
-  expect(await LoadConfig.loadConfig(state)).toEqual({
+  const config = await LoadConfig.loadConfig(state)
+
+  expect(config).toEqual({
+    commit: 'abc123',
+    date: '2024-01-01T00:00:00.000Z',
+    version: '1.2.3',
+  })
+  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+})
+
+test('loadConfig - missing values', async () => {
+  using mockRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(): string {
+      return JSON.stringify({})
+    },
+  })
+
+  const state: AboutState = {
+    focusId: AboutFocusId.Ok,
+    lines: [],
+    productName: '',
+    uid: 1,
+    useNewLoadConfig: false,
+  }
+
+  const config = await LoadConfig.loadConfig(state)
+
+  expect(config).toEqual({
     commit: '',
     date: '',
     version: '',
   })
+  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
