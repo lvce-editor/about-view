@@ -18,6 +18,8 @@ const getString = (config: Record<string, unknown>, key: string): string => {
 
 export const loadConfig = async (_state: AboutState): Promise<Config> => {
   const configJsonPath = await GetConfigJsonPath.getConfigJsonPath()
+  // FileSystemWorker.readFile is a custom RPC that already returns a string.
+  // eslint-disable-next-line unicorn/consistent-json-file-read
   const content = await FileSystemWorker.readFile(configJsonPath)
   const config = JSON.parse(content) as Record<string, unknown>
   return {
