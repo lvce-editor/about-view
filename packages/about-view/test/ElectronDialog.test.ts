@@ -18,7 +18,7 @@ test('showMessageBox - calls RendererWorker.invoke with correct arguments', asyn
     buttons: ['Ok', 'Cancel'],
     detail: 'test detail',
     message: 'test message',
-    productName: 'Lvce Editor - OSS',
+    productName: 'Configured Editor',
     type: 'info',
     windowId: 1,
   }
@@ -39,7 +39,7 @@ test('showMessageBox - handles error from RendererWorker', async () => {
   const options = {
     buttons: ['Ok'],
     message: 'test message',
-    productName: 'Lvce Editor - OSS',
+    productName: 'Configured Editor',
     type: 'info',
     windowId: 1,
   }

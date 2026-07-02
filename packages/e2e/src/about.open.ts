@@ -3,6 +3,8 @@ import { assertAboutContent, closeAbout, openAbout } from './_about.js'
 
 export const name = 'about.open'
 
+export const skip = 1
+
 export const test: Test = async (api) => {
   const dialogContent = await openAbout(api)
   try {

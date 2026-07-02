@@ -4,16 +4,22 @@ import * as ElectronDialog from '../ElectronDialog/ElectronDialog.ts'
 import * as ElectronMessageBoxType from '../ElectronMessageBoxType/ElectronMessageBoxType.ts'
 import * as GetAboutDetailString from '../GetAboutDetailString/GetAboutDetailString.ts'
 import * as GetWindowId from '../GetWindowId/GetWindowId.ts'
-import * as Product from '../Product/Product.ts'
+import * as LoadConfig from '../LoadConfig/LoadConfig.ts'
+
+const getProductName = async (): Promise<string> => {
+  const config = await LoadConfig.loadConfig()
+  return config.productName
+}
 
 export const showAboutElectron = async (): Promise<void> => {
   const windowId = await GetWindowId.getWindowId()
   const detail = await GetAboutDetailString.getDetailString()
-  const productNameLong = Product.getProductNameLong()
+  const productName = await getProductName()
   const options = {
     buttons: [AboutStrings.copy(), AboutStrings.ok()],
     detail,
-    message: productNameLong,
+    message: productName,
+    productName,
     type: ElectronMessageBoxType.Info,
     windowId,
   }

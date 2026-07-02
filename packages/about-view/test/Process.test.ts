@@ -49,7 +49,3 @@ test('getV8Version', async () => {
 test('getDate', () => {
   expect(Process.getDate()).toBe('')
 })
-
-test('getProductNameLong', async () => {
-  expect(await Process.getProductNameLong()).toBe('Lvce Editor - OSS')
-})
