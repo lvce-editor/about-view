@@ -1,11 +1,20 @@
 import { expect, test } from '@jest/globals'
-import { FileSystemWorker } from '@lvce-editor/rpc-registry'
+import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
 import * as LoadConfig from '../src/parts/LoadConfig/LoadConfig.ts'
 
+const registerConfigJsonPathMock = () => {
+  return RendererWorker.registerMockRpc({
+    'ProcessPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
+  })
+}
+
 test('loadConfig', async () => {
-  using mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRendererRpc = registerConfigJsonPathMock()
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile'(uri: string): string {
       expect(uri).toBe('config.json')
       return JSON.stringify({
@@ -30,11 +39,13 @@ test('loadConfig', async () => {
     date: '2024-01-01T00:00:00.000Z',
     version: '1.2.3',
   })
-  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
 
 test('loadConfig - missing values', async () => {
-  using mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRendererRpc = registerConfigJsonPathMock()
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile'(): string {
       return JSON.stringify({})
     },
@@ -55,5 +66,6 @@ test('loadConfig - missing values', async () => {
     date: '',
     version: '',
   })
-  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
