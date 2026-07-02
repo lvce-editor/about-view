@@ -14,7 +14,7 @@ beforeAll(() => {
   })
 })
 
-const registerConfigJsonPathMock = () => {
+const registerConfigJsonPathMock = (): ReturnType<typeof RendererWorker.registerMockRpc> => {
   return RendererWorker.registerMockRpc({
     'ProcessPaths.getConfigJsonPath'(): string {
       return 'config.json'
