@@ -34,6 +34,9 @@ test('showAbout - electron platform', async () => {
     'Process.getV8Version'(): string {
       return '10.0.0'
     },
+    'ProcessPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
   })
   await ShowAbout.showAbout(PlatformType.Electron)
   expect(wasCalled).toBe(true)
