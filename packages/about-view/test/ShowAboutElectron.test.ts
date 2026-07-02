@@ -46,6 +46,9 @@ test('showAboutElectron - clicks ok button', async () => {
     'Process.getVersion'(): string {
       return '0.0.0-dev'
     },
+    'ProcessPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
   })
 
   const detail = await GetAboutDetailString.getDetailString()
@@ -110,6 +113,9 @@ test('showAboutElectron - clicks copy button', async () => {
     },
     'Process.getVersion'(): string {
       return '0.0.0-dev'
+    },
+    'ProcessPaths.getConfigJsonPath'(): string {
+      return 'config.json'
     },
   })
 

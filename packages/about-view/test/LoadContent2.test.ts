@@ -14,6 +14,14 @@ beforeAll(() => {
   })
 })
 
+const registerConfigJsonPathMock = (): ReturnType<typeof RendererWorker.registerMockRpc> => {
+  return RendererWorker.registerMockRpc({
+    'ProcessPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
+  })
+}
+
 test('loadContent2', async () => {
   RendererWorker.registerMockRpc({})
   AboutStates.clear()
@@ -40,8 +48,8 @@ test('loadContent2', async () => {
 })
 
 test('loadContent2 - useNewLoadConfig', async () => {
-  RendererWorker.registerMockRpc({})
-  using mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRendererRpc = registerConfigJsonPathMock()
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile'(uri: string): string {
       expect(uri).toBe('config.json')
       return JSON.stringify({
@@ -73,12 +81,13 @@ test('loadContent2 - useNewLoadConfig', async () => {
     uid: 1,
     useNewLoadConfig: true,
   })
-  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
 
 test('loadContent2 - useNewLoadConfig falls back to current values', async () => {
-  RendererWorker.registerMockRpc({})
-  using mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRendererRpc = registerConfigJsonPathMock()
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile'(): string {
       return JSON.stringify({})
     },
@@ -104,12 +113,13 @@ test('loadContent2 - useNewLoadConfig falls back to current values', async () =>
     uid: 1,
     useNewLoadConfig: true,
   })
-  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
 
 test('loadContent2 - useNewLoadConfig falls back to current values for invalid config', async () => {
-  RendererWorker.registerMockRpc({})
-  using mockRpc = FileSystemWorker.registerMockRpc({
+  using mockRendererRpc = registerConfigJsonPathMock()
+  using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
     'FileSystem.readFile'(): string {
       return '{'
     },
@@ -135,5 +145,6 @@ test('loadContent2 - useNewLoadConfig falls back to current values for invalid c
     uid: 1,
     useNewLoadConfig: true,
   })
-  expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
+  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
