@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
 import * as ShowAbout from '../src/parts/ShowAbout/ShowAbout.ts'
 
@@ -14,6 +14,13 @@ test('showAbout - web platform', async () => {
 
 test('showAbout - electron platform', async () => {
   let wasCalled = false
+  FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(): string {
+      return JSON.stringify({
+        productName: 'Configured Editor',
+      })
+    },
+  })
   RendererWorker.registerMockRpc({
     'ElectronDialog.showMessageBox'(): number {
       wasCalled = true

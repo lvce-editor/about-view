@@ -22,9 +22,3 @@ export const getV8Version = RendererWorker.getV8Version
 export const getDate = (): string => {
   return commitDate
 }
-
-const productNameLong = 'Lvce Editor - OSS'
-
-export const getProductNameLong = async (): Promise<string> => {
-  return productNameLong
-}

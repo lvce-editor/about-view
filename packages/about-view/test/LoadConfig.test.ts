@@ -11,6 +11,7 @@ test('loadConfig', async () => {
       return JSON.stringify({
         commit: 'abc123',
         date: '2024-01-01T00:00:00.000Z',
+        productName: 'Test Editor',
         version: '1.2.3',
       })
     },
@@ -29,6 +30,7 @@ test('loadConfig', async () => {
   expect(config).toEqual({
     commit: 'abc123',
     date: '2024-01-01T00:00:00.000Z',
+    productName: 'Test Editor',
     version: '1.2.3',
   })
   expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
@@ -54,6 +56,7 @@ test('loadConfig - missing values', async () => {
   expect(config).toEqual({
     commit: '',
     date: '',
+    productName: '',
     version: '',
   })
   expect(mockRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])

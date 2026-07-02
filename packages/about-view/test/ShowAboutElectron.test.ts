@@ -1,11 +1,19 @@
 import { expect, test } from '@jest/globals'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAboutDetailString.ts'
 import * as ShowAboutElectron from '../src/parts/ShowAboutElectron/ShowAboutElectron.ts'
 
 // Ok button
 
 test('showAboutElectron - clicks ok button', async () => {
+  using mockFileRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(uri: string): string {
+      expect(uri).toBe('config.json')
+      return JSON.stringify({
+        productName: 'Configured Editor',
+      })
+    },
+  })
   using mockRpc = RendererWorker.registerMockRpc({
     'ClipBoard.writeText'(_text: string): void {},
     'ElectronDialog.showMessageBox'(options: any): number {
@@ -47,8 +55,8 @@ test('showAboutElectron - clicks ok button', async () => {
   const expectedOptions = {
     buttons: ['Copy', 'Ok'],
     detail,
-    message: 'Lvce Editor - OSS',
-    productName: 'Lvce Editor - OSS',
+    message: 'Configured Editor',
+    productName: 'Configured Editor',
     type: 'info',
     windowId: 1,
   }
@@ -56,12 +64,21 @@ test('showAboutElectron - clicks ok button', async () => {
     'ElectronDialog.showMessageBox',
     expectedOptions,
   ])
+  expect(mockFileRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
   expect(mockRpc.invocations.some((x: readonly any[]) => x[0] === 'ClipBoard.writeText')).toBe(false)
 })
 
 // Copy button
 
 test('showAboutElectron - clicks copy button', async () => {
+  using mockFileRpc = FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(uri: string): string {
+      expect(uri).toBe('config.json')
+      return JSON.stringify({
+        productName: 'Configured Editor',
+      })
+    },
+  })
   using mockRpc = RendererWorker.registerMockRpc({
     'ClipBoard.writeText'(_text: string): void {},
     'ElectronDialog.showMessageBox'(options: any): number {
@@ -103,8 +120,8 @@ test('showAboutElectron - clicks copy button', async () => {
   const expectedOptions = {
     buttons: ['Copy', 'Ok'],
     detail,
-    message: 'Lvce Editor - OSS',
-    productName: 'Lvce Editor - OSS',
+    message: 'Configured Editor',
+    productName: 'Configured Editor',
     type: 'info',
     windowId: 1,
   }
@@ -112,5 +129,6 @@ test('showAboutElectron - clicks copy button', async () => {
     'ElectronDialog.showMessageBox',
     expectedOptions,
   ])
+  expect(mockFileRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
   expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ClipBoard.writeText')).toEqual(['ClipBoard.writeText', detail])
 })
