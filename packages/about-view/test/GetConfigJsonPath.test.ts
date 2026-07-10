@@ -4,11 +4,11 @@ import * as GetConfigJsonPath from '../src/parts/GetConfigJsonPath/GetConfigJson
 
 test('getConfigJsonPath', async () => {
   using mockRpc = RendererWorker.registerMockRpc({
-    'ProcessPaths.getConfigJsonPath'(): string {
+    'PlatformPaths.getConfigJsonPath'(): string {
       return 'config.json'
     },
   })
 
   expect(await GetConfigJsonPath.getConfigJsonPath()).toBe('config.json')
-  expect(mockRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
 })

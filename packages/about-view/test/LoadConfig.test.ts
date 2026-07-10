@@ -6,7 +6,7 @@ import * as LoadConfig from '../src/parts/LoadConfig/LoadConfig.ts'
 
 const registerConfigJsonPathMock = (): ReturnType<typeof RendererWorker.registerMockRpc> => {
   return RendererWorker.registerMockRpc({
-    'ProcessPaths.getConfigJsonPath'(): string {
+    'PlatformPaths.getConfigJsonPath'(): string {
       return 'config.json'
     },
   })
@@ -41,7 +41,7 @@ test('loadConfig', async () => {
     productName: 'Test Editor',
     version: '1.2.3',
   })
-  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
 
@@ -69,6 +69,6 @@ test('loadConfig - missing values', async () => {
     productName: '',
     version: '',
   })
-  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
