@@ -16,7 +16,7 @@ beforeAll(() => {
 
 const registerConfigJsonPathMock = (): ReturnType<typeof RendererWorker.registerMockRpc> => {
   return RendererWorker.registerMockRpc({
-    'ProcessPaths.getConfigJsonPath'(): string {
+    'PlatformPaths.getConfigJsonPath'(): string {
       return 'config.json'
     },
   })
@@ -81,7 +81,7 @@ test('loadContent2 - useNewLoadConfig', async () => {
     uid: 1,
     useNewLoadConfig: true,
   })
-  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
 
@@ -113,7 +113,7 @@ test('loadContent2 - useNewLoadConfig falls back to current values', async () =>
     uid: 1,
     useNewLoadConfig: true,
   })
-  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
 
@@ -145,6 +145,6 @@ test('loadContent2 - useNewLoadConfig falls back to current values for invalid c
     uid: 1,
     useNewLoadConfig: true,
   })
-  expect(mockRendererRpc.invocations).toEqual([['ProcessPaths.getConfigJsonPath']])
+  expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })

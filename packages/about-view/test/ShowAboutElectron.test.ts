@@ -25,6 +25,9 @@ test('showAboutElectron - clicks ok button', async () => {
     'GetWindowId.getWindowId'(): number {
       return 1
     },
+    'PlatformPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
     'Process.getChromeVersion'(): string {
       return 'x'
     },
@@ -45,9 +48,6 @@ test('showAboutElectron - clicks ok button', async () => {
     },
     'Process.getVersion'(): string {
       return '0.0.0-dev'
-    },
-    'ProcessPaths.getConfigJsonPath'(): string {
-      return 'config.json'
     },
   })
 
@@ -93,6 +93,9 @@ test('showAboutElectron - clicks copy button', async () => {
     'GetWindowId.getWindowId'(): number {
       return 1
     },
+    'PlatformPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
     'Process.getChromeVersion'(): string {
       return 'x'
     },
@@ -113,9 +116,6 @@ test('showAboutElectron - clicks copy button', async () => {
     },
     'Process.getVersion'(): string {
       return '0.0.0-dev'
-    },
-    'ProcessPaths.getConfigJsonPath'(): string {
-      return 'config.json'
     },
   })
 

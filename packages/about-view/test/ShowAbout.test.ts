@@ -29,6 +29,9 @@ test('showAbout - electron platform', async () => {
     'GetWindowId.getWindowId'(): number {
       return 1
     },
+    'PlatformPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
     'Process.getChromeVersion'(): string {
       return '123.0.0'
     },
@@ -40,9 +43,6 @@ test('showAbout - electron platform', async () => {
     },
     'Process.getV8Version'(): string {
       return '10.0.0'
-    },
-    'ProcessPaths.getConfigJsonPath'(): string {
-      return 'config.json'
     },
   })
   await ShowAbout.showAbout(PlatformType.Electron)
