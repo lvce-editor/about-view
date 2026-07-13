@@ -2,6 +2,7 @@ import { beforeAll, expect, test } from '@jest/globals'
 import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
+import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import * as LoadContent2 from '../src/parts/LoadContent2/LoadContent2.ts'
 
 beforeAll(() => {
@@ -28,6 +29,13 @@ const oldState: AboutState = {
   uid: 1,
 }
 
+const runLoadContent = async (): Promise<AboutState> => {
+  AboutStates.set(oldState.uid, oldState, oldState)
+  const command = AboutStates.wrapAsyncCommand(LoadContent2.loadContent2)
+  await command(oldState.uid)
+  return AboutStates.get(oldState.uid).newState
+}
+
 test('loadContent2 loads metadata from config.json', async () => {
   using mockRendererRpc = registerConfigJsonPathMock()
   using mockFileSystemRpc = FileSystemWorker.registerMockRpc({
@@ -42,7 +50,7 @@ test('loadContent2 loads metadata from config.json', async () => {
     },
   })
 
-  const newState = await LoadContent2.loadContent2(oldState)
+  const newState = await runLoadContent()
 
   expect(newState).toEqual({
     focusId: AboutFocusId.Ok,
@@ -62,7 +70,7 @@ test('loadContent2 does not fall back to hardcoded metadata', async () => {
     },
   })
 
-  const newState = await LoadContent2.loadContent2(oldState)
+  const newState = await runLoadContent()
 
   expect(newState).toEqual({
     focusId: AboutFocusId.Ok,
@@ -82,7 +90,9 @@ test('loadContent2 rejects invalid config.json', async () => {
     },
   })
 
-  await expect(LoadContent2.loadContent2(oldState)).rejects.toThrow(SyntaxError)
+  AboutStates.set(oldState.uid, oldState, oldState)
+  const command = AboutStates.wrapAsyncCommand(LoadContent2.loadContent2)
+  await expect(command(oldState.uid)).rejects.toThrow(SyntaxError)
   expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })

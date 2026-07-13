@@ -2,7 +2,15 @@ import { expect, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
+import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import * as HandleFocusIn from '../src/parts/HandleFocusIn/HandleFocusIn.ts'
+
+const runHandleFocusIn = async (state: AboutState): Promise<AboutState> => {
+  AboutStates.set(state.uid, state, state)
+  const command = AboutStates.wrapAsyncCommand(HandleFocusIn.handleFocusIn)
+  await command(state.uid)
+  return AboutStates.get(state.uid).newState
+}
 
 test('handleFocusIn - when focusId exists', async () => {
   const state: AboutState = {
@@ -18,7 +26,7 @@ test('handleFocusIn - when focusId exists', async () => {
       }
     },
   })
-  const newState = await HandleFocusIn.handleFocusIn(state)
+  const newState = await runHandleFocusIn(state)
   expect(newState).toBe(state)
   expect(mockRpc.invocations).toEqual([['Focus.setFocus', 4]])
 })
@@ -37,7 +45,7 @@ test('handleFocusIn - when focusId is None', async () => {
       }
     },
   })
-  const newState = await HandleFocusIn.handleFocusIn(state)
+  const newState = await runHandleFocusIn(state)
   expect(newState).toEqual({
     ...state,
     focusId: AboutFocusId.Ok,
@@ -59,7 +67,42 @@ test('handleFocusIn - when focusId is Copy', async () => {
       }
     },
   })
-  const newState = await HandleFocusIn.handleFocusIn(state)
+  const newState = await runHandleFocusIn(state)
   expect(newState).toBe(state)
+  expect(mockRpc.invocations).toEqual([['Focus.setFocus', 4]])
+})
+
+test('handleFocusIn preserves state updates made while the command is awaiting', async () => {
+  const state: AboutState = {
+    focusId: AboutFocusId.None,
+    lines: ['old'],
+    productName: 'Test Editor',
+    uid: 1,
+  }
+  const { promise: focusStarted, resolve: notifyFocusStarted } = Promise.withResolvers<void>()
+  const { promise: continueFocus, resolve: resolveFocus } = Promise.withResolvers<void>()
+  using mockRpc = RendererWorker.registerMockRpc({
+    async 'Focus.setFocus'(): Promise<void> {
+      notifyFocusStarted()
+      await continueFocus
+    },
+  })
+  AboutStates.set(state.uid, state, state)
+  const command = AboutStates.wrapAsyncCommand(HandleFocusIn.handleFocusIn)
+
+  const pendingCommand = command(state.uid)
+  await focusStarted
+  const concurrentState = {
+    ...state,
+    lines: ['new'],
+  }
+  AboutStates.set(state.uid, state, concurrentState)
+  resolveFocus()
+  await pendingCommand
+
+  expect(AboutStates.get(state.uid).newState).toEqual({
+    ...concurrentState,
+    focusId: AboutFocusId.Ok,
+  })
   expect(mockRpc.invocations).toEqual([['Focus.setFocus', 4]])
 })
