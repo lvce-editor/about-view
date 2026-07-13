@@ -9,7 +9,6 @@ test('handleClickCopy', async () => {
     lines: ['Version: 1.0.0', 'Commit: abc'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   const calls: { method: string; args: readonly any[] }[] = []
   RendererWorker.registerMockRpc({
@@ -40,7 +39,6 @@ test('handleClickCopy - error', async () => {
     lines: ['Version: 1.0.0', 'Commit: abc'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   const error = new Error('Failed to copy to clipboard')
   RendererWorker.registerMockRpc({

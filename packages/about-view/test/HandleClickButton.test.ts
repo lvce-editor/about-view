@@ -10,7 +10,6 @@ test('handleClickButton - ok', async () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   using mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget'(widgetId: string): void {
@@ -30,7 +29,6 @@ test('handleClickButton - close', async () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   using mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget'(widgetId: string): void {
@@ -50,7 +48,6 @@ test('handleClickButton - copy', async () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   const calls: { method: string; args: readonly any[] }[] = []
   RendererWorker.registerMockRpc({
@@ -81,7 +78,6 @@ test('handleClickButton - error', async () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   await expect(HandleClickButton.handleClickButton(state, 'abc')).rejects.toThrow(new Error('unexpected button'))
 })

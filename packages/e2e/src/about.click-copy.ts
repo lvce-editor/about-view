@@ -15,7 +15,7 @@ export const test: Test = async ({ About, ClipBoard, expect, Locator }) => {
     await About.handleClickCopy()
 
     // assert
-    await ClipBoard.shouldHaveText(/Version: 0\.0\.0-dev\nCommit: unknown commit\nDate: unknown\nBrowser: /)
+    await ClipBoard.shouldHaveText(/Version: [^\n]*\nCommit: [^\n]*\nDate: unknown\nBrowser: /)
     await expect(dialogContent).toBeHidden()
   } finally {
     await ClipBoard.disableMemoryClipBoard()

@@ -17,7 +17,6 @@ test('render - no changes', () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid,
-    useNewLoadConfig: false,
   }
   const newState: AboutState = {
     ...oldState,
@@ -33,7 +32,6 @@ test('render - content changed', () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid,
-    useNewLoadConfig: false,
   }
   const newState: AboutState = {
     ...oldState,
@@ -59,7 +57,6 @@ test('render - focus changed', () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid,
-    useNewLoadConfig: false,
   }
   const newState: AboutState = {
     ...oldState,
@@ -80,14 +77,12 @@ test('render - both content and focus changed', () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid,
-    useNewLoadConfig: false,
   }
   const newState: AboutState = {
     focusId: AboutFocusId.Copy,
     lines: ['Version: 2.0.0'],
     productName: 'Test Editor 2',
     uid: 1,
-    useNewLoadConfig: false,
   }
   AboutStates.set(uid, oldState, newState)
   const diffResult = Diff2.diff2(uid)

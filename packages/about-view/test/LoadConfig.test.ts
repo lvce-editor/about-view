@@ -1,7 +1,5 @@
 import { expect, test } from '@jest/globals'
 import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
-import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
-import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
 import * as LoadConfig from '../src/parts/LoadConfig/LoadConfig.ts'
 
 const registerConfigJsonPathMock = (): ReturnType<typeof RendererWorker.registerMockRpc> => {
@@ -25,15 +23,7 @@ test('loadConfig', async () => {
       })
     },
   })
-  const state: AboutState = {
-    focusId: AboutFocusId.Ok,
-    lines: [],
-    productName: '',
-    uid: 1,
-    useNewLoadConfig: false,
-  }
-
-  const config = await LoadConfig.loadConfig(state)
+  const config = await LoadConfig.loadConfig()
 
   expect(config).toEqual({
     commit: 'abc123',
@@ -53,15 +43,7 @@ test('loadConfig - missing values', async () => {
     },
   })
 
-  const state: AboutState = {
-    focusId: AboutFocusId.Ok,
-    lines: [],
-    productName: '',
-    uid: 1,
-    useNewLoadConfig: false,
-  }
-
-  const config = await LoadConfig.loadConfig(state)
+  const config = await LoadConfig.loadConfig()
 
   expect(config).toEqual({
     commit: '',

@@ -29,14 +29,6 @@ test('getChromeVersion', async () => {
   expect(await Process.getChromeVersion()).toBe('')
 })
 
-test('getVersion', async () => {
-  expect(await Process.getVersion()).toBe('0.0.0-dev')
-})
-
-test('getCommit', async () => {
-  expect(await Process.getCommit()).toBe('unknown commit')
-})
-
 test('getV8Version', async () => {
   RendererWorker.registerMockRpc({
     'Process.getV8Version'(): undefined {
@@ -44,8 +36,4 @@ test('getV8Version', async () => {
     },
   })
   expect(await Process.getV8Version()).toBeUndefined()
-})
-
-test('getDate', () => {
-  expect(Process.getDate()).toBe('')
 })

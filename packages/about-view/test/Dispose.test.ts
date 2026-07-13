@@ -14,7 +14,6 @@ test('dispose', () => {
     lines: ['test'],
     productName: 'Test',
     uid: 1,
-    useNewLoadConfig: false,
   }
   AboutStates.set(uid, state, state)
   expect(AboutStates.get(uid)).toBeDefined()

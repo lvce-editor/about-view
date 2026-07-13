@@ -11,5 +11,11 @@ beforeAll(() => {
 })
 
 test('getDetailStringWeb', () => {
-  expect(GetAboutDetailStringWeb.getDetailStringWeb()).toEqual(['Version: 0.0.0-dev', 'Commit: unknown commit', 'Date: unknown', 'Browser: Test'])
+  const config = {
+    commit: 'abc123',
+    date: '',
+    productName: 'Test Editor',
+    version: '1.2.3',
+  }
+  expect(GetAboutDetailStringWeb.getDetailStringWeb(config)).toEqual(['Version: 1.2.3', 'Commit: abc123', 'Date: unknown', 'Browser: Test'])
 })

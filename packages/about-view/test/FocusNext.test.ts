@@ -9,14 +9,12 @@ test('focusNext - from Ok to Copy', () => {
     lines: [],
     productName: 'Test Product',
     uid: 1,
-    useNewLoadConfig: false,
   }
   expect(FocusNext.focusNext(state)).toEqual({
     focusId: AboutFocusId.Copy,
     lines: [],
     productName: 'Test Product',
     uid: 1,
-    useNewLoadConfig: false,
   })
 })
 
@@ -26,14 +24,12 @@ test('focusNext - from Copy to Ok', () => {
     lines: [],
     productName: 'Test Product',
     uid: 1,
-    useNewLoadConfig: false,
   }
   expect(FocusNext.focusNext(state)).toEqual({
     focusId: AboutFocusId.Ok,
     lines: [],
     productName: 'Test Product',
     uid: 1,
-    useNewLoadConfig: false,
   })
 })
 
@@ -43,13 +39,11 @@ test('focusNext - from None stays None', () => {
     lines: [],
     productName: 'Test Product',
     uid: 1,
-    useNewLoadConfig: false,
   }
   expect(FocusNext.focusNext(state)).toEqual({
     focusId: AboutFocusId.None,
     lines: [],
     productName: 'Test Product',
     uid: 1,
-    useNewLoadConfig: false,
   })
 })

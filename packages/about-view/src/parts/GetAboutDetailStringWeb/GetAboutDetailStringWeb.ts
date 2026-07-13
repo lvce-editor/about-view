@@ -1,13 +1,11 @@
-import { commit } from '../Commit/Commit.ts'
-import { commitDate } from '../CommitDate/CommitDate.ts'
+import type { Config } from '../LoadConfig/LoadConfig.ts'
 import * as FormatAboutDate from '../FormatAboutDate/FormatAboutDate.ts'
 import * as GetBrowser from '../GetBrowser/GetBrowser.ts'
-import { version } from '../Version/Version.ts'
 
-export const getDetailStringWeb = (): readonly string[] => {
+export const getDetailStringWeb = (config: Config): readonly string[] => {
   const now = Date.now()
-  const formattedDate = FormatAboutDate.formatAboutDate(commitDate, now)
+  const formattedDate = FormatAboutDate.formatAboutDate(config.date, now)
   const browser = GetBrowser.getBrowser()
-  const lines = [`Version: ${version}`, `Commit: ${commit}`, `Date: ${formattedDate}`, `Browser: ${browser}`]
+  const lines = [`Version: ${config.version}`, `Commit: ${config.commit}`, `Date: ${formattedDate}`, `Browser: ${browser}`]
   return lines
 }

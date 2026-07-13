@@ -3,5 +3,4 @@ export interface AboutState {
   readonly lines: readonly string[]
   readonly productName: string
   readonly uid: number
-  readonly useNewLoadConfig: boolean
 }
