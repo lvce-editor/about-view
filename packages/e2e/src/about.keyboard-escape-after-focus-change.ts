@@ -1,5 +1,5 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
-import { getCopyButton, openAbout, waitForFocused } from './_about.js'
+import { getCopyButton, openAbout, pressEscapeUntilHidden, waitForFocused } from './_about.js'
 
 export const name = 'about.keyboard-escape-after-focus-change'
 
@@ -9,6 +9,5 @@ export const test: Test = async ({ About, expect, KeyBoard, Locator }) => {
 
   await KeyBoard.press('Tab')
   await waitForFocused(expect, getCopyButton(dialogContent))
-  await KeyBoard.press('Escape')
-  await expect(dialogContent).toBeHidden()
+  await pressEscapeUntilHidden(KeyBoard, expect, dialogContent)
 }
