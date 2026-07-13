@@ -1,5 +1,4 @@
 import { FileSystemWorker } from '@lvce-editor/rpc-registry'
-import type { AboutState } from '../AboutState/AboutState.ts'
 import * as GetConfigJsonPath from '../GetConfigJsonPath/GetConfigJsonPath.ts'
 
 export interface Config {
@@ -17,7 +16,7 @@ const getString = (config: Record<string, unknown>, key: string): string => {
   return value
 }
 
-export const loadConfig = async (_state?: AboutState): Promise<Config> => {
+export const loadConfig = async (): Promise<Config> => {
   const configJsonPath = await GetConfigJsonPath.getConfigJsonPath()
   // FileSystemWorker.readFile is a custom RPC that already returns a string.
   // eslint-disable-next-line unicorn/consistent-json-file-read

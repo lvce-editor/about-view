@@ -1,140 +1,83 @@
 import { expect, test } from '@jest/globals'
 import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
-import * as GetAboutDetailString from '../src/parts/GetAboutDetailString/GetAboutDetailString.ts'
 import * as ShowAboutElectron from '../src/parts/ShowAboutElectron/ShowAboutElectron.ts'
 
-// Ok button
+const detail = 'Version: 1.2.3\nCommit: abc123\nDate: unknown\nElectron: x\nChromium: x\nNode: x\nV8: x'
+
+const registerFileSystemMock = (): ReturnType<typeof FileSystemWorker.registerMockRpc> => {
+  return FileSystemWorker.registerMockRpc({
+    'FileSystem.readFile'(uri: string): string {
+      expect(uri).toBe('config.json')
+      return JSON.stringify({
+        commit: 'abc123',
+        date: '',
+        productName: 'Configured Editor',
+        version: '1.2.3',
+      })
+    },
+  })
+}
+
+const registerRendererMock = (buttonIndex: number): ReturnType<typeof RendererWorker.registerMockRpc> => {
+  return RendererWorker.registerMockRpc({
+    'ClipBoard.writeText'(_text: string): void {},
+    'ElectronDialog.showMessageBox'(_options: any): number {
+      return buttonIndex
+    },
+    'GetWindowId.getWindowId'(): number {
+      return 1
+    },
+    'PlatformPaths.getConfigJsonPath'(): string {
+      return 'config.json'
+    },
+    'Process.getChromeVersion'(): string {
+      return 'x'
+    },
+    'Process.getElectronVersion'(): string {
+      return 'x'
+    },
+    'Process.getNodeVersion'(): string {
+      return 'x'
+    },
+    'Process.getV8Version'(): string {
+      return 'x'
+    },
+  })
+}
+
+const expectedOptions = {
+  buttons: ['Copy', 'Ok'],
+  detail,
+  message: 'Configured Editor',
+  productName: 'Configured Editor',
+  type: 'info',
+  windowId: 1,
+}
 
 test('showAboutElectron - clicks ok button', async () => {
-  using mockFileRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readFile'(uri: string): string {
-      expect(uri).toBe('config.json')
-      return JSON.stringify({
-        productName: 'Configured Editor',
-      })
-    },
-  })
-  using mockRpc = RendererWorker.registerMockRpc({
-    'ClipBoard.writeText'(_text: string): void {},
-    'ElectronDialog.showMessageBox'(options: any): number {
-      return 1
-    },
-    'GetAboutDetailString.getDetailString'(): Promise<string> | string {
-      return GetAboutDetailString.getDetailString()
-    },
-    'GetWindowId.getWindowId'(): number {
-      return 1
-    },
-    'PlatformPaths.getConfigJsonPath'(): string {
-      return 'config.json'
-    },
-    'Process.getChromeVersion'(): string {
-      return 'x'
-    },
-    'Process.getCommit'(): string {
-      return 'unknown commit'
-    },
-    'Process.getDate'(): string {
-      return 'unknown'
-    },
-    'Process.getElectronVersion'(): string {
-      return 'x'
-    },
-    'Process.getNodeVersion'(): string {
-      return 'x'
-    },
-    'Process.getV8Version'(): string {
-      return 'x'
-    },
-    'Process.getVersion'(): string {
-      return '0.0.0-dev'
-    },
-  })
-
-  const detail = await GetAboutDetailString.getDetailString()
+  using mockFileRpc = registerFileSystemMock()
+  using mockRpc = registerRendererMock(1)
 
   await ShowAboutElectron.showAboutElectron()
 
-  const expectedOptions = {
-    buttons: ['Copy', 'Ok'],
-    detail,
-    message: 'Configured Editor',
-    productName: 'Configured Editor',
-    type: 'info',
-    windowId: 1,
-  }
-  expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox')).toEqual([
+  expect(mockRpc.invocations.find((invocation: readonly any[]) => invocation[0] === 'ElectronDialog.showMessageBox')).toEqual([
     'ElectronDialog.showMessageBox',
     expectedOptions,
   ])
   expect(mockFileRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
-  expect(mockRpc.invocations.some((x: readonly any[]) => x[0] === 'ClipBoard.writeText')).toBe(false)
+  expect(mockRpc.invocations.some((invocation: readonly any[]) => invocation[0] === 'ClipBoard.writeText')).toBe(false)
 })
 
-// Copy button
-
 test('showAboutElectron - clicks copy button', async () => {
-  using mockFileRpc = FileSystemWorker.registerMockRpc({
-    'FileSystem.readFile'(uri: string): string {
-      expect(uri).toBe('config.json')
-      return JSON.stringify({
-        productName: 'Configured Editor',
-      })
-    },
-  })
-  using mockRpc = RendererWorker.registerMockRpc({
-    'ClipBoard.writeText'(_text: string): void {},
-    'ElectronDialog.showMessageBox'(options: any): number {
-      return 0
-    },
-    'GetAboutDetailString.getDetailString'(): Promise<string> | string {
-      return GetAboutDetailString.getDetailString()
-    },
-    'GetWindowId.getWindowId'(): number {
-      return 1
-    },
-    'PlatformPaths.getConfigJsonPath'(): string {
-      return 'config.json'
-    },
-    'Process.getChromeVersion'(): string {
-      return 'x'
-    },
-    'Process.getCommit'(): string {
-      return 'unknown commit'
-    },
-    'Process.getDate'(): string {
-      return 'unknown'
-    },
-    'Process.getElectronVersion'(): string {
-      return 'x'
-    },
-    'Process.getNodeVersion'(): string {
-      return 'x'
-    },
-    'Process.getV8Version'(): string {
-      return 'x'
-    },
-    'Process.getVersion'(): string {
-      return '0.0.0-dev'
-    },
-  })
-
-  const detail = await GetAboutDetailString.getDetailString()
+  using mockFileRpc = registerFileSystemMock()
+  using mockRpc = registerRendererMock(0)
 
   await ShowAboutElectron.showAboutElectron()
 
-  const expectedOptions = {
-    buttons: ['Copy', 'Ok'],
-    detail,
-    message: 'Configured Editor',
-    productName: 'Configured Editor',
-    type: 'info',
-    windowId: 1,
-  }
-  expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ElectronDialog.showMessageBox')).toEqual([
+  expect(mockRpc.invocations.find((invocation: readonly any[]) => invocation[0] === 'ElectronDialog.showMessageBox')).toEqual([
     'ElectronDialog.showMessageBox',
     expectedOptions,
   ])
   expect(mockFileRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
-  expect(mockRpc.invocations.find((x: readonly any[]) => x[0] === 'ClipBoard.writeText')).toEqual(['ClipBoard.writeText', detail])
+  expect(mockRpc.invocations.find((invocation: readonly any[]) => invocation[0] === 'ClipBoard.writeText')).toEqual(['ClipBoard.writeText', detail])
 })

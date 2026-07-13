@@ -9,7 +9,6 @@ test('handleClickOk', async () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   using mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget'(widgetId: string): void {
@@ -29,7 +28,6 @@ test('handleClickOk - error', async () => {
     lines: ['Version: 1.0.0'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   const error = new Error('Failed to close widget')
   RendererWorker.registerMockRpc({

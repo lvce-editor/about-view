@@ -9,14 +9,12 @@ test('renderFocusContext returns correct array', () => {
     lines: [],
     productName: 'test',
     uid: 0,
-    useNewLoadConfig: false,
   }
   const newState: AboutState = {
     focusId: 0,
     lines: [],
     productName: 'test',
     uid: 0,
-    useNewLoadConfig: false,
   }
 
   const result = renderFocusContext(oldState, newState)

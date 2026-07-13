@@ -6,15 +6,10 @@ import * as GetAboutDetailString from '../GetAboutDetailString/GetAboutDetailStr
 import * as GetWindowId from '../GetWindowId/GetWindowId.ts'
 import * as LoadConfig from '../LoadConfig/LoadConfig.ts'
 
-const getProductName = async (): Promise<string> => {
-  const config = await LoadConfig.loadConfig()
-  return config.productName
-}
-
 export const showAboutElectron = async (): Promise<void> => {
-  const windowId = await GetWindowId.getWindowId()
-  const detail = await GetAboutDetailString.getDetailString()
-  const productName = await getProductName()
+  const [windowId, config] = await Promise.all([GetWindowId.getWindowId(), LoadConfig.loadConfig()])
+  const detail = await GetAboutDetailString.getDetailString(config)
+  const { productName } = config
   const options = {
     buttons: [AboutStrings.copy(), AboutStrings.ok()],
     detail,

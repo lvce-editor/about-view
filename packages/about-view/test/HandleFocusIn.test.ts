@@ -10,7 +10,6 @@ test('handleFocusIn - when focusId exists', async () => {
     lines: ['Version: 1.0.0', 'Commit: abc'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus'(value: number): void {
@@ -30,7 +29,6 @@ test('handleFocusIn - when focusId is None', async () => {
     lines: ['Version: 1.0.0', 'Commit: abc'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus'(value: number): void {
@@ -53,7 +51,6 @@ test('handleFocusIn - when focusId is Copy', async () => {
     lines: ['Version: 1.0.0', 'Commit: abc'],
     productName: 'Test Editor',
     uid: 1,
-    useNewLoadConfig: false,
   }
   using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus'(value: number): void {
