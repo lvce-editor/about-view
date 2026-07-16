@@ -42,8 +42,7 @@ export const getDialogVirtualDom = (
       childCount: 1,
       className: ClassNames.DialogClose,
       onClick: DomEventListenerFunctions.HandleClickClose,
-      role: AriaRoles.Button,
-      type: VirtualDomElements.Div,
+      type: VirtualDomElements.Button,
     },
     {
       childCount: 0,
