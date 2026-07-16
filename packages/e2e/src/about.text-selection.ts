@@ -8,8 +8,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = Locator('.DialogContent').first()
 
   try {
-    await expect(getHeading(dialogContent)).toHaveCSS('user-select', 'text')
-    await expect(getMessage(dialogContent)).toHaveCSS('user-select', 'text')
+    await expect(getHeading(dialogContent)).toHaveCSS('userSelect', 'text')
+    await expect(getMessage(dialogContent)).toHaveCSS('userSelect', 'text')
   } finally {
     await About.handleClickClose()
   }
