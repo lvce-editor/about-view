@@ -1,9 +1,9 @@
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 
-export const getElectronVersion = RendererWorker.getElectronVersion
+export const { getElectronVersion } = RendererWorker
 
-export const getNodeVersion = RendererWorker.getNodeVersion
+export const { getNodeVersion } = RendererWorker
 
-export const getChromeVersion = RendererWorker.getChromeVersion
+export const { getChromeVersion } = RendererWorker
 
-export const getV8Version = RendererWorker.getV8Version
+export const { getV8Version } = RendererWorker
