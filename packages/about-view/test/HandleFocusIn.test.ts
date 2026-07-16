@@ -6,10 +6,11 @@ import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import * as HandleFocusIn from '../src/parts/HandleFocusIn/HandleFocusIn.ts'
 
 const runHandleFocusIn = async (state: AboutState): Promise<AboutState> => {
-  AboutStates.set(state.uid, state, state)
+  const { uid } = state
+  AboutStates.set(uid, state, state)
   const command = AboutStates.wrapAsyncCommand(HandleFocusIn.handleFocusIn)
-  await command(state.uid)
-  return AboutStates.get(state.uid).newState
+  await command(uid)
+  return AboutStates.get(uid).newState
 }
 
 test('handleFocusIn - when focusId exists', async () => {
@@ -87,20 +88,21 @@ test('handleFocusIn preserves state updates made while the command is awaiting',
       await continueFocus
     },
   })
-  AboutStates.set(state.uid, state, state)
+  const { uid } = state
+  AboutStates.set(uid, state, state)
   const command = AboutStates.wrapAsyncCommand(HandleFocusIn.handleFocusIn)
 
-  const pendingCommand = command(state.uid)
+  const pendingCommand = command(uid)
   await focusStarted
   const concurrentState = {
     ...state,
     lines: ['new'],
   }
-  AboutStates.set(state.uid, state, concurrentState)
+  AboutStates.set(uid, state, concurrentState)
   resolveFocus()
   await pendingCommand
 
-  expect(AboutStates.get(state.uid).newState).toEqual({
+  expect(AboutStates.get(uid).newState).toEqual({
     ...concurrentState,
     focusId: AboutFocusId.Ok,
   })

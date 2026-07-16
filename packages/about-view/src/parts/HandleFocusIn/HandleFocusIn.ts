@@ -8,7 +8,8 @@ export const handleFocusIn = async (context: AsyncCommandContext<AboutState>): P
   // TODO remove side effect
   await RendererWorker.setFocus(WhenExpression.FocusAbout)
   await context.updateState((state) => {
-    if (state.focusId) {
+    const { focusId } = state
+    if (focusId) {
       return state
     }
     return {
