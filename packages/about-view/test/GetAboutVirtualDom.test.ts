@@ -49,8 +49,7 @@ test('formatDate - 1 millisecond ago', () => {
       childCount: 1,
       className: 'DialogClose',
       onClick: 1,
-      role: 'button',
-      type: 4,
+      type: 1,
     },
     {
       childCount: 0,

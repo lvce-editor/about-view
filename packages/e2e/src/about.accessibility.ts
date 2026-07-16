@@ -8,11 +8,13 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = await openAbout(aboutApi)
 
   try {
+    const closeButton = getCloseButton(dialogContent)
     await expect(getHeading(dialogContent)).toHaveId('DialogHeading')
     await expect(getInfoIcon(dialogContent)).toHaveId('DialogIcon')
     await expect(getInfoIcon(dialogContent)).toHaveAttribute('aria-label', 'Info')
-    await expect(getCloseButton(dialogContent)).toHaveAttribute('aria-label', 'Close Dialog')
-    await expect(getCloseButton(dialogContent)).toHaveAttribute('role', 'button')
+    await expect(closeButton).toHaveAttribute('aria-label', 'Close Dialog')
+    await expect(dialogContent.locator('button.DialogClose')).toHaveCount(1)
+    await expect(dialogContent.locator('.DialogClose[role]')).toHaveCount(0)
   } finally {
     await closeAbout(aboutApi)
   }
