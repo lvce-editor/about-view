@@ -1,5 +1,5 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
-import { openAbout } from './_about.js'
+import { getOkButton, openAbout } from './_about.js'
 
 export const name = 'about.click-ok'
 
@@ -10,7 +10,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = await openAbout(aboutApi)
 
   // act
-  await About.handleClickOk()
+  // eslint-disable-next-line e2e/no-direct-click -- verifies the rendered Ok button is wired to the close command
+  await getOkButton(dialogContent).click()
 
   // assert
   await expect(dialogContent).toBeHidden()

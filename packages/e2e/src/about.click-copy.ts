@@ -1,5 +1,5 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
-import { openAbout } from './_about.js'
+import { getCopyButton, openAbout } from './_about.js'
 
 export const name = 'about.click-copy'
 
@@ -12,11 +12,12 @@ export const test: Test = async ({ About, ClipBoard, expect, Locator }) => {
 
   try {
     // act
-    await About.handleClickCopy()
+    // eslint-disable-next-line e2e/no-direct-click -- verifies the rendered Copy button invokes the clipboard action
+    await getCopyButton(dialogContent).click()
 
     // assert
-    await ClipBoard.shouldHaveText(/Version: [^\n]*\nCommit: [^\n]*\nDate: unknown\nBrowser: /)
     await expect(dialogContent).toBeHidden()
+    await ClipBoard.shouldHaveText(/Version: [^\n]*\nCommit: [^\n]*\nDate: unknown\nBrowser: /)
   } finally {
     await ClipBoard.disableMemoryClipBoard()
   }

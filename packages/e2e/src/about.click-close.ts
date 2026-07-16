@@ -1,5 +1,5 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
-import { openAbout } from './_about.js'
+import { getCloseButton, openAbout } from './_about.js'
 
 export const name = 'about.click-close'
 
@@ -10,7 +10,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = await openAbout(aboutApi)
 
   // act
-  await About.handleClickClose()
+  // eslint-disable-next-line e2e/no-direct-click -- verifies the rendered close control is wired to the close command
+  await getCloseButton(dialogContent).click()
 
   // assert
   await expect(dialogContent).toBeHidden()
