@@ -8,8 +8,9 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = Locator('.DialogContent').first()
 
   try {
-    await expect(getHeading(dialogContent)).toHaveCSS('userSelect', 'text')
-    await expect(getMessage(dialogContent)).toHaveCSS('userSelect', 'text')
+    // WebKit exposes user-select through the prefixed computed style property.
+    await expect(getHeading(dialogContent)).toHaveCSS('-webkit-user-select', 'text')
+    await expect(getMessage(dialogContent)).toHaveCSS('-webkit-user-select', 'text')
   } finally {
     await About.handleClickClose()
   }
