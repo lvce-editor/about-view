@@ -6,7 +6,7 @@ type Locator = ReturnType<TestApi['Locator']>
 
 const wait = (ms: number): Promise<void> => {
   return new Promise((resolve) => {
-    const setTimeout = (globalThis as any).setTimeout
+    const { setTimeout } = globalThis as any
     setTimeout(resolve, ms)
   })
 }
