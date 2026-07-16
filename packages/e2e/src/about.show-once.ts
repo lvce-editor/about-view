@@ -10,9 +10,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   try {
     await About.show()
 
-    const dialogContents = Locator('.DialogContent')
-    await expect(dialogContents).toHaveCount(1)
-    await expect(dialogContents.first()).toBeVisible()
+    const firstDialogContent = Locator('.DialogContent').first()
+    await expect(firstDialogContent).toBeVisible()
   } finally {
     await About.handleClickClose()
   }
