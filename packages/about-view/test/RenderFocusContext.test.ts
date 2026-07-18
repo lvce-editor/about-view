@@ -14,10 +14,10 @@ test('renderFocusContext returns correct array', () => {
     focusId: 0,
     lines: [],
     productName: 'test',
-    uid: 0,
+    uid: 42,
   }
 
   const result = renderFocusContext(oldState, newState)
 
-  expect(result).toEqual(['Viewlet.setFocusContext', WhenExpression.FocusAbout])
+  expect(result).toEqual(['Viewlet.setFocusContext', 42, WhenExpression.FocusAbout])
 })

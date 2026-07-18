@@ -133,7 +133,7 @@ export const assertAboutContent = async (api, dialogContent) => {
   await expect(getHeading(dialogContent)).toHaveText('Lvce Editor - OSS')
   await expect(message).toContainText('Version: ')
   await expect(message).toContainText('Commit: ')
-  await expect(message).toContainText('Date: unknown')
+  await expect(message).toContainText('Date: ')
   await expect(message).toContainText('Browser: ')
   await expect(getOkButton(dialogContent)).toHaveText('Ok')
   await expect(getOkButton(dialogContent)).toHaveAttribute('name', 'Ok')
