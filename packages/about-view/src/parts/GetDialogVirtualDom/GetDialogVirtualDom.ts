@@ -13,6 +13,37 @@ import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as TabIndex from '../TabIndex/TabIndex.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
+const dialogToolBarRow: VirtualDomNode = {
+  childCount: 1,
+  className: ClassNames.DialogToolBarRow,
+  type: VirtualDomElements.Div,
+}
+
+const dialogMessageRow: VirtualDomNode = {
+  childCount: 2,
+  className: ClassNames.DialogMessageRow,
+  type: VirtualDomElements.Div,
+}
+
+const dialogContentRight: VirtualDomNode = {
+  childCount: 2,
+  className: ClassNames.DialogContentRight,
+  type: VirtualDomElements.Div,
+}
+
+const dialogHeading: VirtualDomNode = {
+  childCount: 1,
+  className: ClassNames.DialogHeading,
+  id: Ids.DialogHeading,
+  type: VirtualDomElements.Div,
+}
+
+const dialogButtonsRow: VirtualDomNode = {
+  childCount: 2,
+  className: ClassNames.DialogButtonsRow,
+  type: VirtualDomElements.Div,
+}
+
 export const getDialogVirtualDom = (
   content: readonly VirtualDomNode[],
   closeMessage: string,
@@ -32,11 +63,7 @@ export const getDialogVirtualDom = (
       tabIndex: TabIndex.Focusable,
       type: VirtualDomElements.Div,
     },
-    {
-      childCount: 1,
-      className: ClassNames.DialogToolBarRow,
-      type: VirtualDomElements.Div,
-    },
+    dialogToolBarRow,
     {
       ariaLabel: closeMessage,
       childCount: 1,
@@ -49,11 +76,7 @@ export const getDialogVirtualDom = (
       className: MergeClassNames.mergeClassNames(ClassNames.MaskIcon, ClassNames.MaskIconClose),
       type: VirtualDomElements.Div,
     },
-    {
-      childCount: 2,
-      className: ClassNames.DialogMessageRow,
-      type: VirtualDomElements.Div,
-    },
+    dialogMessageRow,
     {
       ariaLabel: infoMessage,
       childCount: 0,
@@ -61,24 +84,11 @@ export const getDialogVirtualDom = (
       id: Ids.DialogIcon,
       type: VirtualDomElements.Div,
     },
-    {
-      childCount: 2,
-      className: ClassNames.DialogContentRight,
-      type: VirtualDomElements.Div,
-    },
-    {
-      childCount: 1,
-      className: ClassNames.DialogHeading,
-      id: Ids.DialogHeading,
-      type: VirtualDomElements.Div,
-    },
+    dialogContentRight,
+    dialogHeading,
     text(productName),
     ...content,
-    {
-      childCount: 2,
-      className: ClassNames.DialogButtonsRow,
-      type: VirtualDomElements.Div,
-    },
+    dialogButtonsRow,
     ...GetButtonVirtualDom.getSecondaryButtonVirtualDom(okMessage, InputName.Ok),
     ...GetPrimaryButtonVirtualDom.getPrimaryButtonVirtualDom(copyMessage, InputName.Copy),
   ]
