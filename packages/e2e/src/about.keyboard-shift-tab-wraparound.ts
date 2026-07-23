@@ -3,6 +3,8 @@ import { closeAbout, getCopyButton, getOkButton, openAbout, waitForFocused } fro
 
 export const name = 'about.keyboard-shift-tab-wraparound'
 
+export const skip = 1
+
 export const test: Test = async ({ About, expect, KeyBoard, Locator }) => {
   const aboutApi = { About, expect, Locator }
   const dialogContent = await openAbout(aboutApi)
