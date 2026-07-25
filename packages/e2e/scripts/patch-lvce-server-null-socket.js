@@ -3,24 +3,42 @@ import { join } from 'node:path'
 
 const file = join(import.meta.dirname, '..', '..', '..', 'node_modules', '@lvce-editor', 'server', 'src', 'server.js')
 
-const before = `  if (!hasErrorListener.has(res.socket)) {
+const patches = [
+  {
+    before: `  if (!hasErrorListener.has(res.socket)) {
     res.socket.on('error', handleSocketError)
     hasErrorListener.add(res.socket)
-  }`
-
-const after = `  if (res.socket && !hasErrorListener.has(res.socket)) {
+  }`,
+    after: `  if (res.socket && !hasErrorListener.has(res.socket)) {
     res.socket.on('error', handleSocketError)
     hasErrorListener.add(res.socket)
-  }`
+  }`,
+    name: 'static response socket handler',
+  },
+  {
+    before: `const sendHandleSharedProcess = async (request, socket, method, ...params) => {
+  request.on('error', handleRequestError)
+  socket.on('error', handleSocketUpgradeError)`,
+    after: `const sendHandleSharedProcess = async (request, socket, method, ...params) => {
+  request.on('error', handleRequestError)
+  if (!socket) {
+    return
+  }
+  socket.on('error', handleSocketUpgradeError)`,
+    name: 'shared process socket handler',
+  },
+]
 
-const content = await readFile(file, 'utf8')
+let content = await readFile(file, 'utf8')
 
-if (content.includes(after)) {
-  process.exit(0)
+for (const patch of patches) {
+  if (content.includes(patch.after)) {
+    continue
+  }
+  if (!content.includes(patch.before)) {
+    throw new Error(`Could not patch @lvce-editor/server ${patch.name}`)
+  }
+  content = content.replace(patch.before, patch.after)
 }
 
-if (!content.includes(before)) {
-  throw new Error('Could not patch @lvce-editor/server null socket handler')
-}
-
-await writeFile(file, content.replace(before, after))
+await writeFile(file, content)
