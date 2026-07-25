@@ -66,3 +66,55 @@ jobs:
         run: npm run measure
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
+
+  e2e-webkit-stress:
+    name: e2e webkit stress (attempt ${{ matrix.attempt }})
+    strategy:
+      fail-fast: false
+      matrix:
+        attempt: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+      - name: Compute node modules cache key
+        id: nodeModulesCacheKey
+        run: echo "value=$(node packages/build/src/computeNodeModulesCacheKey.ts)" >> $GITHUB_OUTPUT
+        shell: bash
+      - uses: actions/cache@v6
+        id: npm-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ runner.arch }}-cacheNodeModules-${{ steps.nodeModulesCacheKey.outputs.value }}
+      - name: npm ci
+        run: npm ci
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+      - run: npm run build
+      - run: npm run build:static
+      - name: install playwright system dependencies
+        working-directory: ./packages/e2e
+        if: runner.os == 'Linux'
+        run: sudo npx playwright install-deps webkit
+      - name: install playwright dependencies
+        working-directory: ./packages/e2e
+        run: npx playwright install webkit
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+      - name: e2e
+        working-directory: ./packages/e2e
+        run: npm run e2e:webkit:headless 2>&1 | tee e2e-webkit-attempt-${{ matrix.attempt }}.log
+        shell: bash
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+      - name: upload e2e output
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: e2e-webkit-attempt-${{ matrix.attempt }}
+          path: packages/e2e/e2e-webkit-attempt-${{ matrix.attempt }}.log
+          if-no-files-found: warn
+          retention-days: 7
