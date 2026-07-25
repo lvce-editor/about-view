@@ -1,4 +1,4 @@
-import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { DialogWorker } from '@lvce-editor/rpc-registry'
 import * as GetWindowId from '../GetWindowId/GetWindowId.ts'
 
 export const showMessageBox = async (options: any): Promise<any> => {
@@ -7,5 +7,5 @@ export const showMessageBox = async (options: any): Promise<any> => {
     ...options,
     windowId,
   }
-  return RendererWorker.showMessageBox(finalOptions)
+  return DialogWorker.invoke('ElectronDialog.showMessageBox', finalOptions)
 }
