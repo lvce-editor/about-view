@@ -67,8 +67,8 @@ jobs:
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
 
-  e2e-stress:
-    name: e2e stress (attempt ${{ matrix.attempt }})
+  e2e-webkit-stress:
+    name: e2e webkit stress (attempt ${{ matrix.attempt }})
     strategy:
       fail-fast: false
       matrix:
@@ -96,16 +96,16 @@ jobs:
       - run: npm run build:static
       - name: install playwright system dependencies
         working-directory: ./packages/e2e
-        run: sudo npx playwright install-deps chromium
+        run: sudo npx playwright install-deps webkit
       - name: install playwright dependencies
         working-directory: ./packages/e2e
-        run: npx playwright install chromium
+        run: npx playwright install webkit
         if: steps.npm-cache.outputs.cache-hit != 'true'
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: e2e
         working-directory: ./packages/e2e
-        run: npm run e2e:headless 2>&1 | tee e2e-attempt-${{ matrix.attempt }}.log
+        run: npm run e2e:webkit:headless 2>&1 | tee e2e-webkit-attempt-${{ matrix.attempt }}.log
         shell: bash
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
@@ -113,7 +113,7 @@ jobs:
         uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: e2e-attempt-${{ matrix.attempt }}
-          path: packages/e2e/e2e-attempt-${{ matrix.attempt }}.log
+          name: e2e-webkit-attempt-${{ matrix.attempt }}
+          path: packages/e2e/e2e-webkit-attempt-${{ matrix.attempt }}.log
           if-no-files-found: warn
           retention-days: 7
