@@ -1,14 +1,16 @@
 import { expect, test } from '@jest/globals'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
+import { DialogWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import * as ElectronDialog from '../src/parts/ElectronDialog/ElectronDialog.ts'
 
 test('showMessageBox - calls RendererWorker.invoke with correct arguments', async () => {
   const calls: { method: string; args: readonly any[] }[] = []
-  RendererWorker.registerMockRpc({
+  DialogWorker.registerMockRpc({
     'ElectronDialog.showMessageBox'(options: any): number {
       calls.push({ args: [options], method: 'ElectronDialog.showMessageBox' })
       return 1
     },
+  })
+  RendererWorker.registerMockRpc({
     'GetWindowId.getWindowId'(): number {
       calls.push({ args: [], method: 'GetWindowId.getWindowId' })
       return 1
@@ -28,10 +30,12 @@ test('showMessageBox - calls RendererWorker.invoke with correct arguments', asyn
 })
 
 test('showMessageBox - handles error from RendererWorker', async () => {
-  RendererWorker.registerMockRpc({
+  DialogWorker.registerMockRpc({
     'ElectronDialog.showMessageBox'(): never {
       throw new Error('Failed to show message box')
     },
+  })
+  RendererWorker.registerMockRpc({
     'GetWindowId.getWindowId'(): number {
       return 1
     },

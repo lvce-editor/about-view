@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals'
-import { FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
+import { DialogWorker, FileSystemWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import * as PlatformType from '../src/parts/PlatformType/PlatformType.ts'
 import * as ShowAbout from '../src/parts/ShowAbout/ShowAbout.ts'
 
@@ -22,10 +22,6 @@ test('showAbout - electron platform', async () => {
     },
   })
   RendererWorker.registerMockRpc({
-    'ElectronDialog.showMessageBox'(): number {
-      wasCalled = true
-      return 1
-    },
     'GetWindowId.getWindowId'(): number {
       return 1
     },
@@ -43,6 +39,12 @@ test('showAbout - electron platform', async () => {
     },
     'Process.getV8Version'(): string {
       return '10.0.0'
+    },
+  })
+  DialogWorker.registerMockRpc({
+    'ElectronDialog.showMessageBox'(): number {
+      wasCalled = true
+      return 1
     },
   })
   await ShowAbout.showAbout(PlatformType.Electron)
