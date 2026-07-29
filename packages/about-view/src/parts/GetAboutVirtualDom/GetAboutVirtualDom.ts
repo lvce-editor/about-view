@@ -6,6 +6,13 @@ import * as GetAboutContentVirtualDom from '../GetAboutContentVirtualDom/GetAbou
 import * as GetDialogVirtualDom from '../GetDialogVirtualDom/GetDialogVirtualDom.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 
+const about: VirtualDomNode = {
+  childCount: 1,
+  className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.About),
+  onContextMenu: DomEventListenerFunctions.HandleContextMenu,
+  type: VirtualDomElements.Div,
+}
+
 export const getAboutVirtualDom = (
   productName: string,
   lines: readonly string[],
@@ -15,13 +22,5 @@ export const getAboutVirtualDom = (
   infoMessage: string,
 ): readonly VirtualDomNode[] => {
   const content = GetAboutContentVirtualDom.getAboutContentVirtualDom(lines)
-  return [
-    {
-      childCount: 1,
-      className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.About),
-      onContextMenu: DomEventListenerFunctions.HandleContextMenu,
-      type: VirtualDomElements.Div,
-    },
-    ...GetDialogVirtualDom.getDialogVirtualDom(content, closeMessage, infoMessage, okMessage, copyMessage, productName),
-  ]
+  return [about, ...GetDialogVirtualDom.getDialogVirtualDom(content, closeMessage, infoMessage, okMessage, copyMessage, productName)]
 }

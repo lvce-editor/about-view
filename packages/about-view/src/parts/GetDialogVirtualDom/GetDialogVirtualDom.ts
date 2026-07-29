@@ -44,6 +44,12 @@ const dialogButtonsRow: VirtualDomNode = {
   type: VirtualDomElements.Div,
 }
 
+const closeIcon: VirtualDomNode = {
+  childCount: 0,
+  className: MergeClassNames.mergeClassNames(ClassNames.MaskIcon, ClassNames.MaskIconClose),
+  type: VirtualDomElements.Div,
+}
+
 export const getDialogVirtualDom = (
   content: readonly VirtualDomNode[],
   closeMessage: string,
@@ -71,11 +77,7 @@ export const getDialogVirtualDom = (
       onClick: DomEventListenerFunctions.HandleClickClose,
       type: VirtualDomElements.Button,
     },
-    {
-      childCount: 0,
-      className: MergeClassNames.mergeClassNames(ClassNames.MaskIcon, ClassNames.MaskIconClose),
-      type: VirtualDomElements.Div,
-    },
+    closeIcon,
     dialogMessageRow,
     {
       ariaLabel: infoMessage,
