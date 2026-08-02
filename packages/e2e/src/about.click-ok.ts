@@ -1,5 +1,5 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
-import { getOkButton, openAbout } from './_about.js'
+import { getOkButton, openAbout, waitForHidden } from './_about.js'
 
 export const name = 'about.click-ok'
 
@@ -14,5 +14,5 @@ export const test: Test = async ({ About, expect, Locator }) => {
   await getOkButton(dialogContent).click()
 
   // assert
-  await expect(dialogContent).toBeHidden()
+  await waitForHidden(expect, dialogContent)
 }
