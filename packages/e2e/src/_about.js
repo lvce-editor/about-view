@@ -91,6 +91,24 @@ export const waitForFocused = async (expect, locator) => {
 }
 
 /**
+ * @param {TestApi['expect']} expect
+ * @param {Locator} locator
+ */
+export const waitForHidden = async (expect, locator) => {
+  let lastError
+  for (let i = 0; i < 20; i++) {
+    try {
+      await expect(locator).toBeHidden()
+      return
+    } catch (error) {
+      lastError = error
+      await wait(50)
+    }
+  }
+  throw lastError
+}
+
+/**
  * @param {TestApi['KeyBoard']} KeyBoard
  * @param {TestApi['expect']} expect
  * @param {Locator} locator

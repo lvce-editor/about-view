@@ -1,5 +1,5 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
-import { getCloseButton, openAbout } from './_about.js'
+import { getCloseButton, openAbout, waitForHidden } from './_about.js'
 
 export const name = 'about.click-close'
 
@@ -14,5 +14,5 @@ export const test: Test = async ({ About, expect, Locator }) => {
   await getCloseButton(dialogContent).click()
 
   // assert
-  await expect(dialogContent).toBeHidden()
+  await waitForHidden(expect, dialogContent)
 }
