@@ -8,17 +8,13 @@ export const test: Test = async ({ About, ClipBoard, expect, Locator }) => {
   const firstDialogContent = await openAbout(aboutApi)
   await ClipBoard.enableMemoryClipBoard()
 
-  try {
-    await About.handleClickCopy()
-    await expect(firstDialogContent).toBeHidden()
+  await About.handleClickCopy()
+  await expect(firstDialogContent).toBeHidden()
 
-    const secondDialogContent = await openAbout(aboutApi)
-    try {
-      await waitForFocused(expect, getOkButton(secondDialogContent))
-    } finally {
-      await closeAbout(aboutApi)
-    }
+  const secondDialogContent = await openAbout(aboutApi)
+  try {
+    await waitForFocused(expect, getOkButton(secondDialogContent))
   } finally {
-    await ClipBoard.disableMemoryClipBoard()
+    await closeAbout(aboutApi)
   }
 }
