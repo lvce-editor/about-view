@@ -44,6 +44,7 @@ test('render - content changed', async () => {
   await expect(Render2.doRender(uid, diffResult)).resolves.toEqual([
     [
       'Viewlet.setDom2',
+      uid,
       expect.arrayContaining([
         expect.objectContaining({
           className: 'Viewlet About',
@@ -68,7 +69,7 @@ test('render - focus changed', async () => {
   const diffResult = Diff2.diff2(uid)
 
   await expect(Render2.doRender(uid, diffResult)).resolves.toEqual([
-    ['Viewlet.focusSelector', '[name="Copy"]'],
+    ['Viewlet.focusSelector', uid, '[name="Copy"]'],
     ['Viewlet.setFocusContext', uid, 4],
   ])
 })
@@ -97,12 +98,13 @@ test('render - both content and focus changed', async () => {
   expect(queueCommands).toHaveBeenCalledWith(uid, [
     [
       'Viewlet.setDom2',
+      uid,
       expect.arrayContaining([
         expect.objectContaining({
           className: 'Viewlet About',
         }),
       ]),
     ],
-    ['Viewlet.focusSelector', '[name="Copy"]'],
+    ['Viewlet.focusSelector', uid, '[name="Copy"]'],
   ])
 })
