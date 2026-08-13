@@ -1,9 +1,11 @@
-import { beforeEach, expect, test } from '@jest/globals'
+import { beforeEach, expect, jest, test } from '@jest/globals'
+import { createMockRpc } from '@lvce-editor/rpc'
 import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
 import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import * as Diff2 from '../src/parts/Diff2/Diff2.ts'
 import * as Render2 from '../src/parts/Render2/Render2.ts'
+import * as RendererProcess from '../src/parts/RendererProcess/RendererProcess.ts'
 
 beforeEach(() => {
   AboutStates.clear()
@@ -11,7 +13,7 @@ beforeEach(() => {
 
 const uid = 1
 
-test('render - no changes', () => {
+test('render - no changes', async () => {
   const oldState: AboutState = {
     focusId: AboutFocusId.Ok,
     lines: ['Version: 1.0.0'],
@@ -23,10 +25,10 @@ test('render - no changes', () => {
   }
   AboutStates.set(uid, oldState, newState)
   const diffResult = Diff2.diff2(uid)
-  expect(Render2.doRender(uid, diffResult)).toEqual([])
+  await expect(Render2.doRender(uid, diffResult)).resolves.toEqual([])
 })
 
-test('render - content changed', () => {
+test('render - content changed', async () => {
   const oldState: AboutState = {
     focusId: AboutFocusId.Ok,
     lines: ['Version: 1.0.0'],
@@ -39,7 +41,7 @@ test('render - content changed', () => {
   }
   AboutStates.set(uid, oldState, newState)
   const diffResult = Diff2.diff2(uid)
-  expect(Render2.doRender(uid, diffResult)).toEqual([
+  await expect(Render2.doRender(uid, diffResult)).resolves.toEqual([
     [
       'Viewlet.setDom2',
       expect.arrayContaining([
@@ -51,7 +53,7 @@ test('render - content changed', () => {
   ])
 })
 
-test('render - focus changed', () => {
+test('render - focus changed', async () => {
   const oldState: AboutState = {
     focusId: AboutFocusId.Ok,
     lines: ['Version: 1.0.0'],
@@ -65,13 +67,15 @@ test('render - focus changed', () => {
   AboutStates.set(uid, oldState, newState)
   const diffResult = Diff2.diff2(uid)
 
-  expect(Render2.doRender(uid, diffResult)).toEqual([
+  await expect(Render2.doRender(uid, diffResult)).resolves.toEqual([
     ['Viewlet.focusSelector', '[name="Copy"]'],
     ['Viewlet.setFocusContext', uid, 4],
   ])
 })
 
-test('render - both content and focus changed', () => {
+test('render - both content and focus changed', async () => {
+  const queueCommands = jest.fn((_uid: number, _commands: readonly unknown[]) => 17)
+  RendererProcess.set(createMockRpc({ commandMap: { 'Viewlet.queueCommands': queueCommands } }))
   const oldState: AboutState = {
     focusId: AboutFocusId.Ok,
     lines: ['Version: 1.0.0'],
@@ -86,7 +90,11 @@ test('render - both content and focus changed', () => {
   }
   AboutStates.set(uid, oldState, newState)
   const diffResult = Diff2.diff2(uid)
-  expect(Render2.doRender(uid, diffResult)).toEqual([
+  await expect(Render2.doRender(uid, diffResult)).resolves.toEqual([
+    ['Viewlet.setFocusContext', uid, 4],
+    ['Viewlet.commitPending', uid, 17],
+  ])
+  expect(queueCommands).toHaveBeenCalledWith(uid, [
     [
       'Viewlet.setDom2',
       expect.arrayContaining([
@@ -96,6 +104,5 @@ test('render - both content and focus changed', () => {
       ]),
     ],
     ['Viewlet.focusSelector', '[name="Copy"]'],
-    ['Viewlet.setFocusContext', uid, 4],
   ])
 })

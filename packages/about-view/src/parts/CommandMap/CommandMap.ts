@@ -11,6 +11,7 @@ import * as HandleClickClose from '../HandleClickClose/HandleClickClose.ts'
 import * as HandleClickCopy from '../HandleClickCopy/HandleClickCopy.ts'
 import * as HandleClickOk from '../HandleClickOk/HandleClickOk.ts'
 import * as HandleFocusIn from '../HandleFocusIn/HandleFocusIn.ts'
+import * as HandleMessagePort from '../HandleMessagePort/HandleMessagePort.ts'
 import * as LoadContent2 from '../LoadContent2/LoadContent2.ts'
 import * as Render2 from '../Render2/Render2.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
@@ -30,6 +31,7 @@ export const commandMap = {
   'About.handleClickCopy': WrapCommand.wrapCommand(HandleClickCopy.handleClickCopy),
   'About.handleClickOk': WrapCommand.wrapCommand(HandleClickOk.handleClickOk),
   'About.handleFocusIn': WrapCommand.wrapAsyncCommand(HandleFocusIn.handleFocusIn),
+  'About.handleMessagePort': HandleMessagePort.handleMessagePort,
   'About.loadContent2': WrapCommand.wrapAsyncCommand(LoadContent2.loadContent2),
   'About.render2': Render2.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
