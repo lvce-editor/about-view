@@ -11,7 +11,9 @@ export const doRender = async (uid: number, diffResult: readonly number[]): Prom
     return commands
   }
   const rendererWorkerCommands = commands.filter((command) => command[0] === ViewletCommand.SetFocusContext)
-  const rendererProcessCommands = commands.filter((command) => command[0] !== ViewletCommand.SetFocusContext)
+  const rendererProcessCommands = commands
+    .filter((command) => command[0] !== ViewletCommand.SetFocusContext)
+    .flatMap((command) => (command[0] === ViewletCommand.SetDom2 ? [command, ['Viewlet.setUid', uid, uid]] : [command]))
   const transactionId = await RendererProcess.invoke('Viewlet.queueCommands', uid, rendererProcessCommands)
   return [...rendererWorkerCommands, ['Viewlet.commitPending', uid, transactionId]]
 }
