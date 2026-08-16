@@ -105,6 +105,7 @@ test('render - both content and focus changed', async () => {
         }),
       ]),
     ],
+    ['Viewlet.setUid', uid, uid],
     ['Viewlet.focusSelector', uid, '[name="Copy"]'],
   ])
 })
