@@ -18,6 +18,8 @@ import * as RenderEventListeners from '../RenderEventListeners/RenderEventListen
 import * as ShowAbout from '../ShowAbout/ShowAbout.ts'
 import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
+const handleDirectMessagePort = (port: MessagePort): Promise<void> => HandleMessagePort.handleMessagePort(port, commandMap)
+
 export const commandMap = {
   'About.create': Create.create,
   'About.diff2': Diff2.diff2,
@@ -31,7 +33,7 @@ export const commandMap = {
   'About.handleClickCopy': WrapCommand.wrapCommand(HandleClickCopy.handleClickCopy),
   'About.handleClickOk': WrapCommand.wrapCommand(HandleClickOk.handleClickOk),
   'About.handleFocusIn': WrapCommand.wrapAsyncCommand(HandleFocusIn.handleFocusIn),
-  'About.handleMessagePort': HandleMessagePort.handleMessagePort,
+  'About.handleMessagePort': handleDirectMessagePort,
   'About.loadContent2': WrapCommand.wrapAsyncCommand(LoadContent2.loadContent2),
   'About.render2': Render2.doRender,
   'About.renderEventListeners': RenderEventListeners.renderEventListeners,
