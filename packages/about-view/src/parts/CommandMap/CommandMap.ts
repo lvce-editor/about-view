@@ -18,7 +18,7 @@ import * as RenderEventListeners from '../RenderEventListeners/RenderEventListen
 import * as ShowAbout from '../ShowAbout/ShowAbout.ts'
 import * as ShowAboutElectron from '../ShowAboutElectron/ShowAboutElectron.ts'
 
-const handleDirectMessagePort = (port: MessagePort, setAsRendererProcess = true): Promise<void> =>
+const handleDirectMessagePort = (port: MessagePort, setAsRendererProcess?: boolean): Promise<void> =>
   HandleMessagePort.handleMessagePort(port, commandMap, setAsRendererProcess)
 
 export const commandMap = {
