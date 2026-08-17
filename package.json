@@ -43,7 +43,7 @@
   "devDependencies": {
     "@lvce-editor/eslint-config": "^18.4.0",
     "@lvce-editor/notification-center-view": "https://github.com/lvce-editor/notification-center-view/releases/download/v0.1.5/lvce-editor-notification-center-view-0.1.5.tgz",
-    "@lvce-editor/server": "0.101.9",
+    "@lvce-editor/server": "0.103.19",
     "eslint": "^10.8.1",
     "knip": "^6.32.2",
     "prettier": "^3.9.6",
