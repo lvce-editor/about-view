@@ -1,0 +1,17 @@
+import type { Test } from '@lvce-editor/test-with-playwright'
+import { getCopyButton, openAbout, waitForFocused, waitForHidden } from './_about.js'
+
+export const name = 'about.keyboard-space-copy'
+
+export const test: Test = async ({ About, ClipBoard, expect, KeyBoard, Locator }) => {
+  const aboutApi = { About, expect, Locator }
+  const dialogContent = await openAbout(aboutApi)
+  await ClipBoard.enableMemoryClipBoard()
+
+  await KeyBoard.press('Tab')
+  await waitForFocused(expect, getCopyButton(dialogContent))
+  await KeyBoard.press('Space')
+
+  await waitForHidden(expect, dialogContent)
+  await ClipBoard.shouldHaveText(/Version: [^\n]*\nCommit: [^\n]*\nDate: [^\n]*\nBrowser: /)
+}
