@@ -15,6 +15,7 @@ export const showAboutElectron = async (): Promise<void> => {
     detail,
     message: productName,
     productName,
+    title: productName,
     type: ElectronMessageBoxType.Info,
     windowId,
   }

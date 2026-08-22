@@ -55,6 +55,7 @@ const expectedOptions = {
   detail,
   message: 'Configured Editor',
   productName: 'Configured Editor',
+  title: 'Configured Editor',
   type: 'info',
   windowId: 1,
 }
