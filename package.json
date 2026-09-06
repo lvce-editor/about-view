@@ -41,11 +41,11 @@
     "printWidth": 150
   },
   "devDependencies": {
-    "@lvce-editor/eslint-config": "^18.8.0",
+    "@lvce-editor/eslint-config": "^18.9.0",
     "@lvce-editor/notification-center-view": "https://github.com/lvce-editor/notification-center-view/releases/download/v0.1.5/lvce-editor-notification-center-view-0.1.5.tgz",
-    "@lvce-editor/server": "0.111.6",
-    "eslint": "^10.9.1",
-    "knip": "^6.33.0",
+    "@lvce-editor/server": "0.113.14",
+    "eslint": "^10.10.0",
+    "knip": "^6.34.0",
     "prettier": "^3.9.6",
     "typescript": "^6.0.3"
   }
