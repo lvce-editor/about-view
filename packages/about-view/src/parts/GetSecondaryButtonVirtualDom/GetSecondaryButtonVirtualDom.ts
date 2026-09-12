@@ -5,11 +5,13 @@ import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEven
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
+const buttonClassName = MergeClassNames.mergeClassNames(ClassNames.Button, ClassNames.ButtonSecondary)
+
 export const getSecondaryButtonVirtualDom = (message: string, name: string): readonly VirtualDomNode[] => {
   return [
     {
       childCount: 1,
-      className: MergeClassNames.mergeClassNames(ClassNames.Button, ClassNames.ButtonSecondary),
+      className: buttonClassName,
       name,
       onClick: DomEventListenerFunctions.HandleClickButton,
       type: VirtualDomElements.Button,

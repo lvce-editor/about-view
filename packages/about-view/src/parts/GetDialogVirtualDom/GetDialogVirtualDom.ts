@@ -13,6 +13,13 @@ import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as TabIndex from '../TabIndex/TabIndex.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
+const infoIconClassName = MergeClassNames.mergeClassNames(
+  ClassNames.DialogIcon,
+  ClassNames.DialogInfoIcon,
+  ClassNames.MaskIcon,
+  ClassNames.MaskIconInfo,
+)
+
 const dialogToolBarRow: VirtualDomNode = {
   childCount: 1,
   className: ClassNames.DialogToolBarRow,
@@ -82,7 +89,7 @@ export const getDialogVirtualDom = (
     {
       ariaLabel: infoMessage,
       childCount: 0,
-      className: MergeClassNames.mergeClassNames(ClassNames.DialogIcon, ClassNames.DialogInfoIcon, ClassNames.MaskIcon, ClassNames.MaskIconInfo),
+      className: infoIconClassName,
       id: Ids.DialogIcon,
       type: VirtualDomElements.Div,
     },

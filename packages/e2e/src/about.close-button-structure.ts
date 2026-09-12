@@ -11,7 +11,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   try {
     await expect(closeButton).toHaveCount(1)
     await expect(closeButton).toBeVisible()
-    await expect(closeButton.locator('.MaskIconClose')).toHaveCount(1)
+    const closeIcon = closeButton.locator('.MaskIconClose')
+    await expect(closeIcon).toHaveCount(1)
   } finally {
     await closeAbout(aboutApi)
   }
