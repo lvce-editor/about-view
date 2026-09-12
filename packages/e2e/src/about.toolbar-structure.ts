@@ -10,8 +10,10 @@ export const test: Test = async ({ About, expect, Locator }) => {
 
   try {
     await expect(toolbar).toHaveCount(1)
-    await expect(toolbar.locator('.DialogClose')).toHaveCount(1)
-    await expect(getCloseButton(dialogContent).locator('.MaskIconClose')).toHaveCount(1)
+    const closeButton = toolbar.locator('.DialogClose')
+    await expect(closeButton).toHaveCount(1)
+    const closeIcon = getCloseButton(dialogContent).locator('.MaskIconClose')
+    await expect(closeIcon).toHaveCount(1)
   } finally {
     await closeAbout(aboutApi)
   }

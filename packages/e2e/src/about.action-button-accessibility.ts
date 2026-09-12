@@ -8,10 +8,14 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = await openAbout(aboutApi)
 
   try {
-    await expect(dialogContent.locator('button.Button')).toHaveCount(2)
-    await expect(dialogContent.locator('button.ButtonSecondary[name="Ok"]')).toHaveText('Ok')
-    await expect(dialogContent.locator('button.ButtonPrimary[name="Copy"]')).toHaveText('Copy')
-    await expect(dialogContent.locator('.Button:not(button)')).toHaveCount(0)
+    const buttons = dialogContent.locator('button.Button')
+    await expect(buttons).toHaveCount(2)
+    const okButton = dialogContent.locator('button.ButtonSecondary[name="Ok"]')
+    await expect(okButton).toHaveText('Ok')
+    const copyButton = dialogContent.locator('button.ButtonPrimary[name="Copy"]')
+    await expect(copyButton).toHaveText('Copy')
+    const nonButtonElements = dialogContent.locator('.Button:not(button)')
+    await expect(nonButtonElements).toHaveCount(0)
   } finally {
     await closeAbout(aboutApi)
   }

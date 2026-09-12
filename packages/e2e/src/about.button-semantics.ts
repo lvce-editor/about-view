@@ -10,7 +10,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const copyButton = getCopyButton(dialogContent)
 
   try {
-    await expect(dialogContent.locator('.Button')).toHaveCount(2)
+    const buttons = dialogContent.locator('.Button')
+    await expect(buttons).toHaveCount(2)
     await expect(okButton).toHaveClass('Button')
     await expect(okButton).toHaveClass('ButtonSecondary')
     await expect(okButton).toHaveAttribute('name', 'Ok')

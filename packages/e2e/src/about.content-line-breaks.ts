@@ -8,7 +8,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = await openAbout(aboutApi)
 
   try {
-    await expect(getMessage(dialogContent).locator('br')).toHaveCount(3)
+    const lineBreaks = getMessage(dialogContent).locator('br')
+    await expect(lineBreaks).toHaveCount(3)
   } finally {
     await closeAbout(aboutApi)
   }
