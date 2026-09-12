@@ -11,7 +11,7 @@ export const test: Test = async ({ About, ClipBoard, expect, Locator }) => {
   await ClipBoard.enableMemoryClipBoard()
 
   // act
-  // eslint-disable-next-line e2e/no-direct-click -- verifies the rendered Copy button invokes the clipboard action
+  // eslint-disable-next-line e2e/no-direct-click, @typescript-eslint/no-deprecated -- verifies the rendered Copy button invokes the clipboard action
   await getCopyButton(dialogContent).click()
 
   // assert
