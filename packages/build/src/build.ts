@@ -1,7 +1,6 @@
 import { execa } from 'execa'
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { bundleJs } from './bundleJs.ts'
 import { root } from './root.ts'
 
@@ -54,8 +53,6 @@ await rm(dist, { recursive: true, force: true })
 await mkdir(dist, { recursive: true })
 
 await bundleJs()
-
-await cp(fileURLToPath(import.meta.resolve('@lvce-editor/notification-center-view')), join(dist, 'dist', 'notificationCenterWorkerMain.js'))
 
 const version = await getVersion()
 
