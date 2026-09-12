@@ -10,7 +10,7 @@ export const test: Test = async ({ About, expect, Locator }) => {
   const dialogContent = await openAbout(aboutApi)
 
   // act
-  // eslint-disable-next-line e2e/no-direct-click -- verifies the rendered Ok button is wired to the close command
+  // eslint-disable-next-line e2e/no-direct-click, @typescript-eslint/no-deprecated -- verifies the rendered Ok button is wired to the close command
   await getOkButton(dialogContent).click()
 
   // assert
