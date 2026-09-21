@@ -11,7 +11,8 @@ export const test: Test = async ({ About, expect, Locator }) => {
   try {
     await expect(messageRow).toHaveCSS('display', 'flex')
     await expect(messageRow).toHaveCSS('gap', '24px')
-    await expect(messageRow).toHaveCSS('flex-grow', '1')
+    await expect(messageRow).toHaveCSS('flex-grow', '0')
+    await expect(messageRow).toHaveCSS('contain', 'content')
     await expect(messageRow).toHaveCSS('padding-left', '10px')
     await expect(messageRow).toHaveCSS('padding-right', '10px')
   } finally {
