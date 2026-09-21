@@ -11,7 +11,7 @@ export const test: Test = async ({ About, expect, Locator }) => {
     await expect(dialogContent).toHaveCSS('display', 'flex')
     await expect(dialogContent).toHaveCSS('flex-direction', 'column')
     await expect(dialogContent).toHaveCSS('width', '520px')
-    await expect(dialogContent).toHaveCSS('height', '280px')
+    await expect(dialogContent).toHaveCSS('contain', 'content')
     await expect(dialogContent).toHaveCSS('border-radius', '6px')
   } finally {
     await closeAbout(aboutApi)
