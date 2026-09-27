@@ -41,10 +41,10 @@
     "printWidth": 150
   },
   "devDependencies": {
-    "@lvce-editor/eslint-config": "^18.14.0",
+    "@lvce-editor/eslint-config": "^18.14.2",
     "eslint": "10.11.0",
-    "knip": "^6.37.0",
-    "prettier": "^3.9.8",
+    "knip": "^6.38.0",
+    "prettier": "^3.9.9",
     "typescript": "^6.0.3"
   }
 }
