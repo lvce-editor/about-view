@@ -14,7 +14,7 @@ const options: RollupOptions = {
   output: {
     file: join(root, '.tmp/dist/dist/aboutWorkerMain.js'),
     format: 'es',
-    sourcemap: 'inline',
+    sourcemap: true,
     freeze: false,
     generatedCode: {
       constBindings: true,
