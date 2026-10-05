@@ -103,8 +103,6 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
-      - name: Capture WebKit startup errors
-        run: node packages/build/src/captureWebkitStartup.ts
       - name: Reproduce WebKit startup
         working-directory: ./packages/e2e
         shell: bash
@@ -120,7 +118,6 @@ jobs:
           name: webkit-attempt-${{ matrix.attempt }}
           path: |
             packages/e2e/webkit.log
-            packages/e2e/startup-diagnostics/
             packages/e2e/renderer-worker-traces/
             packages/e2e/test-results/
           if-no-files-found: warn
