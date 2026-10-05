@@ -103,21 +103,24 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
+      - name: Capture WebKit startup errors
+        run: node packages/build/src/captureWebkitStartup.ts
       - name: Reproduce WebKit startup
         working-directory: ./packages/e2e
         shell: bash
         run: |
           set -o pipefail
-          npm run e2e:webkit:headless -- --filter=about.open 2>&1 | tee webkit.log
+          npm run e2e:webkit:headless -- --filter=about.open --trace-renderer-worker 2>&1 | tee webkit.log
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: Upload e2e artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: webkit-attempt-${{ matrix.attempt }}
           path: |
             packages/e2e/webkit.log
+            packages/e2e/startup-diagnostics/
             packages/e2e/renderer-worker-traces/
             packages/e2e/test-results/
           if-no-files-found: warn
