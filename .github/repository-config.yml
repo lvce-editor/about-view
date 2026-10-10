@@ -5,12 +5,16 @@ requiredStatusChecks:
   - pr (macos-26)
   - pr (windows-2025)
 settings:
-  description: About View
+  description: About View for LVCE Editor
   homepage: https://lvce-editor.github.io/about-view/
 topics:
   - about
+  - editor
   - lvce-editor
-labels: []
+labels:
+  - name: repository-config
+    color: '5319e7'
+    description: Changes to GitHub repository configuration
 milestones: []
 branches:
   - name: main
