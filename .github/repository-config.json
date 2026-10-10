@@ -1,4 +1,0 @@
-{
-  "version": 1,
-  "requiredStatusChecks": ["pr (ubuntu-24.04)", "pr (ubuntu-24.04-arm)", "pr (macos-26)", "pr (windows-2025)"]
-}
