@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-26, windows-2025]
+        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-26, windows-2025, windows-11-arm]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     steps:
@@ -30,6 +30,9 @@ jobs:
       - name: npm ci
         run: npm ci
         if: steps.npm-cache.outputs.cache-hit != 'true'
+      - name: Verify Windows ARM64 runner
+        if: matrix.os == 'windows-11-arm'
+        run: node -e "if (process.arch !== 'arm64') process.exit(1); console.log('Node architecture:', process.arch)"
       - run: npm run build
       - run: npm run build:static
       - run: npm test
