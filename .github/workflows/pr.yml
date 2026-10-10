@@ -69,8 +69,8 @@ jobs:
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
 
-  webkit-focus-previous-reproduction:
-    name: WebKit focus previous attempt ${{ matrix.attempt }}
+  webkit-suite-reproduction:
+    name: WebKit suite attempt ${{ matrix.attempt }}
     strategy:
       fail-fast: false
       matrix:
@@ -102,18 +102,18 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
-      - name: Reproduce about.focus-previous in WebKit
+      - name: Reproduce full WebKit suite
         working-directory: ./packages/e2e
         shell: bash
         run: |
           set -o pipefail
-          npm run e2e:webkit:headless -- --filter=about.focus-previous 2>&1 | tee focus-previous.log
+          npm run e2e:webkit:headless 2>&1 | tee webkit.log
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: Upload attempt log
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: webkit-focus-previous-attempt-${{ matrix.attempt }}
-          path: packages/e2e/focus-previous.log
+          name: webkit-suite-attempt-${{ matrix.attempt }}
+          path: packages/e2e/webkit.log
           if-no-files-found: warn
