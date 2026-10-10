@@ -4,6 +4,7 @@ requiredStatusChecks:
   - pr (ubuntu-24.04-arm)
   - pr (macos-26)
   - pr (windows-2025)
+  - pr (windows-11-arm)
 settings:
   description: About View for LVCE Editor
   homepage: https://lvce-editor.github.io/about-view/
