@@ -1,0 +1,24 @@
+version: 1
+requiredStatusChecks:
+  - pr (ubuntu-24.04)
+  - pr (ubuntu-24.04-arm)
+  - pr (macos-26)
+  - pr (windows-2025)
+settings:
+  description: About View
+  homepage: https://lvce-editor.github.io/about-view/
+topics:
+  - about
+  - lvce-editor
+labels: []
+milestones: []
+branches:
+  - name: main
+    protection:
+      enforce_admins: true
+      required_signatures: false
+      required_pull_request_reviews:
+        required_approving_review_count: 0
+        dismiss_stale_reviews: false
+        require_code_owner_reviews: false
+        require_last_push_approval: false
