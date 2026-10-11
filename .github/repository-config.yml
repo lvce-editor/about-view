@@ -8,11 +8,11 @@ requiredStatusChecks:
 settings:
   description: About View for LVCE Editor
   homepage: https://lvce-editor.github.io/about-view/
-  has_wiki: false
-  has_projects: false
+  has_wiki: true
+  has_projects: true
   allow_squash_merge: true
-  allow_merge_commit: false
-  allow_rebase_merge: false
+  allow_merge_commit: true
+  allow_rebase_merge: true
   allow_auto_merge: true
   delete_branch_on_merge: true
 topics:
@@ -34,4 +34,18 @@ branches:
         dismiss_stale_reviews: false
         require_code_owner_reviews: false
         require_last_push_approval: false
-rulesets: []
+rulesets:
+  - name: Protect release tags
+    target: tag
+    enforcement: active
+    conditions:
+      ref_name:
+        include: ['refs/tags/v*']
+        exclude: []
+    bypass_actors:
+      - actor_id: 5
+        actor_type: RepositoryRole
+        bypass_mode: always
+    rules:
+      - type: deletion
+      - type: non_fast_forward
