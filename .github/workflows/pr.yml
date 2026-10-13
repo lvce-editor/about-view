@@ -96,7 +96,7 @@ jobs:
         run: |
           mkdir -p e2e-artifacts
           set -o pipefail
-          npm run e2e:webkit:headless -- --trace-renderer-worker 2>&1 | tee e2e-artifacts/webkit.log
+          npm run e2e:webkit:headless 2>&1 | tee e2e-artifacts/webkit.log
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: Upload e2e artifacts
@@ -106,7 +106,6 @@ jobs:
           name: webkit-reproduction-${{ matrix.attempt }}
           path: |
             packages/e2e/e2e-artifacts/
-            packages/e2e/renderer-worker-traces/
             packages/e2e/test-results/
             packages/e2e/screenshots/
           if-no-files-found: warn
