@@ -1,10 +1,13 @@
 import { ViewletCommand } from '@lvce-editor/constants'
 import * as AboutStates from '../AboutStates/AboutStates.ts'
 import * as ApplyRender from '../ApplyRender/ApplyRender.ts'
+import * as Diff from '../Diff/Diff.ts'
 import * as RendererProcess from '../RendererProcess/RendererProcess.ts'
 
-export const doRender = async (uid: number, diffResult: readonly number[]): Promise<readonly any[]> => {
+export const doRender = async (uid: number, _diffResult: readonly number[]): Promise<readonly any[]> => {
   const { oldState, scheduledState } = AboutStates.get(uid)
+  // State may change between the diff2 and render2 RPCs.
+  const diffResult = Diff.diff(oldState, scheduledState)
   AboutStates.set(uid, scheduledState, scheduledState)
   const commands = ApplyRender.applyRender(oldState, scheduledState, diffResult)
   if (!RendererProcess.isConnected()) {
