@@ -4,6 +4,7 @@ import type { AboutState } from '../src/parts/AboutState/AboutState.ts'
 import * as AboutFocusId from '../src/parts/AboutFocusId/AboutFocusId.ts'
 import * as AboutStates from '../src/parts/AboutStates/AboutStates.ts'
 import * as Diff2 from '../src/parts/Diff2/Diff2.ts'
+import * as FocusNext from '../src/parts/FocusNext/FocusNext.ts'
 import * as Render2 from '../src/parts/Render2/Render2.ts'
 import * as RendererProcess from '../src/parts/RendererProcess/RendererProcess.ts'
 
@@ -72,6 +73,27 @@ test('render - focus changed', async () => {
     ['Viewlet.focusSelector', uid, '[name="Copy"]'],
     ['Viewlet.setFocusContext', uid, 4],
   ])
+})
+
+test('render - focus changes after the diff was calculated', async () => {
+  const state: AboutState = {
+    focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.0.0'],
+    productName: 'Test Editor',
+    uid,
+  }
+  AboutStates.set(uid, state, state)
+  const diffResult = Diff2.diff2(uid)
+  expect(diffResult).toEqual([])
+
+  const focusNext = AboutStates.wrapCommand(FocusNext.focusNext)
+  await focusNext(uid)
+
+  await expect(Render2.doRender(uid, diffResult)).resolves.toEqual([
+    ['Viewlet.focusSelector', uid, '[name="Copy"]'],
+    ['Viewlet.setFocusContext', uid, 4],
+  ])
+  expect(Diff2.diff2(uid)).toEqual([])
 })
 
 test('render - both content and focus changed', async () => {
