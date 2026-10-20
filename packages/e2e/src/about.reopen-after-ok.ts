@@ -6,7 +6,8 @@ export const name = 'about.reopen-after-ok'
 export const test: Test = async ({ About, expect, Locator }) => {
   const aboutApi = { About, expect, Locator }
   const firstDialogContent = await openAbout(aboutApi)
-  await About.handleClickOk()
+  // eslint-disable-next-line e2e/no-direct-click, @typescript-eslint/no-deprecated -- exercise reopening after the rendered Ok control closes its worker
+  await getOkButton(firstDialogContent).click()
   await expect(firstDialogContent).toBeHidden()
 
   const secondDialogContent = await openAbout(aboutApi)

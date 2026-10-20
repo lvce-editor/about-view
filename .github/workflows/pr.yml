@@ -62,6 +62,7 @@ jobs:
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: e2e firefox
+        if: ${{ !cancelled() }}
         working-directory: ./packages/e2e
         run: npm run e2e:firefox:headless
         env:
@@ -69,10 +70,17 @@ jobs:
       - name: e2e webkit
         working-directory: ./packages/e2e
         run: npm run e2e:webkit:headless
-        if: runner.os != 'Windows'
+        if: ${{ !cancelled() && runner.os != 'Windows' }}
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: measure
         run: npm run measure
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
+      - name: Upload screenshot diagnostics
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: about-screenshots-${{ matrix.os }}
+          path: packages/e2e/fixtures/**/*.actual.png
+          if-no-files-found: ignore

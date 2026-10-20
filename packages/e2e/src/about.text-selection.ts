@@ -1,5 +1,5 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
-import { getHeading, getMessage } from './_about.js'
+import { closeAbout, getHeading, getMessage } from './_about.js'
 
 export const name = 'about.text-selection'
 
@@ -12,6 +12,6 @@ export const test: Test = async ({ About, expect, Locator }) => {
     await expect(getHeading(dialogContent)).toHaveCSS('-webkit-user-select', 'text')
     await expect(getMessage(dialogContent)).toHaveCSS('-webkit-user-select', 'text')
   } finally {
-    await About.handleClickClose()
+    await closeAbout({ About, expect, Locator })
   }
 }
