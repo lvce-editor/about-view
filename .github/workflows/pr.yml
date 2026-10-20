@@ -15,6 +15,14 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
+      - name: Install actions-lock
+        if: matrix.os == 'ubuntu-26.04'
+        run: gh extension install github/gh-actions-lock --pin d5dca22a06ff8590d50b41612038996800cfb336
+      - name: Verify actions lock
+        if: matrix.os == 'ubuntu-26.04'
+        run: gh actions-lock --verify
+        env:
+          GH_TOKEN: ${{ github.token }}
       - uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
