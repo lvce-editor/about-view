@@ -96,3 +96,15 @@ test('loadContent2 rejects invalid config.json', async () => {
   expect(mockRendererRpc.invocations).toEqual([['PlatformPaths.getConfigJsonPath']])
   expect(mockFileSystemRpc.invocations).toEqual([['FileSystem.readFile', 'config.json']])
 })
+
+test('loadContent2 accepts explicit stable display content without reading config', async () => {
+  AboutStates.set(oldState.uid, oldState, oldState)
+  const command = AboutStates.wrapAsyncCommand(LoadContent2.loadContent2)
+  await command(oldState.uid, { lines: ['Version: 1.0.0', 'Browser: Test Browser'], productName: 'Lvce Editor - OSS' })
+  expect(AboutStates.get(oldState.uid).newState).toEqual({
+    focusId: AboutFocusId.Ok,
+    lines: ['Version: 1.0.0', 'Browser: Test Browser'],
+    productName: 'Lvce Editor - OSS',
+    uid: oldState.uid,
+  })
+})
