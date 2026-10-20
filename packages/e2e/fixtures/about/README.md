@@ -2,7 +2,7 @@
 
 The screenshot test freezes release metadata and browser text through About's normal load command. PNG preserves the CSS mask icons, which DOM-to-SVG conversion currently renders as solid squares.
 
-Baselines are separated by `navigator.platform` and browser because fonts, text rasterization and browser rendering differ. The regular CI matrix compares the matching fixture on each platform; it never updates baselines automatically. Missing or changed screenshots produce `.actual.png` diagnostics, uploaded by CI for review.
+Baselines are separated by server architecture, `navigator.platform`, and browser because fonts, text rasterization and browser rendering differ. The browser and server run on the same test runner; server architecture is read through `Process.getArch` because browsers can report x86_64 on ARM64. The regular CI matrix compares the matching fixture on each platform; it never updates baselines automatically. Missing or changed screenshots produce `.actual.png` diagnostics, uploaded by CI for review.
 
 To deliberately create or update the fixture on the matching platform, run from the repository root:
 

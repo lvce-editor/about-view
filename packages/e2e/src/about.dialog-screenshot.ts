@@ -24,7 +24,12 @@ export const test: Test = async ({ About, Command, ComponentState, expect, Locat
       browser = 'chromium'
     }
     const platform = navigator.platform.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')
-    await expect(dialog).toMatchScreenShot(`about/${platform}/${browser}.png`)
+    // Browsers can report x86_64 even on ARM64; the local test server knows the runner architecture.
+    const architecture = await Command.execute('Process.getArch')
+    if (typeof architecture !== 'string' || !/^[a-z0-9]+$/.test(architecture)) {
+      throw new Error('Unable to determine the screenshot runner architecture')
+    }
+    await expect(dialog).toMatchScreenShot(`about/${architecture}/${platform}/${browser}.png`)
   } finally {
     await closeAbout(aboutApi)
   }
