@@ -79,7 +79,7 @@ jobs:
           PLAYWRIGHT_BROWSERS_PATH: 0
       - name: Upload screenshot diagnostics
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7.0.2
+        uses: actions/upload-artifact@v7
         with:
           name: about-screenshots-${{ matrix.os }}
           path: packages/e2e/fixtures/**/*.actual.png

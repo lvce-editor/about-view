@@ -7,9 +7,9 @@ Baselines are separated by `navigator.platform` and browser because fonts, text 
 To deliberately create or update the fixture on the matching platform, run from the repository root:
 
 ```sh
-npm run e2e:headless -- --filter=about.dialog-screenshot --update-screenshots
-npm run e2e:firefox:headless -- --filter=about.dialog-screenshot --update-screenshots
-npm run e2e:webkit:headless -- --filter=about.dialog-screenshot --update-screenshots
+npm run e2e:headless --workspace=packages/e2e -- --filter=about.dialog-screenshot --update-screenshots
+npm run e2e:firefox:headless --workspace=packages/e2e -- --filter=about.dialog-screenshot --update-screenshots
+npm run e2e:webkit:headless --workspace=packages/e2e -- --filter=about.dialog-screenshot --update-screenshots
 ```
 
 Review changes to icons, text, spacing, colors and focus outlines before committing, then rerun without the update option. Browser version or font changes can require reviewed baseline updates.

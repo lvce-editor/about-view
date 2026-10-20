@@ -175,6 +175,7 @@ export const openAbout = async (api) => {
  */
 export const closeAbout = async (api) => {
   const dialogContent = getDialogContent(api)
-  await api.About.handleClickClose()
+  // Close through the rendered control; a direct close RPC can dispose its own reply path.
+  await getCloseButton(dialogContent).click()
   await api.expect(dialogContent).toBeHidden()
 }
