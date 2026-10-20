@@ -84,3 +84,42 @@ jobs:
           name: about-screenshots-${{ matrix.os }}
           path: packages/e2e/fixtures/**/*.actual.png
           if-no-files-found: ignore
+
+  screenshot-fixtures:
+    name: Screenshot fixtures (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-26.04, ubuntu-26.04-arm, macos-26, windows-2025, windows-11-arm]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+      - run: npm ci
+      - run: npm run build
+      - name: Install browser system dependencies
+        if: runner.os == 'Linux'
+        working-directory: ./packages/e2e
+        run: npx playwright install-deps chromium firefox webkit
+      - name: Install browsers
+        working-directory: ./packages/e2e
+        run: npx playwright install chromium firefox webkit
+      - name: Generate review fixtures
+        shell: bash
+        run: |
+          for screenshot_browser in chromium firefox; do
+            npm run e2e:headless --workspace=packages/e2e -- --filter=about.dialog-screenshot --browser="$screenshot_browser" --no-reuse-page --update-screenshots --timeout=30000
+          done
+      - name: Generate WebKit review fixture
+        if: runner.os != 'Windows'
+        run: npm run e2e:headless --workspace=packages/e2e -- --filter=about.dialog-screenshot --browser=webkit --no-reuse-page --update-screenshots --timeout=30000
+      - name: Upload reference fixtures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: about-fixtures-${{ matrix.os }}
+          path: packages/e2e/fixtures/about/**/*.png
+          if-no-files-found: error
