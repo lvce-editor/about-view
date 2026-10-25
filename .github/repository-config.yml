@@ -8,7 +8,7 @@ requiredStatusChecks:
   - pr (windows-2025)
   - pr (windows-11-arm)
 settings:
-  description: About View for LVCE Editor
+  description: About View
   homepage: https://lvce-editor.github.io/about-view/
   has_wiki: false
   has_projects: false
